@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""
+Generate 10 more blog post outlines + Pinterest titles for BudgetLoom.
+Output: content/outlines.json
+"""
+import json, os
+
+OUT = "../content"
+os.makedirs(OUT, exist_ok=True)
+
+outlines = [
+    {"slug": "how-to-save-1000-emergency-fund", "title": "How to Build a $1,000 Emergency Fund Fast", "category": "Savings", "keywords": ["emergency fund", "save 1000 dollars fast", "beginner savings"]},
+    {"slug": "frugal-grocery-shopping-tips", "title": "15 Frugal Grocery Shopping Tips That Actually Save Money", "category": "Food", "keywords": ["grocery budget", "save money on groceries", "cheap groceries"]},
+    {"slug": "no-spend-month-guide", "title": "No-Spend Month: The Complete Beginner Guide", "category": "Savings", "keywords": ["no spend month", "no spend challenge", "spending freeze"]},
+    {"slug": "how-to-pay-off-debt-fast", "title": "How to Pay Off Debt Faster (Even on a Low Income)", "category": "Debt", "keywords": ["debt payoff", "pay off debt fast", "debt snowball"]},
+    {"slug": "cheap-date-ideas", "title": "50 Cheap Date Ideas That Do Not Feel Cheap", "category": "Lifestyle", "keywords": ["cheap date ideas", "free date ideas", "budget dates"]},
+    {"slug": "how-to-stop-impulse-buying", "title": "How to Stop Impulse Buying: 7 Rules That Work", "category": "Budgeting", "keywords": ["stop impulse buying", "spending triggers", "no impulse buys"]},
+    {"slug": "budget-printables-how-to-use", "title": "How to Use Budget Printables to Actually Save Money", "category": "Budgeting", "keywords": ["budget printables", "how to use budget planner", "free budget printables"]},
+    {"slug": "save-money-on-utilities", "title": "12 Easy Ways to Save Money on Utilities", "category": "Savings", "keywords": ["save on utilities", "lower electric bill", "lower bills"]},
+    {"slug": "low-income-budget-tips", "title": "Budgeting Tips That Work When You Are Low Income", "category": "Budgeting", "keywords": ["low income budget", "budget tips", "survive paycheck to paycheck"]},
+    {"slug": "free-fun-things-to-do", "title": "100 Free Things to Do Instead of Spending Money", "category": "Lifestyle", "keywords": ["free things to do", "free activities", "no money fun"]},
+]
+
+with open(os.path.join(OUT, 'outlines.json'), 'w') as f:
+    json.dump(outlines, f, indent=2)
+
+print(f"Created {len(outlines)} post outlines in {OUT}/outlines.json")
+for o in outlines:
+    print(f"- {o['title']}")

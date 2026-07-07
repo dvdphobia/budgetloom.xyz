@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+.next/
+dist/
+*.log
+.env
+.env.local
+.vercel
+scripts/.venv/
+__pycache__/
