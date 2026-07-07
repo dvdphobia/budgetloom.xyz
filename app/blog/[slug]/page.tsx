@@ -8,17 +8,21 @@ import { posts, getPostBySlug } from '@/lib/posts'
 import { affiliateProducts } from '@/lib/config'
 import { notFound } from 'next/navigation'
 
-export function generateStaticParams() {
+type Params = { slug: string }
+
+export async function generateStaticParams() {
   return posts.map(p => ({ slug: p.slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<Params> }) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
   return { title: post ? post.title : 'Not Found', description: post?.description }
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug)
+export default async function PostPage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
   if (!post) return notFound()
 
   return (

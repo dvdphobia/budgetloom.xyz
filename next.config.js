@@ -4,5 +4,6 @@ const nextConfig = {
   distDir: 'dist',
   images: { unoptimized: true },
   trailingSlash: true,
+  allowedDevOrigins: ['192.168.43.238', 'localhost'],
 }
 module.exports = nextConfig

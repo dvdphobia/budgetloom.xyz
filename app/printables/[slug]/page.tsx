@@ -5,17 +5,21 @@ import { printables, getPrintableBySlug } from '@/lib/printables'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 
-export function generateStaticParams() {
+type Params = { slug: string }
+
+export async function generateStaticParams() {
   return printables.map(p => ({ slug: p.slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const p = getPrintableBySlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<Params> }) {
+  const { slug } = await params
+  const p = getPrintableBySlug(slug)
   return { title: p ? p.title : 'Not Found', description: p?.description }
 }
 
-export default function PrintablePage({ params }: { params: { slug: string } }) {
-  const p = getPrintableBySlug(params.slug)
+export default async function PrintablePage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params
+  const p = getPrintableBySlug(slug)
   if (!p) return notFound()
 
   return (
