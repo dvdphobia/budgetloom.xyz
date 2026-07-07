@@ -13,13 +13,13 @@ os.makedirs(OUT, exist_ok=True)
 BG_COLORS = ["#10b981", "#059669", "#047857", "#065f46"]
 
 PINS = [
-    ("Save $500 in 30 days", "Free printable challenge", "budgetloom.com", 0),
-    ("Eat for $40 a week", "Budget meal plan printable", "budgetloom.com", 1),
-    ("Budget when you feel broke", "Simple starter guide", "budgetloom.com", 2),
-    ("No-spend weekend ideas", "Free fun activities", "budgetloom.com", 3),
-    ("Budget Starter Bundle", "12-page planner printable", "budgetloom.com", 0),
-    ("Meal Planner Budget Kit", "8-page grocery planner", "budgetloom.com", 1),
-    ("Debt Payoff Planner", "Snowball + avalanche tracker", "budgetloom.com", 2),
+    ("Save $500 in 30 days", "Free printable challenge", "budgetloom.xyz", 0),
+    ("Eat for $40 a week", "Budget meal plan printable", "budgetloom.xyz", 1),
+    ("Budget when you feel broke", "Simple starter guide", "budgetloom.xyz", 2),
+    ("No-spend weekend ideas", "Free fun activities", "budgetloom.xyz", 3),
+    ("Budget Starter Bundle", "12-page planner printable", "budgetloom.xyz", 0),
+    ("Meal Planner Budget Kit", "8-page grocery planner", "budgetloom.xyz", 1),
+    ("Debt Payoff Planner", "Snowball + avalanche tracker", "budgetloom.xyz", 2),
 ]
 
 

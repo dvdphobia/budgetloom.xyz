@@ -1,6 +1,6 @@
 export const site = {
   name: 'BudgetLoom',
-  url: 'https://budgetloom.com',
+  url: 'https://budgetloom.xyz',
 }
 
 export const monetization = {
