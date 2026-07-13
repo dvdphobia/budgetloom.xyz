@@ -2,10 +2,11 @@ export default function PinTemplate({ title }: { title: string }) {
   return (
     <div className="pin-preview">
       <div className="pin-card">
-        <div style={{fontSize:'1rem', fontWeight:400, marginBottom:'1rem'}}>BudgetLoom</div>
+        <div className="pin-card-brand">BudgetLoom</div>
         {title}
+        <div className="pin-card-url">budgetloom.xyz</div>
       </div>
-      <p style={{color:'var(--gray)', marginTop:'1rem', fontSize:'0.9rem'}}>Pinterest pin preview: 1000×1500 vertical image</p>
+      <p className="pin-label">Pinterest pin preview — 1000 x 1500 vertical image</p>
     </div>
   )
 }

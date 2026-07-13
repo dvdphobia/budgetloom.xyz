@@ -1,17 +1,27 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-export const metadata = { title: 'Terms - BudgetLoom', description: 'Terms of use for BudgetLoom.' }
+export const metadata = {
+  title: 'Terms of Use — BudgetLoom',
+  description: 'Terms of use for BudgetLoom.',
+}
 
 export default function Terms() {
   return (
     <>
       <Header />
       <main className="container section">
-        <h1>Terms of Use</h1>
-        <p><strong>Last updated:</strong> July 7, 2026</p>
-        <p>By using BudgetLoom, you agree to these terms. All content is for personal use only. Printables are digital downloads sold or offered under the license described on each product page.</p>
-        <p>We are not financial advisors. Our content is educational and should not replace professional financial advice.</p>
+        <article style={{maxWidth: '680px', margin: '0 auto'}}>
+          <h1 className="article-title">Terms of Use</h1>
+          <div className="article-body">
+            <p><strong>Last updated:</strong> July 14, 2026</p>
+            <p>By using BudgetLoom, you agree to these terms. All content is for personal use only. Printables are digital downloads offered under the license described on each product page.</p>
+            <h2>Not financial advice</h2>
+            <p>We are not financial advisors. Our content is educational and should not replace professional financial advice. Always consult a qualified professional before making financial decisions.</p>
+            <h2>Limitation</h2>
+            <p>BudgetLoom is not liable for any financial decisions made based on content on this site.</p>
+          </div>
+        </article>
       </main>
       <Footer />
     </>
