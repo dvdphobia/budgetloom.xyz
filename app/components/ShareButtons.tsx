@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { Icon } from './Icons'
 
 export default function ShareButtons({ title, url }: { title: string, url: string }) {
   const [copied, setCopied] = useState(false)
 
-  const share = async (platform: string) => {
+  const share = (platform: string) => {
     const encodedTitle = encodeURIComponent(title)
     const encodedUrl = encodeURIComponent(url)
     const links: Record<string, string> = {
@@ -25,13 +26,19 @@ export default function ShareButtons({ title, url }: { title: string, url: strin
   }
 
   return (
-    <div className="share-buttons">
-      <span className="label">Share:</span>
-      <button className="share-btn" onClick={() => share('pinterest')} aria-label="Share on Pinterest">P</button>
-      <button className="share-btn" onClick={() => share('facebook')} aria-label="Share on Facebook">f</button>
-      <button className="share-btn" onClick={() => share('twitter')} aria-label="Share on Twitter">t</button>
-      <button className="share-btn" onClick={copyLink} aria-label="Copy link">
-        {copied ? '✓' : '#'}
+    <div className="share-row">
+      <span className="label">Share</span>
+      <button className={`share-btn ${copied ? 'copied' : ''}`} onClick={() => share('pinterest')} aria-label="Share on Pinterest">
+        <Icon.pin />
+      </button>
+      <button className="share-btn" onClick={() => share('facebook')} aria-label="Share on Facebook">
+        <Icon.facebook />
+      </button>
+      <button className="share-btn" onClick={() => share('twitter')} aria-label="Share on Twitter">
+        <Icon.twitter />
+      </button>
+      <button className={`share-btn ${copied ? 'copied' : ''}`} onClick={copyLink} aria-label="Copy link">
+        {copied ? <Icon.check /> : <Icon.link />}
       </button>
     </div>
   )

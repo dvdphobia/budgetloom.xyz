@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Icon } from './Icons'
 
 export default function EmailForm({ cta = "Get the free printable", tag = "budget tips" }: { cta?: string, tag?: string }) {
   const [email, setEmail] = useState('')
@@ -39,24 +40,26 @@ export default function EmailForm({ cta = "Get the free printable", tag = "budge
   return (
     <>
       <form onSubmit={submit} className="email-form">
+        <label htmlFor="email-input" className="sr-only">Email address</label>
         <input
+          id="email-input"
           type="email"
-          placeholder="Enter your email"
+          placeholder="your@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit" className="btn" disabled={status === 'loading'}>
+        <button type="submit" className="btn btn-primary" disabled={status === 'loading'}>
           {status === 'loading' ? 'Sending...' : cta}
         </button>
       </form>
       {status === 'ok' && (
-        <p style={{ width: '100%', margin: '0.5rem 0 0', color: 'var(--green-dark)', fontWeight: 500 }}>
-          Check your inbox for the {tag}!
+        <p style={{ width: '100%', margin: '0.5rem 0 0', color: 'var(--green-dark)', fontWeight: 500, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.3rem', justifyContent: 'center' }}>
+          <Icon.check className="" /> Check your inbox!
         </p>
       )}
       {status === 'error' && (
-        <p style={{ width: '100%', margin: '0.5rem 0 0', color: '#dc2626', fontWeight: 500 }}>
+        <p style={{ width: '100%', margin: '0.5rem 0 0', color: '#dc2626', fontWeight: 500, fontSize: '0.9rem' }}>
           {errorMessage}
         </p>
       )}

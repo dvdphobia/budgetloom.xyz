@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { LogoMark, Icon } from './Icons'
 
 export default function Footer() {
   return (
@@ -6,13 +7,20 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div>
-            <div className="footer-brand">BudgetLoom</div>
+            <div className="footer-brand">
+              <LogoMark size={24} />
+              <span className="footer-brand-name">BudgetLoom</span>
+            </div>
             <p className="footer-desc">
-              Free budget printables, money-saving challenges, and simple guides to help you save more and spend smarter.
+              Free budget printables and money guides for people who want to save more without stress.
             </p>
-            <div className="footer-social" style={{marginTop: '1rem'}}>
-              <a href="https://pinterest.com/budgetloom" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">P</a>
-              <a href="mailto:hello@budgetloom.xyz" aria-label="Email">@</a>
+            <div className="footer-social" style={{ marginTop: '1rem' }}>
+              <a href="https://pinterest.com/budgetloom" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+                <Icon.pin />
+              </a>
+              <a href="mailto:hello@budgetloom.xyz" aria-label="Email">
+                <Icon.mail />
+              </a>
             </div>
           </div>
           <div className="footer-col">
@@ -31,19 +39,10 @@ export default function Footer() {
             <Link href="/terms/">Terms</Link>
             <Link href="/contact/">Contact</Link>
           </div>
-          <div className="footer-col footer-newsletter">
-            <h4>Free Weekly Tips</h4>
-            <p style={{fontSize: '0.85rem', marginBottom: '0.8rem'}}>Get money-saving tips and free printables in your inbox.</p>
-            <form action="/api/subscribe/" method="POST" style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-              <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required />
-              <input type="hidden" name="tag" value="footer" />
-              <button type="submit" className="btn btn-sm" style={{width: '100%'}}>Subscribe Free</button>
-            </form>
-          </div>
         </div>
         <div className="footer-bottom">
-          <div>&copy; {new Date().getFullYear()} BudgetLoom. All rights reserved.</div>
-          <div>BudgetLoom is reader-supported. We may earn commissions from affiliate links.</div>
+          <div>&copy; {new Date().getFullYear()} BudgetLoom</div>
+          <div>Reader-supported. We may earn commissions from affiliate links.</div>
         </div>
       </div>
     </footer>

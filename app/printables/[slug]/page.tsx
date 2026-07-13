@@ -3,6 +3,7 @@ import Footer from '../../components/Footer'
 import EmailForm from '../../components/EmailForm'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import ShareButtons from '../../components/ShareButtons'
+import { PrintablePreview, Icon } from '../../components/Icons'
 import { printables, getPrintableBySlug } from '@/lib/printables'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
@@ -20,11 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   return {
     title: p.title,
     description: p.description,
-    openGraph: {
-      title: p.title,
-      description: p.description,
-      type: 'article',
-    },
+    openGraph: { title: p.title, description: p.description, type: 'article' },
     alternates: { canonical: `https://budgetloom.xyz/printables/${p.slug}/` },
   }
 }
@@ -35,21 +32,6 @@ export default async function PrintablePage({ params }: { params: Promise<Params
   if (!p) return notFound()
 
   const printableUrl = `https://budgetloom.xyz/printables/${p.slug}/`
-
-  const productSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: p.title,
-    description: p.description,
-    brand: { '@type': 'Brand', name: 'BudgetLoom' },
-    offers: {
-      '@type': 'Offer',
-      price: p.price.replace('$', ''),
-      priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-      url: printableUrl,
-    },
-  }
 
   return (
     <>
@@ -63,55 +45,59 @@ export default async function PrintablePage({ params }: { params: Promise<Params
 
         <div className="printable-hero">
           <div className="printable-preview">
-            <span className="printable-preview-icon">📄</span>
-            <span className="printable-preview-label">{p.pages}-page printable PDF</span>
-            <span style={{fontSize: '0.8rem', color: 'var(--gray)'}}>Instant download</span>
+            <PrintablePreview pages={p.pages} />
           </div>
           <div className="printable-info">
             <h1>{p.title}</h1>
             <p>{p.description}</p>
             <div className="printable-price">
               <span className="printable-price-tag">{p.price}</span>
-              <span className="printable-price-pages">{p.pages} pages · PDF download</span>
+              <span className="printable-price-pages">{p.pages} pages · PDF</span>
             </div>
-            <a href={`/printables/${p.slug}.pdf`} className="btn btn-lg" download>Download PDF</a>
-            <div style={{marginTop: '1rem', fontSize: '0.85rem', color: 'var(--gray)'}}>
-              ✅ No email required · ✅ Print at home · ✅ Beginner-friendly
+            <a href={`/printables/${p.slug}.pdf`} className="btn btn-primary btn-lg" download>
+              <Icon.download className="" /> Download PDF
+            </a>
+            <div className="printable-trust">
+              <span><Icon.check className="" /> No email required</span>
+              <span><Icon.print className="" /> Print at home</span>
             </div>
           </div>
         </div>
 
         <ShareButtons title={p.title} url={printableUrl} />
 
-        <h2 style={{fontSize: '1.4rem', fontWeight: 700, marginTop: '2rem', marginBottom: '0.5rem'}}>What is included</h2>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginTop: '2rem', marginBottom: '0.5rem' }}>What's included</h2>
         <ul className="includes-list">
-          {p.includes.map(item => <li key={item}>{item}</li>)}
+          {p.includes.map(item => (
+            <li key={item}>
+              <Icon.check className="" />
+              {item}
+            </li>
+          ))}
         </ul>
 
-        <h2 style={{fontSize: '1.4rem', fontWeight: 700, marginTop: '2rem', marginBottom: '1rem'}}>Share on Pinterest</h2>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginTop: '2rem', marginBottom: '1rem' }}>Save on Pinterest</h2>
         <div className="pin-preview">
           <Image
             src={`/pins/pin_${p.slug.replace(/-/g, '_')}.png`}
-            alt={`${p.title} - free printable from BudgetLoom`}
+            alt={`${p.title} printable`}
             width={280}
             height={420}
-            style={{borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)'}}
+            style={{ borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)' }}
           />
-          <p className="pin-label">Save this pin to your budget board for later</p>
+          <p className="pin-label">Pin this to your budget board for later</p>
         </div>
 
-        <div className="lead-box" style={{marginTop: '2rem'}}>
+        <div className="lead-box">
           <h2>Get more free printables</h2>
-          <p>Join the BudgetLoom library for weekly printables and money tips.</p>
+          <p>Join the library for weekly printables and money tips.</p>
           <EmailForm cta="Send me more printables" tag={p.title} />
           <div className="lead-perks">
-            <span className="lead-perk">Weekly printables</span>
-            <span className="lead-perk">Money-saving tips</span>
-            <span className="lead-perk">No spam</span>
+            <span className="lead-perk"><Icon.check className="" /> Weekly printables</span>
+            <span className="lead-perk"><Icon.check className="" /> Money-saving tips</span>
+            <span className="lead-perk"><Icon.check className="" /> No spam</span>
           </div>
         </div>
-
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       </main>
       <Footer />
     </>

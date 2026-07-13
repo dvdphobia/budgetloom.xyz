@@ -1,15 +1,6 @@
-'use client'
-
-import { monetization } from '@/lib/config'
+// Ad banner component — renders nothing until real ad codes are configured.
+// This prevents placeholder text from showing to users.
 
 export default function AdBanner({ slot }: { slot: 'adsterra' | 'adskeeper' }) {
-  const label = slot === 'adsterra'
-    ? `Adsterra — ${monetization.adsterraNativeKey}`
-    : `AdsKeeper — ${monetization.adskeeperWidgetId}`
-
-  return (
-    <div className="ad-slot">
-      Advertisement — {label}
-    </div>
-  )
+  return null
 }
