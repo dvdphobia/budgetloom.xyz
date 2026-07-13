@@ -38,11 +38,16 @@ function parseContent(content: string) {
   const elements: React.ReactNode[] = []
   let listItems: string[] = []
   let listKey = 0
+  let orderedItems: string[] = []
 
   const flushList = (key: string) => {
     if (listItems.length > 0) {
       elements.push(<ul key={`ul-${listKey++}`}>{listItems.map((item, i) => <li key={i}>{item}</li>)}</ul>)
       listItems = []
+    }
+    if (orderedItems.length > 0) {
+      elements.push(<ol key={`ol-${listKey++}`}>{orderedItems.map((item, i) => <li key={i}>{item}</li>)}</ol>)
+      orderedItems = []
     }
   }
 
@@ -61,8 +66,7 @@ function parseContent(content: string) {
     } else if (bullet) {
       listItems.push(bullet[1])
     } else if (numbered) {
-      flushList(`f-${i}`)
-      elements.push(<p key={i}><strong>{numbered[2]}</strong></p>)
+      orderedItems.push(numbered[2])
     } else if (!line.trim()) {
       flushList(`f-${i}`)
     } else {
