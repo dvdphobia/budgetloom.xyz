@@ -1,9 +1,16 @@
-export const metadata = {
-  title: 'BudgetLoom - Budget Printables & Money-Saving Guides',
-  description: 'Free budget printables, money-saving challenges, and simple guides to help you save more and spend smarter.',
-}
+import "./globals.css";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const metadata = {
+  title: "BudgetLoom - Budget Printables & Money-Saving Guides",
+  description:
+    "Free budget printables, money-saving challenges, and simple guides to help you save more and spend smarter.",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
@@ -11,5 +18,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>{children}</body>
     </html>
-  )
+  );
 }
