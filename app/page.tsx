@@ -7,11 +7,19 @@ import { printables } from '@/lib/printables'
 
 const categoryIcons: Record<string, string> = {
   'Savings': '💰',
-  'Food': '🎧',
-  'Budgeting': '📄',
+  'Food': '🍽️',
+  'Budgeting': '📊',
   'Lifestyle': '✨',
   'Debt': '💳',
 }
+
+const categories = [
+  { name: 'Savings', icon: '💰', desc: 'Build emergency funds and savings habits' },
+  { name: 'Budgeting', icon: '📊', desc: 'Simple budget systems that actually work' },
+  { name: 'Food', icon: '🍽️', desc: 'Cut grocery bills without eating rice and beans' },
+  { name: 'Debt', icon: '💳', desc: 'Pay off debt faster with proven methods' },
+  { name: 'Lifestyle', icon: '✨', desc: 'Live well on less with frugal living tips' },
+]
 
 export default function Home() {
   const recentPosts = posts.slice(0, 6)
@@ -20,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="hero">
           <div className="container hero-inner">
@@ -60,8 +68,34 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Categories */}
+        <section className="section" style={{paddingBottom: '2rem'}}>
+          <div className="container">
+            <div className="section-header">
+              <h2>Browse by Topic</h2>
+              <p>Find guides and printables for your biggest money challenges.</p>
+            </div>
+            <div className="grid">
+              {categories.map(cat => (
+                <Link
+                  href={`/blog/#${cat.name.toLowerCase()}`}
+                  key={cat.name}
+                  className="card"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className="card-body" style={{ textAlign: 'center', alignItems: 'center' }}>
+                    <span style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{cat.icon}</span>
+                    <h3 style={{ marginBottom: '0.3rem' }}>{cat.name}</h3>
+                    <p style={{ fontSize: '0.88rem' }}>{cat.desc}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Printables */}
-        <section className="section">
+        <section className="section" style={{paddingTop: '2rem'}}>
           <div className="container">
             <div className="section-header">
               <h2>Popular Printables</h2>
@@ -73,12 +107,15 @@ export default function Home() {
                 <div className="card" key={p.slug}>
                   <div className="card-cover">
                     <span className="card-cover-icon">📄</span>
-                    <span className="card-cover-tag">{p.price}</span>
+                    <span className={`card-cover-tag ${p.price === 'Free' ? 'free' : ''}`}>{p.price}</span>
                   </div>
                   <div className="card-body">
                     <span className="card-badge">{p.pages} pages</span>
                     <h3><Link href={`/printables/${p.slug}/`}>{p.title}</Link></h3>
                     <p>{p.description}</p>
+                    <div className="card-meta">
+                      <Link href={`/printables/${p.slug}/`} className="btn btn-sm" style={{marginTop: '0.5rem'}}>View Details →</Link>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -86,8 +123,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Blog */}
+        {/* How it works */}
         <section className="section" style={{background: 'var(--light)'}}>
+          <div className="container">
+            <div className="section-header">
+              <h2>How It Works</h2>
+              <p>Start saving money in 3 simple steps.</p>
+            </div>
+            <div className="how-it-works">
+              <div className="step">
+                <div className="step-num">1</div>
+                <h3>Choose a Printable</h3>
+                <p>Pick from budget worksheets, savings trackers, meal planners, and debt payoff charts.</p>
+              </div>
+              <div className="step">
+                <div className="step-num">2</div>
+                <h3>Download & Print</h3>
+                <p>Instant PDF download. Print at home or at a local print shop. No waiting.</p>
+              </div>
+              <div className="step">
+                <div className="step-num">3</div>
+                <h3>Start Saving</h3>
+                <p>Use the planner daily or weekly. Watch your savings grow and debt shrink.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Blog */}
+        <section className="section">
           <div className="container">
             <div className="section-header">
               <h2>Latest Money Guides</h2>
@@ -105,6 +169,8 @@ export default function Home() {
                     <h3><Link href={`/blog/${post.slug}/`}>{post.title}</Link></h3>
                     <p>{post.description}</p>
                     <div className="card-meta">
+                      <span>{post.date}</span>
+                      <span>·</span>
                       <span>{post.readTime} read</span>
                     </div>
                   </div>
@@ -115,7 +181,7 @@ export default function Home() {
         </section>
 
         {/* Email CTA */}
-        <section className="section" id="free-library">
+        <section className="section" id="free-library" style={{background: 'var(--light)'}}>
           <div className="container">
             <div className="lead-box">
               <h2>Join the Free Budget Library</h2>
