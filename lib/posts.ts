@@ -175,26 +175,167 @@ Print it, tape it to your fridge, and start tomorrow.`
   {
     slug: 'budget-meal-plan-for-one',
     title: 'Budget Meal Plan for One: Eat for $40 a Week',
-    description: 'A 7-day meal plan designed for one person on a tight grocery budget.',
+    description: 'A complete 7-day meal plan for one person on a $40 weekly budget. Includes shopping list with prices, daily meals, prep strategy, and food waste tips.',
     date: '2026-07-07',
     category: 'Food',
-    readTime: '6 min',
-    content: `## The $40 week plan
-Eating cheap does not mean eating boring. This plan uses 10 ingredients, batch cooking, and zero waste.
+    readTime: '8 min',
+    content: `## Why cooking for one is harder than it looks
 
-## Shopping list
-- Eggs, rice, oats, frozen vegetables, canned beans, pasta, tomato sauce, chicken thighs, onion, garlic.
+Grocery stores sell in family sizes. Recipes serve four to six. And when you buy fresh produce for one, half of it rots before you finish it.
 
-## 7-day menu
-- Breakfast: oatmeal or eggs.
-- Lunch: rice + beans or leftover dinner.
-- Dinner: pasta, stir-fry, or sheet-pan chicken + vegetables.
+The result: most people cooking for one either overspend on groceries or overspend on takeout. The average single person spends $300-450/month on food. This plan cuts that to $160-180.
 
-## Tips to stretch further
-- Buy store brands.
-- Cook double and freeze half.
-- Use everything: vegetable scraps become broth.
-- Use meal prep containers to keep portions controlled and food fresh longer.`
+$40 a week is tight but doable. It requires three things: a short ingredient list, batch cooking, and zero waste.
+
+## The $40 shopping list
+
+Prices vary by store and region. These are average US prices at budget grocers like Aldi, Walmart, or Trader Joe's. If you live somewhere expensive, adjust by swapping to frozen or generic.
+
+### Proteins ($14)
+- 1 dozen eggs — $2.50
+- 1 lb chicken thighs — $4.00
+- 1 lb dried beans (black or pinto) — $1.50
+- 1 lb dried lentils — $1.50
+- 1 can tuna — $1.00
+- 1 lb ground turkey or beef — $3.50
+
+### Grains and pantry ($10)
+- 2 lb bag rice — $2.00
+- 1 lb pasta — $1.00
+- 1 lb rolled oats — $2.50
+- 1 jar tomato sauce — $1.50
+- 1 loaf bread — $1.50
+- 1 bag flour tortillas — $1.50
+
+### Produce ($9)
+- 1 bag frozen mixed vegetables — $1.50
+- 1 bag frozen stir-fry vegetables — $1.50
+- 2 onions — $1.00
+- 1 head garlic — $0.50
+- 2 sweet potatoes — $1.50
+- 1 bag spinach or lettuce — $2.00
+- 3 bananas — $1.00
+
+### Dairy and misc ($7)
+- 1 block cheese (cheddar or mozzarella) — $3.00
+- 1/2 gallon milk or alternative — $2.00
+- Cooking oil, salt, pepper (pantry staples, not counted weekly) — $2.00
+
+Total: $40
+
+## 7-day meal plan
+
+This plan uses each ingredient at least twice. Cook dinners large enough for leftovers the next day. Breakfast and lunch are fast and repeat.
+
+### Day 1 (Sunday — prep day)
+- Breakfast: Oatmeal with banana and a splash of milk
+- Lunch: Egg sandwich (egg fried in a pan, on toast with cheese)
+- Dinner: Chicken stir-fry (chicken thighs, frozen stir-fry vegetables, soy sauce or stir-fry sauce, over rice). Cook enough rice for 3 days. Cook enough chicken for 2 dinners.
+
+### Day 2 (Monday)
+- Breakfast: Oatmeal with banana
+- Lunch: Leftover chicken stir-fry from Sunday
+- Dinner: Rice and beans (cook a pot of black beans or lentils with onion and garlic, serve over rice). Make enough beans for 3 meals.
+
+### Day 3 (Tuesday)
+- Breakfast: 2 eggs, scrambled, with toast
+- Lunch: Leftover rice and beans
+- Dinner: Tuna melt (tuna mixed with mayo or oil, on toast with cheese, broiled). Side of spinach salad.
+
+### Day 4 (Wednesday)
+- Breakfast: Oatmeal with banana
+- Lunch: Leftover rice and beans
+- Dinner: Pasta with tomato sauce and a side salad. Cook enough pasta for 2 dinners.
+
+### Day 5 (Thursday)
+- Breakfast: 2 eggs with toast
+- Lunch: Leftover pasta
+- Dinner: Chicken and vegetable rice bowl (use remaining chicken from Sunday, frozen mixed vegetables, over remaining rice)
+
+### Day 6 (Friday)
+- Breakfast: Oatmeal with banana
+- Lunch: Egg sandwich or leftover beans on toast
+- Dinner: Sweet potato stuffed with leftover beans, topped with cheese. Bake or microwave the sweet potato, scoop out some flesh, fill with beans and cheese.
+
+### Day 7 (Saturday)
+- Breakfast: Pancakes from oats (blend oats with egg and banana, fry in a pan)
+- Lunch: Quesadilla (tortilla, cheese, any leftover beans or chicken)
+- Dinner: Lentil soup (cook remaining lentils with onion, garlic, frozen vegetables, and water. Season with salt, pepper, and whatever spices you have). Serve with bread.
+
+## The prep strategy
+
+You do not need to cook every day. Cook twice and eat all week.
+
+### Sunday session (45 minutes)
+1. Cook 3 cups of rice. This lasts 4-5 meals.
+2. Cook chicken thighs in a pan with oil, salt, and pepper. This gives you protein for 3 meals.
+3. Start a pot of beans if using dried beans. They take 1-2 hours to simmer but require zero attention.
+
+### Wednesday session (20 minutes)
+1. Cook pasta for 2 dinners.
+2. Hard-boil 4 eggs for quick breakfasts and lunches.
+3. Chop remaining vegetables for salads and bowls.
+
+If you have meal prep containers, divide everything into single portions. This prevents overeating and makes grab-and-go lunches automatic.
+
+## How to avoid food waste when cooking for one
+
+Food waste is the biggest budget killer for single cooks. A bag of spinach goes slimy in 3 days. Chicken spoils in 2-3 days in the fridge.
+
+- Freeze what you will not eat in 3 days. Cooked chicken, rice, beans, and bread all freeze well.
+- Buy frozen vegetables instead of fresh. They cost less, last months, and have the same nutrition.
+- Use the same ingredient three ways. Chicken becomes stir-fry, then rice bowl, then quesadilla. Beans become a side, then a soup, then a taco filling.
+- Plan one "clean the fridge" meal per week. Friday or Saturday, use every leftover. Lentil soup with whatever vegetables remain. Quesadilla with whatever protein and cheese are left.
+- Do not buy fresh herbs. They cost $2-3 and rot before you finish them. Use dried spices instead.
+
+## Adapting the plan
+
+### Vegetarian
+Swap chicken and tuna for extra eggs, beans, lentils, and cheese. Add peanut butter for more protein. The cost drops to about $32/week since meat is the most expensive category.
+
+### Gluten-free
+Swap pasta for rice (already in the plan), bread for rice cakes or gluten-free bread, and tortillas for corn tortillas. Check that your oats are certified gluten-free.
+
+### Higher budget ($60/week)
+Add fresh fruit (apples, oranges), yogurt, a second vegetable, and a treat (chocolate, nuts, or wine). The base plan covers nutrition. Extra budget goes to variety.
+
+## Common mistakes
+
+### Buying fresh everything
+Fresh produce spoils. Frozen vegetables are cheaper, last longer, and are just as nutritious. Use fresh for things you eat raw (spinach, bananas). Use frozen for everything you cook.
+
+### Cooking one portion at a time
+Cooking one serving of rice or pasta wastes time and energy. Cook 3-4 servings, refrigerate or freeze the rest. Reheating takes 2 minutes.
+
+### No plan for leftovers
+If you cook chicken on Sunday with no plan for Monday, you will order takeout on Monday. Write down what each leftover becomes before you cook it.
+
+### Shopping without a list
+Walking into a grocery store without a list adds $15-30 to your bill. The $40 plan only works with a list. Use our grocery list printable to plan your shop.
+
+## What to keep in your pantry
+
+These items last months and make cheap meals possible. Buy once, use for weeks:
+
+- Rice, pasta, oats
+- Dried beans and lentils (or canned if you prefer convenience)
+- Canned tomatoes, tomato sauce, tuna
+- Oil, salt, pepper, and 2-3 spices you like
+- Flour tortillas (freeze well)
+- Onions and garlic (last 2-4 weeks in a cool, dry spot)
+
+With a stocked pantry, your weekly shopping list shrinks to just proteins and fresh items.
+
+## Get the meal planner kit
+
+Planning your meals saves $150-300/month compared to eating out. Our Meal Planner Budget Kit includes:
+
+- Weekly meal planner grid
+- Grocery list by category
+- Pantry inventory sheet
+- Recipe cost calculator
+
+Download it free and plan your first $40 week.`
   },
   {
     slug: 'how-to-build-a-budget-when-broke',
