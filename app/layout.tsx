@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 
 const SITE_URL = 'https://budgetloom.xyz'
@@ -42,6 +43,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to content</a>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-CRZCXM56DQ" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CRZCXM56DQ');
+        `}</Script>
         {children}
       </body>
     </html>
