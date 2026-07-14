@@ -896,33 +896,137 @@ Download it free and cut your grocery bill starting this week.`
   {
     slug: 'no-spend-month-guide',
     title: 'No-Spend Month: The Complete Beginner Guide',
-    description: 'How to survive a full no-spend month without losing your mind or your friends.',
+    description: 'How to do a no-spend month: rules, what counts as essential, weekly survival strategies, how much you can save, and what to do when you slip up.',
     date: '2026-07-14',
     category: 'Savings',
     readTime: '8 min',
     content: `## What is a no-spend month?
-You commit to zero discretionary spending for 30 days. Bills, groceries, and essentials only. No eating out, no shopping, no Amazon orders, no impulse buys.
 
-## Rules that make it work
-- Define "essential" before you start. Groceries, rent, utilities, gas, medicine = yes. Coffee, clothes, takeout = no.
-- Allow one cheat day. Total restriction leads to binge spending.
-- Tell a friend. Accountability doubles your chance of success.
-- Unsubscribe from shopping emails and delete payment info from online stores.
+You commit to zero discretionary spending for 30 days. Bills, groceries, and essentials only. No restaurants, no Amazon orders, no clothes shopping, no coffee runs, no impulse buys.
 
-## What to do instead of spending
-- Cook all meals at home.
-- Use what you already have: pantry challenges, closet shopping.
-- Free activities: parks, libraries, hiking, movie nights at home.
-- Declutter and sell things you no longer need.
+It is not about spending nothing. It is about spending only on things you genuinely need to survive. Everything else pauses for one month.
+
+A no-spend month serves two purposes: it saves money fast ($300-800 in 30 days for most people), and it resets your spending habits. After 30 days of conscious spending, the unconscious habits — the impulse buys, the convenience fees, the "I deserve a treat" spending — become visible.
+
+## The rules
+
+### What is allowed
+
+- Rent, mortgage, and utilities
+- Groceries (basic ingredients, not pre-made meals or snacks)
+- Gas and transportation to work
+- Medications and medical care
+- Insurance payments
+- Minimum debt payments
+- Existing subscriptions (cancel them, do not just skip paying — that hurts your credit)
+
+### What is not allowed
+
+- Restaurants, takeout, and delivery
+- Coffee shops
+- Alcohol
+- New clothes, shoes, or accessories
+- Home decor or furniture
+- Entertainment that costs money (movies, concerts, paid events)
+- Online shopping (Amazon, Target, etc.)
+- App purchases or in-game spending
+- Gifts (plan ahead or make something instead)
+
+### Define your edge cases before day 1
+
+Most no-spend months fail because of ambiguity. "Is a birthday gift essential?" "Can I buy new running shoes if I use them every day?" Decide before the month starts.
+
+Common edge cases:
+- Social events with a cost: attend free parts only, or decline
+- Replacing something broken: only if it is essential (work shoes, phone charger). Not if it is an upgrade.
+- Groceries: yes, but set a grocery budget. "Essential groceries" means ingredients, not $15 frozen pizzas.
+- Gifts: make something or write a letter. Do not buy.
+
+## Pre-month checklist
+
+Do these 3 things before day 1:
+
+### 1. Audit your subscriptions
+
+Go through your bank statements. Cancel everything you have not used in 30 days. This alone saves $20-60/month. Do not wait — cancel before the next billing cycle.
+
+### 2. Delete payment info from shopping apps
+
+Remove saved credit cards from Amazon, your browser autofill, and any shopping app. The harder it is to buy, the less you will buy. Friction is your friend.
+
+### 3. Unsubscribe from shopping emails
+
+Unsubscribe from store newsletters, promo emails, and deal alerts. If you do not know there is a sale, you will not be tempted by the sale.
+
+## Week-by-week survival guide
+
+### Week 1: The honeymoon
+
+The first week is exciting. You feel disciplined. You cook at home. You say no to things easily.
+
+The trap: spending energy you saved this week on "reward" spending in week 2. Do not reward yourself for saving. The reward is the saving.
+
+### Week 2: The wall
+
+This is where most people quit. The novelty is gone. Your friends want to go out. You are tired of cooking. You miss your coffee shop.
+
+Survival strategies:
+- Invite friends to your place instead of going out
+- Make coffee at home in a way you actually enjoy — buy good beans before the month starts
+- Look at your savings total so far. Real money is the best motivation.
+- Remind yourself: this is 30 days, not forever
+
+### Week 3: The groove
+
+Your habits have shifted. Cooking feels normal. Saying no feels automatic. You start noticing how much of your old spending was completely unconscious.
+
+This week is where the mindset change happens. You realize you do not need most of what you used to buy.
+
+### Week 4: The finish line
+
+You are almost done. Do not celebrate by buying something. Plan a modest reward for day 31 — a nice meal out or a small purchase you have been wanting. Having something to look forward to helps you power through the final days.
+
+## What to do when you slip up
+
+You will mess up. You will buy something you did not plan to. This does not ruin the month.
+
+When it happens:
+1. Do not quit. One mistake in 30 days is 97% success. That is still a win.
+2. Return it if you can. If it was an online order and it has not shipped, cancel it.
+3. Write down why you bought it. Was it boredom? Stress? Social pressure? Identifying the trigger prevents the next slip.
+4. Recalculate your savings total. If you saved $400 instead of $500 because of one $100 purchase, you still saved $400.
 
 ## How much can you save?
-Most people save $300-$800 in a no-spend month. That is a full emergency fund in 1-2 months.
+
+The average person saves $300-800 in a no-spend month. The range depends on how much discretionary spending they normally do.
+
+- Light spender ($50/week discretionary): $200-300
+- Average spender ($100-150/week): $400-600
+- Heavy spender ($200+/week): $800-1,200
+
+A no-spend month can fund a full $1,000 emergency fund in one shot. Or pay off a credit card balance. Or fund 2 months of a 30-day savings challenge.
+
+## What happens after the month
+
+The month ends. You have money saved and habits shifted. Now what?
+
+### Do not binge spend
+
+The biggest mistake is "treating yourself" the day after and spending everything you saved. Pick one small reward (under $50) and redirect the rest to a savings goal.
+
+### Keep the habits that worked
+
+You probably discovered some spending you did not miss. Maybe you learned you do not need the coffee shop. Or that cooking at home is fine. Keep those habits. Let the ones you missed come back.
+
+### Plan your next challenge
+
+One no-spend month per quarter (4 per year) saves $1,200-3,200/year. Pair it with a 30-day savings challenge for compounding results.
 
 ## Track your progress
-Use a no-spend tracker printable. Cross off each day. The visual streak motivates you to keep going.
 
-## Download the free no-spend tracker
-Get a 30-day no-spend tracker plus a habit tracker to stay on course.`
+Use a no-spend tracker printable. Cross off each day you complete. The visual streak is the single most motivating thing you can do. Put it on your fridge.
+
+Download the Budget Starter Bundle for a free no-spend tracker, habit tracker, and savings goal worksheet.`
   },
   {
     slug: 'how-to-pay-off-debt-fast',
