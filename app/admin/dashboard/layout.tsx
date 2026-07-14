@@ -52,20 +52,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 flex flex-col transition-transform md:sticky md:top-0 md:h-screen md:translate-x-0",
+        "fixed inset-y-0 left-0 z-50 w-64 flex flex-col transition-transform md:sticky md:top-0 md:h-screen md:translate-x-0 bg-card border-r border-border",
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      )} style={{ background: '#0c1a1e' }}>
-        <div className="flex items-center justify-between p-5 border-b border-white/10">
-          <div>
-            <div className="text-lg font-bold text-primary">BudgetLoom</div>
-            <div className="text-xs text-gray-400">Admin Panel</div>
+      )}>
+        <div className="flex items-center justify-between p-6 border-b border-border">
+          <div className="flex flex-col gap-1">
+            <div className="text-base font-bold text-foreground">BudgetLoom</div>
+            <div className="text-xs text-muted-foreground font-medium">Management</div>
           </div>
-          <Button variant="ghost" size="icon" className="md:hidden text-white" onClick={() => setSidebarOpen(false)}>
+          <Button variant="ghost" size="icon" className="md:hidden text-foreground" onClick={() => setSidebarOpen(false)}>
             <X className="h-5 w-5" />
           </Button>
         </div>
 
-        <nav className="flex-1 p-3 space-y-1">
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {navItems.map(item => {
             const active = pathname === item.href || pathname?.startsWith(item.href + '/')
             return (
@@ -74,38 +74,42 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 href={item.href}
                 onClick={() => setSidebarOpen(false)}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                  active ? "bg-primary/20 text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"
+                  "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200",
+                  active 
+                    ? "bg-primary/10 text-primary border border-primary/30" 
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 )}
               >
-                <item.icon className="h-5 w-5" />
-                {item.label}
+                <item.icon className="h-5 w-5 flex-shrink-0" />
+                <span>{item.label}</span>
               </Link>
             )
           })}
         </nav>
 
-        <div className="p-3 border-t border-white/10 space-y-1">
-          <a href="/" target="_blank" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-gray-400 hover:bg-white/5 hover:text-white transition-colors">
-            <ExternalLink className="h-5 w-5" />
+        <div className="p-4 border-t border-border space-y-2">
+          <a href="/" target="_blank" className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200">
+            <ExternalLink className="h-5 w-5 flex-shrink-0" />
             View Site
           </a>
-          <button onClick={logout} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors w-full">
-            <LogOut className="h-5 w-5" />
+          <button onClick={logout} className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-destructive hover:text-destructive hover:bg-destructive/5 transition-all duration-200 w-full">
+            <LogOut className="h-5 w-5 flex-shrink-0" />
             Sign Out
           </button>
         </div>
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 min-w-0">
-        <header className="sticky top-0 z-30 flex items-center gap-3 border-b bg-background px-6 py-3">
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSidebarOpen(true)}>
-            <Menu className="h-5 w-5" />
-          </Button>
-          <h1 className="text-lg font-semibold">{currentLabel}</h1>
+      <div className="flex-1 min-w-0 flex flex-col">
+        <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-border bg-background/95 backdrop-blur-sm px-6 py-4 shadow-xs">
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSidebarOpen(true)}>
+              <Menu className="h-5 w-5" />
+            </Button>
+            <h1 className="text-xl font-semibold text-foreground">{currentLabel}</h1>
+          </div>
         </header>
-        <main className="p-6">{children}</main>
+        <main className="flex-1 overflow-auto p-6 bg-muted/30">{children}</main>
       </div>
     </div>
   )

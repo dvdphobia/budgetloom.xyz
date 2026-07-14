@@ -54,23 +54,28 @@ export default function OverviewPage() {
   ]
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-xl font-bold">Dashboard Overview</h2>
-        <p className="text-sm text-muted-foreground">Manage your BudgetLoom website</p>
+    <div className="space-y-8 pb-8">
+      {/* Header Section */}
+      <div className="border-b pb-6">
+        <h1 className="text-3xl font-bold text-foreground mb-2">Dashboard</h1>
+        <p className="text-muted-foreground">Manage your BudgetLoom content and settings</p>
       </div>
 
+      {/* Stats Cards */}
       <div className="grid gap-4 sm:grid-cols-3">
         {cards.map(card => (
           <Link key={card.label} href={card.href}>
-            <Card className="hover:shadow-md transition-shadow cursor-pointer">
-              <CardContent className="pt-6">
+            <Card className="relative overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer group">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="pt-6 relative z-10">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <div className={cn('text-3xl font-bold', card.color)}>{card.value}</div>
-                    <div className="text-sm text-muted-foreground mt-1">{card.label}</div>
+                  <div className="flex-1">
+                    <div className={cn('text-4xl font-bold tracking-tight', card.color)}>{card.value}</div>
+                    <p className="text-xs text-muted-foreground mt-2 font-medium uppercase tracking-wide">{card.label}</p>
                   </div>
-                  <card.icon className={cn('h-10 w-10 opacity-20', card.color)} />
+                  <div className={cn('h-12 w-12 rounded-lg bg-gradient-to-br from-background to-muted flex items-center justify-center', 'group-hover:scale-110 transition-transform')}>
+                    <card.icon className={cn('h-6 w-6', card.color)} />
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -78,55 +83,79 @@ export default function OverviewPage() {
         ))}
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <Database className="h-5 w-5" />
+      {/* Database Setup Section */}
+      <Card className="border-l-4 border-l-primary/50">
+        <CardHeader className="bg-gradient-to-r from-primary/5 to-transparent pb-4">
+          <CardTitle className="text-xl flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Database className="h-5 w-5 text-primary" />
+            </div>
             Database Setup
           </CardTitle>
-          <CardDescription>Initialize creates all tables. Seed copies existing content into the database.</CardDescription>
+          <CardDescription className="mt-2">Initialize creates all tables. Seed copies existing content into the database.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 pt-6">
           <div className="flex gap-3 flex-wrap">
-            <Button onClick={initDB} disabled={loading}>
-              <Database className="h-4 w-4 mr-2" />
+            <Button 
+              onClick={initDB} 
+              disabled={loading}
+              className="gap-2"
+            >
+              <Database className="h-4 w-4" />
               Initialize Database
             </Button>
-            <Button onClick={seedContent} disabled={loading} variant="secondary">
-              <Sparkles className="h-4 w-4 mr-2" />
-              Seed Existing Content
+            <Button 
+              onClick={seedContent} 
+              disabled={loading} 
+              variant="secondary"
+              className="gap-2"
+            >
+              <Sparkles className="h-4 w-4" />
+              Seed Content
             </Button>
           </div>
           {initMsg && (
-            <p className={cn('text-sm', initMsg.includes('Error') ? 'text-destructive' : 'text-primary')}>{initMsg}</p>
+            <div className={cn('p-3 rounded-lg text-sm font-medium', initMsg.includes('Error') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary')}>
+              {initMsg}
+            </div>
           )}
           {seedMsg && (
-            <p className={cn('text-sm', seedMsg.includes('Error') ? 'text-destructive' : 'text-primary')}>{seedMsg}</p>
+            <div className={cn('p-3 rounded-lg text-sm font-medium', seedMsg.includes('Error') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary')}>
+              {seedMsg}
+            </div>
           )}
         </CardContent>
       </Card>
 
+      {/* Quick Actions Section */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Quick Actions</CardTitle>
+          <CardTitle className="text-xl">Quick Actions</CardTitle>
         </CardHeader>
-        <CardContent className="grid gap-2 sm:grid-cols-2">
-          <Link href="/admin/dashboard/posts/new" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Create New Post</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-          </Link>
-          <Link href="/admin/dashboard/printables/new" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Create New Printable</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-          </Link>
-          <Link href="/admin/dashboard/ads" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Manage Ads</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-          </Link>
-          <Link href="/admin/dashboard/settings" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Edit Settings</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-          </Link>
+        <CardContent className="grid gap-3 sm:grid-cols-2">
+          {[
+            { href: "/admin/dashboard/posts/new", label: "Create New Post", icon: FilePlus },
+            { href: "/admin/dashboard/printables/new", label: "Create New Printable", icon: FileText },
+            { href: "/admin/dashboard/ads", label: "Manage Ads", icon: Megaphone },
+            { href: "/admin/dashboard/settings", label: "Edit Settings", icon: Database }
+          ].map(action => {
+            const IconComponent = action.icon
+            return (
+              <Link 
+                key={action.label}
+                href={action.href} 
+                className="group flex items-center justify-between rounded-lg border border-border p-4 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-muted group-hover:bg-primary/20 transition-colors">
+                    <IconComponent className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
+                  <span className="text-sm font-medium text-foreground">{action.label}</span>
+                </div>
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+              </Link>
+            )
+          })}
         </CardContent>
       </Card>
     </div>
