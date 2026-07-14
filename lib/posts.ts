@@ -1287,41 +1287,123 @@ Download the Budget Starter Bundle for a free monthly budget worksheet and expen
   {
     slug: 'how-to-stop-impulse-buying',
     title: 'How to Stop Impulse Buying: 7 Rules That Work',
-    description: 'Practical rules to kill impulse purchases and keep money in your bank account.',
+    description: 'Understand the psychology behind impulse buying and learn 7 practical rules to stop it — from the 48-hour rule to identifying your spending triggers.',
     date: '2026-07-14',
     category: 'Budgeting',
-    readTime: '6 min',
+    readTime: '7 min',
     content: `## Impulse buying drains your money
-The average person spends $200+ per month on impulse purchases. That is $2,400+ per year gone on things they barely use.
+
+The average person spends $200-300 per month on impulse purchases. That is $2,400-3,600 per year gone on things they barely remember buying.
+
+Impulse buying is not a willpower problem. It is a design problem. Retailers spend billions engineering environments that make you spend — targeted ads, one-click checkout, flash sales, "limited time" urgency, end-cap displays.
+
+You cannot out-willpower a system designed to bypass your rational brain. But you can build systems that make impulse buying harder and conscious spending easier.
+
+## Why we impulse buy
+
+Understanding the trigger is the first step to breaking the habit.
+
+### Emotional triggers
+- Stress: shopping releases dopamine. It literally feels good. Your brain learns "spending = relief."
+- Boredom: browsing Amazon is entertainment. You are not shopping, you are scrolling — and buying is the side effect.
+- Sadness or loneliness: buying something new feels like a fresh start.
+- Celebration: "I deserve a treat" after a hard week.
+
+### Environmental triggers
+- Targeted ads based on your browsing history
+- "Sale ends tonight" urgency notifications
+- Saved credit cards making checkout take 3 seconds
+- Social media influencers showing products in lifestyle contexts
+
+### The impulse buying cycle
+
+Trigger (stress, boredom, ad) -> Urge ("I want this") -> Action (buy) -> Relief (dopamine hit) -> Guilt ("why did I buy that") -> Trigger (stress from the spending)
+
+Breaking the cycle means interrupting it at the "urge" stage — between wanting and buying.
 
 ## 7 rules to stop
 
 ### 1. The 48-hour rule
-See something you want? Wait 48 hours. If you still want it after two days, buy it. 80% of urges disappear.
 
-### 2. Delete saved cards
-Remove your credit card from Amazon, browser autofill, and shopping apps. Friction kills impulse buying.
+See something you want? Wait 48 hours. If you still want it after two days, buy it. If not, you just saved money.
 
-### 3. Unsubscribe
-Delete shopping newsletters. Out of inbox, out of mind.
+80% of impulse urges disappear within 48 hours. The urge is not a need — it is a dopamine spike that fades.
+
+For items over $100, extend to 7 days. For items over $500, extend to 30 days. The bigger the purchase, the longer the wait.
+
+### 2. Delete saved cards from shopping apps
+
+Remove your credit card from Amazon, your browser autofill, and every shopping app. Force yourself to get up, find your wallet, and type the numbers every time.
+
+Friction kills impulse buying. A 30-second delay is enough time for your rational brain to catch up with your impulse brain.
+
+### 3. Unsubscribe from shopping triggers
+
+Delete shopping newsletters. Unfollow influencers who post product links. Turn off push notifications from shopping apps.
+
+If you do not know there is a sale, you will not be tempted by the sale. The best deal is the one you never see.
 
 ### 4. Shop with a list only
-If it is not on the list, it does not go in the cart. No exceptions.
+
+If it is not on the list, it does not go in the cart. No exceptions. This applies to groceries, Target runs, and online shopping.
+
+Before you go to any store, write down what you need. When you see something not on the list, you have a rule to fall back on. You do not have to argue with yourself in the moment.
 
 ### 5. Calculate in hours, not dollars
-Want a $60 sweater? Ask: is this worth 4 hours of work? Usually the answer is no.
 
-### 6. Track every impulse buy
-Write down every impulse purchase for one month. The shame of seeing the list adds up.
+Want a $60 sweater? How many hours do you have to work to earn $60? If you make $20/hour, that sweater costs 3 hours of your life.
+
+Is 3 hours of work worth this sweater? Most of the time, the answer is no. Converting prices to labor hours makes spending feel real in a way dollars do not.
+
+### 6. Track every impulse buy for 30 days
+
+Write down every impulse purchase for one month. Date, item, price, and trigger (boredom, stress, sale, social).
+
+Two things happen when you track:
+1. The act of writing it down creates a moment of pause. Some purchases die at the pen.
+2. At the end of 30 days, you see the total. Most people are shocked. "$800 on stuff I do not even use?"
+
+Use a printable expense tracker. Keep it visible — on the fridge or in your wallet.
 
 ### 7. Replace the habit
-Impulse buying is often stress relief. Replace it with a walk, calling a friend, or cooking.
 
-## Use a spending tracker
-Print a spending tracker and keep it in your wallet or on your fridge. Every time you resist an impulse, mark it as saved.
+Impulse buying is often stress relief. If you remove the spending without replacing the stress relief, the urge comes back.
 
-## Download the free spending tracker
-Get our printable expense tracker and start keeping more of your money.`
+Replace the shopping habit with something that provides the same dopamine hit:
+- A walk outside (free, 15 minutes)
+- Call a friend (free, 10 minutes)
+- Cook a meal you enjoy ($5-10, 30 minutes)
+- Exercise (free, 20 minutes)
+- Read a book you already own (free, 30 minutes)
+
+The replacement needs to be immediately available when the urge hits. If you have to plan it, it will not work. Keep your replacement ready.
+
+## The 30-day impulse reset
+
+If you want to reset your spending habits completely, try this:
+
+1. Delete all shopping apps from your phone for 30 days. Amazon, Target, Sephora, whatever your weakness is. You can use them on a computer — the extra step of going to a desktop adds friction.
+2. For 30 days, only buy things on a pre-written list. If it is not on the list, it waits until next month.
+3. Track every purchase you make in a notebook. Every one. No matter how small.
+4. At day 30, review. What did you not miss? What did you desperately want that you now do not care about?
+
+Most people discover that 90% of their impulse buys were things they forgot about within a week.
+
+## What to do after you slip up
+
+You will buy something impulsively. It happens. The mistake is not the purchase — it is the spiral.
+
+When you slip up:
+- Return it if you can. Most stores give 30-90 day return windows.
+- Do not use the slip-up as an excuse to give up. One purchase does not undo a month of progress.
+- Identify the trigger. Were you stressed? Bored? Influenced by an ad? Knowing the trigger helps you prepare for next time.
+- Add it to your tracker. Seeing it written down prevents the next one.
+
+## Get the free spending tracker
+
+Print an expense tracker and keep it in your wallet or on your fridge. Every time you resist an impulse, mark it as saved. Every time you buy impulsively, mark it honestly.
+
+The Budget Starter Bundle includes an expense tracker, monthly budget worksheet, and savings tracker. Download it free and start your 30-day impulse reset.`
   },
   {
     slug: 'budget-printables-how-to-use',
