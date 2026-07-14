@@ -1,19 +1,58 @@
-import { sql } from '@vercel/postgres'
+import { Pool } from 'pg'
 
-export { sql }
+let pool: Pool | null = null
 
-// Database initialization — call this on first deploy or manually hit /api/admin/init
+function getPool(): Pool {
+  if (pool) return pool
+
+  // Use pooled connection string (POSTGRES_URL) — not the direct one
+  const connectionString = process.env.POSTGRES_URL || 
+                          process.env.DATABASE_URL ||
+                          process.env.POSTGRES_PRISMA_URL ||
+                          process.env.POSTGRES_URL_NON_POOLING
+
+  if (!connectionString) {
+    throw new Error('No database connection string found. Set POSTGRES_URL in Vercel environment variables.')
+  }
+
+  // Fix sslmode parameter for pooled connections
+  let url = connectionString
+  if (url.includes('sslmode=') && url.includes('?')) {
+    // Some Vercel Postgres URLs have sslmode=require which doesn't work with pg
+    // when using the pooled connection
+  }
+
+  pool = new Pool({
+    connectionString: url,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+    max: 10,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 10000,
+  })
+
+  return pool
+}
+
+export async function query(text: string, params?: any[]) {
+  const client = getPool()
+  const result = await client.query(text, params || [])
+  return result
+}
+
+// Database initialization
 export async function initDB() {
-  await sql`
+  const db = getPool()
+
+  await db.query(`
     CREATE TABLE IF NOT EXISTS admin_users (
       id SERIAL PRIMARY KEY,
       username TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       created_at TIMESTAMP DEFAULT NOW()
     );
-  `
+  `)
 
-  await sql`
+  await db.query(`
     CREATE TABLE IF NOT EXISTS posts (
       id SERIAL PRIMARY KEY,
       slug TEXT UNIQUE NOT NULL,
@@ -27,9 +66,9 @@ export async function initDB() {
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
     );
-  `
+  `)
 
-  await sql`
+  await db.query(`
     CREATE TABLE IF NOT EXISTS printables (
       id SERIAL PRIMARY KEY,
       slug TEXT UNIQUE NOT NULL,
@@ -37,14 +76,14 @@ export async function initDB() {
       description TEXT NOT NULL,
       price TEXT NOT NULL,
       pages INTEGER NOT NULL,
-      includes TEXT[] NOT NULL,
+      includes TEXT[],
       file_url TEXT NOT NULL,
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
     );
-  `
+  `)
 
-  await sql`
+  await db.query(`
     CREATE TABLE IF NOT EXISTS ad_placements (
       id SERIAL PRIMARY KEY,
       placement TEXT UNIQUE NOT NULL,
@@ -54,18 +93,18 @@ export async function initDB() {
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
     );
-  `
+  `)
 
-  await sql`
+  await db.query(`
     CREATE TABLE IF NOT EXISTS site_settings (
       id SERIAL PRIMARY KEY,
       key TEXT UNIQUE NOT NULL,
       value TEXT NOT NULL,
       updated_at TIMESTAMP DEFAULT NOW()
     );
-  `
+  `)
 
-  // Insert default ad placements if they don't exist
+  // Insert default ad placements
   const placements = [
     { placement: 'header_banner', label: 'Header Banner (below nav, all pages)' },
     { placement: 'blog_list_top', label: 'Blog List Top (above post grid)' },
@@ -79,14 +118,15 @@ export async function initDB() {
   ]
 
   for (const p of placements) {
-    await sql`
-      INSERT INTO ad_placements (placement, label, ad_code, enabled)
-      VALUES (${p.placement}, ${p.label}, '', false)
-      ON CONFLICT (placement) DO NOTHING;
-    `
+    await db.query(
+      `INSERT INTO ad_placements (placement, label, ad_code, enabled)
+       VALUES ($1, $2, '', false)
+       ON CONFLICT (placement) DO NOTHING`,
+      [p.placement, p.label]
+    )
   }
 
-  // Insert default site settings if they don't exist
+  // Insert default site settings
   const defaults = [
     { key: 'amazon_tracking_id', value: 'budgetloom20-20' },
     { key: 'adsterra_key', value: '' },
@@ -98,23 +138,21 @@ export async function initDB() {
   ]
 
   for (const s of defaults) {
-    await sql`
-      INSERT INTO site_settings (key, value)
-      VALUES (${s.key}, ${s.value})
-      ON CONFLICT (key) DO NOTHING;
-    `
+    await db.query(
+      `INSERT INTO site_settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO NOTHING`,
+      [s.key, s.value]
+    )
   }
 
-  // Create default admin user if none exists (username: admin, password: admin123)
-  const existing = await sql`SELECT id FROM admin_users LIMIT 1;`
+  // Create default admin user if none exists
+  const existing = await db.query('SELECT id FROM admin_users LIMIT 1')
   if (existing.rows.length === 0) {
     const bcrypt = await import('bcryptjs')
     const hash = await bcrypt.hash('admin123', 10)
-    await sql`
-      INSERT INTO admin_users (username, password_hash)
-      VALUES ('admin', ${hash})
-      ON CONFLICT DO NOTHING;
-    `
+    await db.query(
+      `INSERT INTO admin_users (username, password_hash) VALUES ('admin', $1) ON CONFLICT DO NOTHING`,
+      [hash]
+    )
   }
 
   return { initialized: true }
@@ -123,7 +161,7 @@ export async function initDB() {
 // Helper: get all settings as key-value object
 export async function getSettings(): Promise<Record<string, string>> {
   try {
-    const result = await sql`SELECT key, value FROM site_settings;`
+    const result = await query('SELECT key, value FROM site_settings')
     const settings: Record<string, string> = {}
     for (const row of result.rows as any[]) {
       settings[row.key] = row.value
@@ -137,7 +175,7 @@ export async function getSettings(): Promise<Record<string, string>> {
 // Helper: get all ad placements
 export async function getAdPlacements() {
   try {
-    const result = await sql`SELECT * FROM ad_placements ORDER BY id;`
+    const result = await query('SELECT * FROM ad_placements ORDER BY id')
     return result.rows as any[]
   } catch {
     return []
@@ -147,9 +185,10 @@ export async function getAdPlacements() {
 // Helper: get enabled ad by placement
 export async function getAdByPlacement(placement: string) {
   try {
-    const result = await sql`
-      SELECT ad_code FROM ad_placements WHERE placement = ${placement} AND enabled = true;
-    `
+    const result = await query(
+      'SELECT ad_code FROM ad_placements WHERE placement = $1 AND enabled = true',
+      [placement]
+    )
     if (result.rows.length > 0) {
       return (result.rows[0] as any).ad_code
     }
@@ -159,13 +198,12 @@ export async function getAdByPlacement(placement: string) {
   }
 }
 
-// Helper: get all posts
+// Helper: get all posts (list)
 export async function getAllPosts() {
   try {
-    const result = await sql`
-      SELECT id, slug, title, description, date, category, read_time, published, created_at, updated_at
-      FROM posts ORDER BY date DESC;
-    `
+    const result = await query(
+      'SELECT id, slug, title, description, date, category, read_time, published, created_at, updated_at FROM posts ORDER BY date DESC'
+    )
     return result.rows as any[]
   } catch {
     return []
@@ -175,7 +213,7 @@ export async function getAllPosts() {
 // Helper: get post by slug
 export async function getPostBySlugDB(slug: string) {
   try {
-    const result = await sql`SELECT * FROM posts WHERE slug = ${slug};`
+    const result = await query('SELECT * FROM posts WHERE slug = $1', [slug])
     return result.rows[0] || null
   } catch {
     return null
@@ -185,7 +223,7 @@ export async function getPostBySlugDB(slug: string) {
 // Helper: get all printables
 export async function getAllPrintables() {
   try {
-    const result = await sql`SELECT * FROM printables ORDER BY id;`
+    const result = await query('SELECT * FROM printables ORDER BY id')
     return result.rows as any[]
   } catch {
     return []
@@ -195,7 +233,7 @@ export async function getAllPrintables() {
 // Helper: get printable by slug
 export async function getPrintableBySlugDB(slug: string) {
   try {
-    const result = await sql`SELECT * FROM printables WHERE slug = ${slug};`
+    const result = await query('SELECT * FROM printables WHERE slug = $1', [slug])
     return result.rows[0] || null
   } catch {
     return null

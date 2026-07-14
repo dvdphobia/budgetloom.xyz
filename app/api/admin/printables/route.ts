@@ -1,19 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sql } from '@vercel/postgres'
+import { query } from '@/lib/db'
 import { verifyToken, unauthorized } from '@/lib/auth'
 
-// GET /api/admin/printables — list all
 export async function GET(request: NextRequest) {
   if (!await verifyToken(request)) return unauthorized()
   try {
-    const result = await sql`SELECT * FROM printables ORDER BY id;`
+    const result = await query('SELECT * FROM printables ORDER BY id')
     return NextResponse.json({ printables: result.rows })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
 
-// POST /api/admin/printables — create
 export async function POST(request: NextRequest) {
   if (!await verifyToken(request)) return unauthorized()
   try {
@@ -23,11 +21,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'slug, title required' }, { status: 400 })
     }
 
-    const result = await sql`
-      INSERT INTO printables (slug, title, description, price, pages, includes, file_url)
-      VALUES (${slug}, ${title}, ${description || ''}, ${price || 'Free'}, ${pages || 1}, ${includes || []}, ${file_url || ''})
-      RETURNING id;
-    `
+    const includesArr = Array.isArray(includes) ? includes : (typeof includes === 'string' ? JSON.parse(includes || '[]') : [])
+
+    const result = await query(
+      `INSERT INTO printables (slug, title, description, price, pages, includes, file_url)
+       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
+      [slug, title, description || '', price || 'Free', pages || 1, includesArr, file_url || '']
+    )
 
     return NextResponse.json({ success: true, id: (result.rows[0] as any).id })
   } catch (error: any) {

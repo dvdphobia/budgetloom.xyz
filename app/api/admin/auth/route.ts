@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sql } from '@vercel/postgres'
+import { query, initDB } from '@/lib/db'
 import bcrypt from 'bcryptjs'
 import { signToken } from '@/lib/auth'
-import { initDB } from '@/lib/db'
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,16 +14,16 @@ export async function POST(request: NextRequest) {
     // Auto-init DB if tables don't exist yet
     try {
       await initDB()
-    } catch {
-      // If init fails, the database might not be connected yet
-      return NextResponse.json({ 
-        error: 'Database not connected. Go to Vercel Dashboard > Storage > Create Postgres database, connect it to this project, then visit /api/admin/init to initialize.' 
+    } catch (e: any) {
+      return NextResponse.json({
+        error: `Database error: ${e.message}. Make sure Vercel Postgres is connected to this project.`
       }, { status: 503 })
     }
 
-    const result = await sql`
-      SELECT id, username, password_hash FROM admin_users WHERE username = ${username};
-    `
+    const result = await query(
+      'SELECT id, username, password_hash FROM admin_users WHERE username = $1',
+      [username]
+    )
 
     if (result.rows.length === 0) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
@@ -44,14 +43,14 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: 60 * 60 * 24 * 7,
       path: '/',
     })
 
     return response
   } catch (error: any) {
-    return NextResponse.json({ 
-      error: 'Database not connected. Make sure Vercel Postgres is enabled. Visit /api/admin/init to initialize tables.' 
+    return NextResponse.json({
+      error: `Database not connected: ${error.message}`
     }, { status: 503 })
   }
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sql } from '@vercel/postgres'
+import { query } from '@/lib/db'
 import { verifyToken } from '@/lib/auth'
 import { posts as staticPosts } from '@/lib/posts'
 import { printables as staticPrintables } from '@/lib/printables'
@@ -12,26 +12,26 @@ export async function POST(request: NextRequest) {
     let postsCount = 0
     let printablesCount = 0
 
-    // Seed posts
     for (const post of staticPosts) {
-      const existing = await sql`SELECT id FROM posts WHERE slug = ${post.slug};`
+      const existing = await query('SELECT id FROM posts WHERE slug = $1', [post.slug])
       if (existing.rows.length === 0) {
-        await sql`
-          INSERT INTO posts (slug, title, description, date, category, read_time, content, published)
-          VALUES (${post.slug}, ${post.title}, ${post.description}, ${post.date}, ${post.category}, ${post.readTime}, ${post.content}, true);
-        `
+        await query(
+          `INSERT INTO posts (slug, title, description, date, category, read_time, content, published)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, true)`,
+          [post.slug, post.title, post.description, post.date, post.category, post.readTime, post.content]
+        )
         postsCount++
       }
     }
 
-    // Seed printables
     for (const p of staticPrintables) {
-      const existing = await sql`SELECT id FROM printables WHERE slug = ${p.slug};`
+      const existing = await query('SELECT id FROM printables WHERE slug = $1', [p.slug])
       if (existing.rows.length === 0) {
-        await sql`
-          INSERT INTO printables (slug, title, description, price, pages, includes, file_url)
-          VALUES (${p.slug}, ${p.title}, ${p.description}, ${p.price}, ${p.pages}, ${JSON.stringify(p.includes)}, ${'/printables/' + p.slug + '.pdf'});
-        `
+        await query(
+          `INSERT INTO printables (slug, title, description, price, pages, includes, file_url)
+           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          [p.slug, p.title, p.description, p.price, p.pages, p.includes, '/printables/' + p.slug + '.pdf']
+        )
         printablesCount++
       }
     }
