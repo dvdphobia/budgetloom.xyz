@@ -774,35 +774,124 @@ The Budget Starter Bundle includes a savings tracker, savings goal worksheet, an
   {
     slug: 'frugal-grocery-shopping-tips',
     title: '15 Frugal Grocery Shopping Tips That Actually Save Money',
-    description: 'Real, practical ways to cut your grocery bill without eating rice and beans every day.',
+    description: 'Practical, tested ways to cut your grocery bill 20-40% without eating rice and beans. Includes unit pricing, store brands, cashback apps, and meal planning.',
     date: '2026-07-14',
     category: 'Food',
     readTime: '9 min',
     content: `## Grocery spending is the easiest place to cut
-After rent, groceries are most people second biggest expense. The good news: it is also the most flexible.
 
-## 15 tips that work
-1. Never shop hungry. You will buy 20% more.
-2. Plan meals around sales, not around cravings.
-3. Buy store brands for staples like rice, pasta, and canned goods.
-4. Shop the perimeter. Fresh, cheap, healthy food is on the edges.
-5. Use a list and stick to it. No list = 30% more spending.
-6. Compare unit prices, not package prices.
-7. Buy produce in season. Out-of-season costs 2-3x more.
-8. Freeze bread, meat, and herbs before they go bad.
-9. Cook once, eat twice. Double every dinner and freeze half.
-10. Avoid pre-cut anything. You pay for convenience.
-11. Try ethnic markets for spices, rice, and produce at half the price.
-12. Use cashback apps like Ibotta or Fetch Rewards.
-13. Do one big shop per week. Fewer trips = less impulse buying.
-14. Check your receipt. 1 in 10 grocery receipts has an error.
-15. Track your grocery spending for one month. Awareness alone cuts spending.
+After rent, groceries are most people's second biggest expense. The average household spends $400-800/month on food — more if they eat out.
 
-## Use a grocery list printable
-A structured grocery list stops impulse buys. Our meal planner budget kit includes a grocery list, pantry inventory, and recipe cost calculator.
+The good news: groceries are also the most flexible expense. You cannot negotiate your rent, but you can cut your grocery bill 20-40% without eating the same meal every day.
 
-## Download the meal planner kit
-Get the full 8-page printable kit to plan meals and save hundreds per year.`
+These 15 tips are not about clipping coupons for 3 hours a week. They are small changes that add up to $100-300/month in savings.
+
+## 1. Never shop hungry
+
+This is not a myth. Studies show hungry shoppers buy 20-60% more food, especially junk food. Your brain interprets hunger as "we need food now" and you overbuy.
+
+Eat before you go. A $2 snack before shopping saves $20-40 in impulse purchases.
+
+## 2. Plan meals around sales, not cravings
+
+Before you make your list, check your store's weekly ad or app. If chicken is on sale, plan chicken meals this week. If beans are cheap, plan a bean-based dinner.
+
+This is the difference between "I want tacos" and "tacos are on sale." The first costs whatever the store charges. The second costs whatever the sale price is.
+
+## 3. Buy store brands for staples
+
+Store brands are often made in the same factories as name brands. The ingredients are identical. The price difference is 20-40%.
+
+The biggest savings: rice, pasta, canned goods, cleaning supplies, dairy, and frozen vegetables. The taste difference is usually zero.
+
+Try this: replace 5 name-brand items with store brands on your next trip. Compare the total. Most people save $15-30 per trip.
+
+## 4. Shop the perimeter
+
+Grocery stores are designed to make you walk through the middle aisles to get milk and bread. The middle aisles are where processed, expensive, high-margin products live.
+
+The perimeter has produce, meat, dairy, and bread — the basics. Walk the outside edges first. Go into the middle only for specific items on your list.
+
+## 5. Use a list and stick to it
+
+Shopping without a list adds 30% to your bill. You buy things you already have. You buy things you do not need. You grab items at the end of aisles because they are there.
+
+Write your list before you go. Organize it by section (produce, dairy, pantry, frozen). If it is not on the list, it does not go in the cart. No exceptions.
+
+## 6. Compare unit prices, not package prices
+
+A $4 box of cereal that weighs 16 oz is cheaper per ounce than a $3 box that weighs 10 oz. The shelf tag shows the unit price (price per ounce or per pound). Look at that number, not the total price.
+
+Bigger packages are usually cheaper per unit — but not always. Check the unit price tag on the shelf. It is usually in small print below the main price.
+
+## 7. Buy produce in season
+
+Out-of-season produce costs 2-3x more and tastes worse. Strawberries in January are flown in from another continent. Tomatoes in December are greenhouse-grown and flavorless.
+
+In-season produce is cheaper, fresher, and tastes better. If you want strawberries in winter, buy frozen — they were picked at peak ripeness and flash-frozen.
+
+## 8. Freeze before it goes bad
+
+The average household wastes $1,500/year in food. Most of it is fresh produce that spoiled before anyone ate it.
+
+If your spinach is wilting, freeze it for smoothies or soup. If your bread is going stale, freeze half the loaf. If bananas are browning, peel and freeze them for banana bread or smoothies.
+
+Freeze meat the day you buy it if you will not eat it within 2 days. Most foods keep for 3-6 months in the freezer with no quality loss.
+
+## 9. Cook once, eat twice
+
+Double every dinner. Eat half, freeze half. This saves money two ways: ingredients are cheaper in larger quantities, and having a frozen meal prevents the "I am tired, let me order delivery" trap.
+
+## 10. Avoid pre-cut anything
+
+Pre-cut fruit, pre-washed salad, pre-chopped onions — you pay a 40-200% premium for someone else to do 5 minutes of work. Buy whole ingredients and cut them yourself.
+
+A whole pineapple costs $3-4. Pre-cut pineapple in a container costs $5-7 for half the fruit.
+
+## 11. Try ethnic markets and discount stores
+
+Asian, Latin, and Middle Eastern markets sell spices, rice, beans, sauces, and produce at 30-60% less than mainstream grocery stores. The same bag of rice at a big chain costs $4. At an Asian market it costs $2.
+
+Aldi and Trader Joe's are 20-30% cheaper than standard chains for the same quality. If you have one nearby, make it your primary store.
+
+## 12. Use cashback apps
+
+Apps like Ibotta, Fetch Rewards, and Checkout 51 give you cash back on groceries you already buy. Scan your receipt after shopping. The apps match items to offers and credit your account.
+
+You will not get rich — $5-15/month is typical. But over a year that is $60-180 for 2 minutes of scanning receipts.
+
+## 13. Do one big shop per week
+
+Every trip to the grocery store is a chance to impulse buy. Fewer trips means fewer temptations. Plan one weekly trip, get everything, and do not go back.
+
+If you run out of something, improvise. Most "I need to run to the store" trips add $15-30 in unplanned purchases.
+
+## 14. Check your receipt
+
+1 in 10 grocery receipts has an error. Sale prices that did not ring up. Items scanned twice. Wrong items charged. Check your receipt before you leave the store. It takes 30 seconds and catches mistakes that cost you money.
+
+## 15. Track your grocery spending for one month
+
+Write down every grocery purchase for 30 days. Include the quick stops, the corner store runs, the Amazon pantry orders. Most people are shocked by the total.
+
+Awareness alone cuts spending. When you see $600/month in black and white, the $4 daily coffee stops looking necessary.
+
+## How much can you save?
+
+Using 5-7 of these tips consistently saves most households $100-300/month. Using all 15 can save $300-500/month.
+
+That is $1,200-6,000/year back in your pocket from one category of spending.
+
+## Get the grocery list printable
+
+A structured grocery list stops impulse buys and keeps you on budget. Our Meal Planner Budget Kit includes:
+
+- Grocery list organized by store section
+- Pantry inventory sheet
+- Weekly meal planner grid
+- Recipe cost calculator
+
+Download it free and cut your grocery bill starting this week.`
   },
   {
     slug: 'no-spend-month-guide',
