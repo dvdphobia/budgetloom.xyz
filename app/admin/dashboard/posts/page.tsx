@@ -2,6 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Button } from '@/app/components/ui/button'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/app/components/ui/table'
+import { Badge } from '@/app/components/ui/badge'
+import { Card } from '@/app/components/ui/card'
 
 export default function PostsList() {
   const [posts, setPosts] = useState<any[]>([])
@@ -17,44 +22,54 @@ export default function PostsList() {
     setPosts(posts.filter(p => p.id !== id))
   }
 
-  if (loading) return <p style={{ color: '#6b7280' }}>Loading...</p>
+  if (loading) return <p className="text-muted-foreground">Loading...</p>
 
   return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0c1a1e' }}>Blog Posts ({posts.length})</h2>
-        <Link href="/admin/dashboard/posts/new" style={{ padding: '10px 20px', fontSize: 14, fontWeight: 600, color: '#fff', background: '#059669', borderRadius: 8, textDecoration: 'none' }}>+ New Post</Link>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-bold">Blog Posts ({posts.length})</h2>
+        <Button asChild>
+          <Link href="/admin/dashboard/posts/new"><Plus className="h-4 w-4 mr-2" />New Post</Link>
+        </Button>
       </div>
 
-      <div style={{ background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
-              <th style={{ padding: 12, textAlign: 'left', fontSize: 13, fontWeight: 600, color: '#374151' }}>Title</th>
-              <th style={{ padding: 12, textAlign: 'left', fontSize: 13, fontWeight: 600, color: '#374151' }}>Category</th>
-              <th style={{ padding: 12, textAlign: 'left', fontSize: 13, fontWeight: 600, color: '#374151' }}>Date</th>
-              <th style={{ padding: 12, textAlign: 'center', fontSize: 13, fontWeight: 600, color: '#374151' }}>Published</th>
-              <th style={{ padding: 12, textAlign: 'right', fontSize: 13, fontWeight: 600, color: '#374151' }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Card>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Title</TableHead>
+              <TableHead>Category</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead className="text-center">Status</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {posts.map(p => (
-              <tr key={p.id} style={{ borderBottom: '1px solid #f3f4f6' }}>
-                <td style={{ padding: 12, fontSize: 14, color: '#0c1a1e', maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.title}</td>
-                <td style={{ padding: 12, fontSize: 14, color: '#6b7280' }}>{p.category}</td>
-                <td style={{ padding: 12, fontSize: 14, color: '#6b7280' }}>{p.date}</td>
-                <td style={{ padding: 12, textAlign: 'center' }}>
-                  <span style={{ fontSize: 12, padding: '2px 8px', borderRadius: 12, fontWeight: 600, color: p.published ? '#059669' : '#9ca3af', background: p.published ? '#d1fae5' : '#f3f4f6' }}>{p.published ? 'Live' : 'Draft'}</span>
-                </td>
-                <td style={{ padding: 12, textAlign: 'right' }}>
-                  <Link href={`/admin/dashboard/posts/edit?id=${p.id}`} style={{ fontSize: 13, color: '#059669', marginRight: 12, textDecoration: 'none' }}>Edit</Link>
-                  <button onClick={() => del(p.id)} style={{ fontSize: 13, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}>Delete</button>
-                </td>
-              </tr>
+              <TableRow key={p.id}>
+                <TableCell className="font-medium max-w-xs truncate">{p.title}</TableCell>
+                <TableCell className="text-muted-foreground">{p.category}</TableCell>
+                <TableCell className="text-muted-foreground">{p.date}</TableCell>
+                <TableCell className="text-center">
+                  <Badge variant={p.published ? 'success' : 'secondary'}>
+                    {p.published ? 'Live' : 'Draft'}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-2">
+                    <Button variant="ghost" size="sm" asChild>
+                      <Link href={`/admin/dashboard/posts/edit?id=${p.id}`}><Pencil className="h-4 w-4" /></Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => del(p.id)} className="text-destructive hover:text-destructive">
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </Card>
     </div>
   )
 }

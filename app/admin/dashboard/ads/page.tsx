@@ -1,6 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Save, Megaphone } from 'lucide-react'
+import { Button } from '@/app/components/ui/button'
+import { Textarea } from '@/app/components/ui/textarea'
+import { Switch } from '@/app/components/ui/switch'
+import { Label } from '@/app/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
+import { Badge } from '@/app/components/ui/badge'
 
 export default function AdsManager() {
   const [ads, setAds] = useState<any[]>([])
@@ -22,37 +29,51 @@ export default function AdsManager() {
     if (res.ok) { setSaved(id); setTimeout(() => setSaved(null), 2000) }
   }
 
-  if (loading) return <p style={{ color: '#6b7280' }}>Loading...</p>
+  if (loading) return <p className="text-muted-foreground">Loading...</p>
 
   return (
-    <div>
-      <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0c1a1e', marginBottom: 4 }}>Ad Management</h2>
-      <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 24 }}>Paste ad codes from Adsterra, AdsKeeper, Google AdSense, or any ad network. Toggle ads on/off per placement.</p>
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-xl font-bold">Ad Management</h2>
+        <p className="text-sm text-muted-foreground">Paste ad codes from Adsterra, AdsKeeper, Google AdSense, or any ad network.</p>
+      </div>
 
-      <div style={{ display: 'grid', gap: 16 }}>
+      <div className="space-y-4">
         {ads.map(ad => (
-          <div key={ad.id} style={{ background: '#fff', borderRadius: 12, padding: 20, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-              <div>
-                <div style={{ fontSize: 16, fontWeight: 600, color: '#0c1a1e' }}>{ad.label}</div>
-                <div style={{ fontSize: 12, color: '#9ca3af', fontFamily: 'monospace' }}>{ad.placement}</div>
+          <Card key={ad.id}>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Megaphone className="h-5 w-5 text-muted-foreground" />
+                  <div>
+                    <CardTitle className="text-base">{ad.label}</CardTitle>
+                    <code className="text-xs text-muted-foreground">{ad.placement}</code>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Badge variant={ad.enabled ? 'success' : 'secondary'}>
+                    {ad.enabled ? 'Enabled' : 'Disabled'}
+                  </Badge>
+                  <Switch checked={ad.enabled || false} onCheckedChange={v => updateAd(ad.id, 'enabled', v)} />
+                </div>
               </div>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
-                <input type="checkbox" checked={ad.enabled || false} onChange={e => updateAd(ad.id, 'enabled', e.target.checked)} style={{ width: 18, height: 18 }} />
-                <span style={{ fontSize: 14, fontWeight: 600, color: ad.enabled ? '#059669' : '#9ca3af' }}>{ad.enabled ? 'Enabled' : 'Disabled'}</span>
-              </label>
-            </div>
-            <textarea
-              value={ad.ad_code || ''}
-              onChange={e => updateAd(ad.id, 'ad_code', e.target.value)}
-              placeholder="Paste ad code here..."
-              style={{ width: '100%', minHeight: 80, padding: 12, fontSize: 13, fontFamily: 'monospace', border: '1px solid #d1d5db', borderRadius: 8, outline: 'none', resize: 'vertical' }}
-            />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 12 }}>
-              <button onClick={() => save(ad.id)} style={{ padding: '8px 20px', fontSize: 13, fontWeight: 600, color: '#fff', background: '#059669', border: 'none', borderRadius: 8, cursor: 'pointer' }}>Save</button>
-              {saved === ad.id && <span style={{ fontSize: 13, color: '#059669' }}>Saved!</span>}
-            </div>
-          </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Textarea
+                value={ad.ad_code || ''}
+                onChange={e => updateAd(ad.id, 'ad_code', e.target.value)}
+                placeholder="Paste ad code here..."
+                className="min-h-[80px] font-mono text-xs"
+              />
+              <div className="flex items-center gap-3">
+                <Button size="sm" onClick={() => save(ad.id)}>
+                  <Save className="h-4 w-4 mr-2" />
+                  Save
+                </Button>
+                {saved === ad.id && <span className="text-sm text-primary">Saved!</span>}
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>

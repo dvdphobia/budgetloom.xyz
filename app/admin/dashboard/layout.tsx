@@ -3,13 +3,16 @@
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { LayoutDashboard, FileText, FilePlus, Megaphone, Settings, LogOut, ExternalLink, Menu, X } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { Button } from '@/app/components/ui/button'
 
 const navItems = [
-  { href: '/admin/dashboard', label: 'Overview', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
-  { href: '/admin/dashboard/posts', label: 'Blog Posts', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' },
-  { href: '/admin/dashboard/printables', label: 'Printables', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
-  { href: '/admin/dashboard/ads', label: 'Ad Management', icon: 'M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13.118l-6.5-3.5m6.5 3.5l3.417 2.094M18 13.118V6.5m0 6.618L14 19.5' },
-  { href: '/admin/dashboard/settings', label: 'Site Settings', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z' },
+  { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard },
+  { href: '/admin/dashboard/posts', label: 'Blog Posts', icon: FileText },
+  { href: '/admin/dashboard/printables', label: 'Printables', icon: FilePlus },
+  { href: '/admin/dashboard/ads', label: 'Ad Management', icon: Megaphone },
+  { href: '/admin/dashboard/settings', label: 'Site Settings', icon: Settings },
 ]
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -25,7 +28,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }, [])
 
   if (authed === null) {
-    return <div style={{ minHeight: '100vh', background: '#0c1a1e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>Loading...</div>
+    return <div className="min-h-screen flex items-center justify-center text-white" style={{ background: '#0c1a1e' }}>Loading...</div>
   }
 
   if (!authed) {
@@ -38,48 +41,71 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     router.push('/admin/login')
   }
 
+  const currentLabel = navItems.find(n => pathname === n.href || pathname?.startsWith(n.href + '/'))?.label || 'Admin'
+
   return (
-    <div style={{ minHeight: '100vh', background: '#f3f4f6', display: 'flex' }}>
+    <div className="min-h-screen bg-muted/30 flex">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-40 bg-black/50 md:hidden" onClick={() => setSidebarOpen(false)} />
+      )}
+
       {/* Sidebar */}
-      <aside style={{
-        width: 240, background: '#0c1a1e', color: '#fff', minHeight: '100vh',
-        display: sidebarOpen ? 'block' : 'none', position: 'fixed', zIndex: 50,
-        '@media (min-width: 768px)': { display: 'block', position: 'sticky', top: 0 } } as any}
-      >
-        <div style={{ padding: 20, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <div style={{ fontSize: 18, fontWeight: 700, color: '#059669' }}>BudgetLoom</div>
-          <div style={{ fontSize: 12, color: '#6b7280' }}>Admin Panel</div>
+      <aside className={cn(
+        "fixed inset-y-0 left-0 z-50 w-64 flex flex-col transition-transform md:sticky md:top-0 md:h-screen md:translate-x-0",
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      )} style={{ background: '#0c1a1e' }}>
+        <div className="flex items-center justify-between p-5 border-b border-white/10">
+          <div>
+            <div className="text-lg font-bold text-primary">BudgetLoom</div>
+            <div className="text-xs text-gray-400">Admin Panel</div>
+          </div>
+          <Button variant="ghost" size="icon" className="md:hidden text-white" onClick={() => setSidebarOpen(false)}>
+            <X className="h-5 w-5" />
+          </Button>
         </div>
-        <nav style={{ padding: 8 }}>
-          {navItems.map(item => (
-            <Link key={item.href} href={item.href} onClick={() => setSidebarOpen(false)}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 12, padding: '10px 16px',
-                borderRadius: 8, fontSize: 14, fontWeight: 500, marginBottom: 2,
-                color: pathname === item.href || pathname?.startsWith(item.href + '/') ? '#fff' : '#9ca3af',
-                background: pathname === item.href || pathname?.startsWith(item.href + '/') ? 'rgba(5,150,105,0.2)' : 'transparent',
-                textDecoration: 'none', transition: 'all 0.15s',
-              }}>
-              <svg width={20} height={20} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
-              {item.label}
-            </Link>
-          ))}
+
+        <nav className="flex-1 p-3 space-y-1">
+          {navItems.map(item => {
+            const active = pathname === item.href || pathname?.startsWith(item.href + '/')
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setSidebarOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                  active ? "bg-primary/20 text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                {item.label}
+              </Link>
+            )
+          })}
         </nav>
-        <div style={{ padding: 16, borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: 'auto' }}>
-          <a href="/" target="_blank" style={{ display: 'block', fontSize: 13, color: '#9ca3af', marginBottom: 8, textDecoration: 'none' }}>View Site →</a>
-          <button onClick={logout} style={{ fontSize: 13, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}>Sign Out</button>
+
+        <div className="p-3 border-t border-white/10 space-y-1">
+          <a href="/" target="_blank" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-gray-400 hover:bg-white/5 hover:text-white transition-colors">
+            <ExternalLink className="h-5 w-5" />
+            View Site
+          </a>
+          <button onClick={logout} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors w-full">
+            <LogOut className="h-5 w-5" />
+            Sign Out
+          </button>
         </div>
       </aside>
 
       {/* Main content */}
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <header style={{ background: '#fff', borderBottom: '1px solid #e5e7eb', padding: '12px 24px', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} style={{ display: 'block', '@media (min-width: 768px)': { display: 'none' } } as any}>
-            <svg width={24} height={24} fill="none" stroke="#0c1a1e" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
-          </button>
-          <h1 style={{ fontSize: 16, fontWeight: 600, color: '#0c1a1e' }}>{navItems.find(n => pathname === n.href || pathname?.startsWith(n.href + '/'))?.label || 'Admin'}</h1>
+      <div className="flex-1 min-w-0">
+        <header className="sticky top-0 z-30 flex items-center gap-3 border-b bg-background px-6 py-3">
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSidebarOpen(true)}>
+            <Menu className="h-5 w-5" />
+          </Button>
+          <h1 className="text-lg font-semibold">{currentLabel}</h1>
         </header>
-        <main style={{ padding: 24 }}>{children}</main>
+        <main className="p-6">{children}</main>
       </div>
     </div>
   )

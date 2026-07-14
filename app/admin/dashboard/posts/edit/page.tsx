@@ -3,20 +3,30 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-
-const inputStyle = { width: '100%', padding: '10px 14px', fontSize: 14, border: '1px solid #d1d5db', borderRadius: 8, outline: 'none' }
-const labelStyle = { display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }
+import { ArrowLeft, Save, Trash2 } from 'lucide-react'
+import { Button } from '@/app/components/ui/button'
+import { Input } from '@/app/components/ui/input'
+import { Label } from '@/app/components/ui/label'
+import { Textarea } from '@/app/components/ui/textarea'
+import { Card, CardContent } from '@/app/components/ui/card'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select'
 
 export default function EditPost() {
   const [post, setPost] = useState<any>(null)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [category, setCategory] = useState('')
+  const [published, setPublished] = useState(true)
   const router = useRouter()
   const params = useSearchParams()
   const id = params.get('id')
 
   useEffect(() => {
-    if (id) fetch(`/api/admin/posts/${id}`).then(r => r.json()).then(d => setPost(d.post))
+    if (id) fetch(`/api/admin/posts/${id}`).then(r => r.json()).then(d => {
+      setPost(d.post)
+      setCategory(d.post?.category || 'Budgeting')
+      setPublished(d.post?.published ?? true)
+    })
   }, [id])
 
   async function save(e: React.FormEvent) {
@@ -27,10 +37,10 @@ export default function EditPost() {
       title: (form.elements.namedItem('title') as HTMLInputElement).value,
       description: (form.elements.namedItem('description') as HTMLInputElement).value,
       date: (form.elements.namedItem('date') as HTMLInputElement).value,
-      category: (form.elements.namedItem('category') as HTMLSelectElement).value,
+      category,
       read_time: (form.elements.namedItem('read_time') as HTMLInputElement).value,
       content: (form.elements.namedItem('content') as HTMLTextAreaElement).value,
-      published: (form.elements.namedItem('published') as HTMLInputElement).checked,
+      published,
     }
     try {
       const res = await fetch(`/api/admin/posts/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
@@ -46,36 +56,83 @@ export default function EditPost() {
     router.push('/admin/dashboard/posts')
   }
 
-  if (!post) return <p style={{ color: '#6b7280' }}>Loading...</p>
+  if (!post) return <p className="text-muted-foreground">Loading...</p>
 
   return (
-    <div style={{ maxWidth: 800 }}>
-      <Link href="/admin/dashboard/posts" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', marginBottom: 16, display: 'inline-block' }}>← Back to Posts</Link>
-      <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0c1a1e', marginBottom: 24 }}>Edit Post</h2>
-      <form onSubmit={save} style={{ background: '#fff', borderRadius: 12, padding: 24, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
-          <div><label style={labelStyle}>Slug</label><input name="slug" defaultValue={post.slug} style={inputStyle} required /></div>
-          <div><label style={labelStyle}>Title</label><input name="title" defaultValue={post.title} style={inputStyle} required /></div>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginBottom: 16 }}>
-          <div><label style={labelStyle}>Category</label>
-            <select name="category" defaultValue={post.category} style={inputStyle}>
-              <option value="Budgeting">Budgeting</option><option value="Savings">Savings</option><option value="Food">Food</option><option value="Debt">Debt</option><option value="Lifestyle">Lifestyle</option>
-            </select>
-          </div>
-          <div><label style={labelStyle}>Date</label><input name="date" type="date" defaultValue={post.date?.split('T')[0]} style={inputStyle} /></div>
-          <div><label style={labelStyle}>Read Time</label><input name="read_time" defaultValue={post.read_time} style={inputStyle} /></div>
-        </div>
-        <div style={{ marginBottom: 16 }}><label style={labelStyle}>Description</label><input name="description" defaultValue={post.description} style={inputStyle} /></div>
-        <div style={{ marginBottom: 16 }}><label style={labelStyle}>Content (Markdown)</label><textarea name="content" defaultValue={post.content} style={{ ...inputStyle, fontFamily: 'monospace', minHeight: 400, lineHeight: 1.6 }} required /></div>
-        <div style={{ marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <input name="published" type="checkbox" defaultChecked={post.published} id="pub" /><label htmlFor="pub" style={{ fontSize: 14, color: '#374151' }}>Published</label>
-        </div>
-        {error && <p style={{ color: '#dc2626', fontSize: 14, marginBottom: 12 }}>{error}</p>}
-        <div style={{ display: 'flex', gap: 12 }}>
-          <button type="submit" disabled={saving} style={{ padding: '12px 24px', fontSize: 14, fontWeight: 600, color: '#fff', background: '#059669', border: 'none', borderRadius: 8, cursor: saving ? 'wait' : 'pointer' }}>{saving ? 'Saving...' : 'Save Changes'}</button>
-          <button type="button" onClick={del} style={{ padding: '12px 24px', fontSize: 14, fontWeight: 600, color: '#dc2626', background: 'none', border: '1px solid #dc2626', borderRadius: 8, cursor: 'pointer' }}>Delete</button>
-        </div>
+    <div className="max-w-3xl space-y-6">
+      <Link href="/admin/dashboard/posts" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+        <ArrowLeft className="h-4 w-4" /> Back to Posts
+      </Link>
+
+      <h2 className="text-xl font-bold">Edit Post</h2>
+
+      <form onSubmit={save}>
+        <Card>
+          <CardContent className="pt-6 space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="slug">Slug</Label>
+                <Input id="slug" name="slug" defaultValue={post.slug} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="title">Title</Label>
+                <Input id="title" name="title" defaultValue={post.title} required />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <Label>Category</Label>
+                <Select value={category} onValueChange={setCategory}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Budgeting">Budgeting</SelectItem>
+                    <SelectItem value="Savings">Savings</SelectItem>
+                    <SelectItem value="Food">Food</SelectItem>
+                    <SelectItem value="Debt">Debt</SelectItem>
+                    <SelectItem value="Lifestyle">Lifestyle</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="date">Date</Label>
+                <Input id="date" name="date" type="date" defaultValue={post.date?.split('T')[0]} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="read_time">Read Time</Label>
+                <Input id="read_time" name="read_time" defaultValue={post.read_time} />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="description">Description</Label>
+              <Input id="description" name="description" defaultValue={post.description} />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="content">Content (Markdown)</Label>
+              <Textarea id="content" name="content" defaultValue={post.content} className="min-h-[400px] font-mono text-sm leading-relaxed" required />
+            </div>
+
+            <div className="flex items-center gap-2">
+              <input id="published" type="checkbox" checked={published} onChange={e => setPublished(e.target.checked)} className="h-4 w-4 rounded border-input" />
+              <Label htmlFor="published">Published</Label>
+            </div>
+
+            {error && <p className="text-sm text-destructive">{error}</p>}
+
+            <div className="flex gap-3">
+              <Button type="submit" disabled={saving}>
+                <Save className="h-4 w-4 mr-2" />
+                {saving ? 'Saving...' : 'Save Changes'}
+              </Button>
+              <Button type="button" variant="outline" onClick={del} className="text-destructive border-destructive hover:bg-destructive/10">
+                <Trash2 className="h-4 w-4 mr-2" />
+                Delete
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </form>
     </div>
   )

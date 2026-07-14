@@ -2,6 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Button } from '@/app/components/ui/button'
+import { Input } from '@/app/components/ui/input'
+import { Label } from '@/app/components/ui/label'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('')
@@ -37,48 +41,53 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0c1a1e' }}>
-      <div style={{ width: '100%', maxWidth: 380, padding: 40, background: '#fdfcf7', borderRadius: 16, boxShadow: '0 4px 24px rgba(0,0,0,0.3)' }}>
-        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#0c1a1e', marginBottom: 4 }}>BudgetLoom Admin</h1>
-        <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 24 }}>Sign in to manage your site</p>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#0c1a1e' }}>
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">BudgetLoom Admin</CardTitle>
+          <CardDescription>Sign in to manage your site</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                type="text"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                placeholder="admin"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+            </div>
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: 16 }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              style={{ width: '100%', padding: '10px 14px', fontSize: 14, border: '1px solid #d1d5db', borderRadius: 8, outline: 'none' }}
-              placeholder="admin"
-              required
-            />
-          </div>
-          <div style={{ marginBottom: 20 }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              style={{ width: '100%', padding: '10px 14px', fontSize: 14, border: '1px solid #d1d5db', borderRadius: 8, outline: 'none' }}
-              placeholder="••••••••"
-              required
-            />
-          </div>
+            {error && (
+              <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+                {error}
+              </div>
+            )}
 
-          {error && <p style={{ color: '#dc2626', fontSize: 13, marginBottom: 12 }}>{error}</p>}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? 'Signing in...' : 'Sign In'}
+            </Button>
+          </form>
 
-          <button
-            type="submit"
-            disabled={loading}
-            style={{ width: '100%', padding: '12px', fontSize: 14, fontWeight: 600, color: '#fff', background: '#059669', border: 'none', borderRadius: 8, cursor: loading ? 'wait' : 'pointer' }}
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
-
-        <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 20, textAlign: 'center' }}>Default: admin / admin123 — change after first login</p>
-      </div>
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            Default: admin / admin123 — change after first login
+          </p>
+        </CardContent>
+      </Card>
     </div>
   )
 }

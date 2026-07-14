@@ -1,6 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Save, Settings as SettingsIcon } from 'lucide-react'
+import { Button } from '@/app/components/ui/button'
+import { Input } from '@/app/components/ui/input'
+import { Label } from '@/app/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card'
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<Record<string, string>>({})
@@ -25,41 +30,54 @@ export default function SettingsPage() {
     setSettings({ ...settings, [key]: value })
   }
 
-  if (loading) return <p style={{ color: '#6b7280' }}>Loading...</p>
+  if (loading) return <p className="text-muted-foreground">Loading...</p>
 
   const fields = [
-    { key: 'site_name', label: 'Site Name', type: 'text' },
-    { key: 'site_url', label: 'Site URL', type: 'text' },
-    { key: 'amazon_tracking_id', label: 'Amazon Affiliate ID', type: 'text', hint: 'Your Amazon Associates tracking ID' },
-    { key: 'google_analytics_id', label: 'Google Analytics ID', type: 'text', hint: 'e.g. G-CRZCXM56DQ' },
-    { key: 'adsterra_key', label: 'Adsterra Key', type: 'text', hint: 'Adsterra native ad key' },
-    { key: 'adskeeper_widget_id', label: 'AdsKeeper Widget ID', type: 'text' },
-    { key: 'pinterest_verification', label: 'Pinterest Verification Code', type: 'text', hint: 'For p:domain_verify meta tag' },
+    { key: 'site_name', label: 'Site Name', hint: '' },
+    { key: 'site_url', label: 'Site URL', hint: '' },
+    { key: 'amazon_tracking_id', label: 'Amazon Affiliate ID', hint: 'Your Amazon Associates tracking ID' },
+    { key: 'google_analytics_id', label: 'Google Analytics ID', hint: 'e.g. G-CRZCXM56DQ' },
+    { key: 'adsterra_key', label: 'Adsterra Key', hint: 'Adsterra native ad key' },
+    { key: 'adskeeper_widget_id', label: 'AdsKeeper Widget ID', hint: '' },
+    { key: 'pinterest_verification', label: 'Pinterest Verification Code', hint: 'For p:domain_verify meta tag' },
   ]
 
   return (
-    <div style={{ maxWidth: 600 }}>
-      <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0c1a1e', marginBottom: 4 }}>Site Settings</h2>
-      <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 24 }}>Configure tracking IDs, ad network keys, and site details.</p>
+    <div className="max-w-xl space-y-6">
+      <div>
+        <h2 className="text-xl font-bold">Site Settings</h2>
+        <p className="text-sm text-muted-foreground">Configure tracking IDs, ad network keys, and site details.</p>
+      </div>
 
-      <form onSubmit={save} style={{ background: '#fff', borderRadius: 12, padding: 24, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-        {fields.map(f => (
-          <div key={f.key} style={{ marginBottom: 20 }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>{f.label}</label>
-            <input
-              type={f.type}
-              value={settings[f.key] || ''}
-              onChange={e => update(f.key, e.target.value)}
-              style={{ width: '100%', padding: '10px 14px', fontSize: 14, border: '1px solid #d1d5db', borderRadius: 8, outline: 'none' }}
-              placeholder={f.hint || ''}
-            />
-            {f.hint && <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 4 }}>{f.hint}</p>}
-          </div>
-        ))}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <button type="submit" disabled={saving} style={{ padding: '12px 24px', fontSize: 14, fontWeight: 600, color: '#fff', background: '#059669', border: 'none', borderRadius: 8, cursor: saving ? 'wait' : 'pointer' }}>{saving ? 'Saving...' : 'Save Settings'}</button>
-          {saved && <span style={{ fontSize: 14, color: '#059669' }}>Settings saved!</span>}
-        </div>
+      <form onSubmit={save}>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2"><SettingsIcon className="h-5 w-5" />Configuration</CardTitle>
+            <CardDescription>These values control affiliate links, analytics, and ad network integration.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {fields.map(f => (
+              <div key={f.key} className="space-y-2">
+                <Label htmlFor={f.key}>{f.label}</Label>
+                <Input
+                  id={f.key}
+                  value={settings[f.key] || ''}
+                  onChange={e => update(f.key, e.target.value)}
+                  placeholder={f.hint || ''}
+                />
+                {f.hint && <p className="text-xs text-muted-foreground">{f.hint}</p>}
+              </div>
+            ))}
+
+            <div className="flex items-center gap-3 pt-2">
+              <Button type="submit" disabled={saving}>
+                <Save className="h-4 w-4 mr-2" />
+                {saving ? 'Saving...' : 'Save Settings'}
+              </Button>
+              {saved && <span className="text-sm text-primary">Settings saved!</span>}
+            </div>
+          </CardContent>
+        </Card>
       </form>
     </div>
   )
