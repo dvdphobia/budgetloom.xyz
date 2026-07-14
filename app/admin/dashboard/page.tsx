@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FileText, FilePlus, Megaphone, Database, Sparkles, ArrowRight } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card'
-import { Button } from '@/app/components/ui/button'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export default function OverviewPage() {
   const [stats, setStats] = useState({ posts: 0, printables: 0, adsEnabled: 0 })
@@ -46,90 +46,99 @@ export default function OverviewPage() {
     setLoading(false)
   }
 
-  const cards = [
-    { label: 'Blog Posts', value: stats.posts, href: '/admin/dashboard/posts', icon: FileText, color: 'text-primary' },
-    { label: 'Printables', value: stats.printables, href: '/admin/dashboard/printables', icon: FilePlus, color: 'text-amber-600' },
-    { label: 'Active Ads', value: stats.adsEnabled, href: '/admin/dashboard/ads', icon: Megaphone, color: 'text-purple-600' },
-  ]
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-12 max-w-4xl">
+      {/* Header */}
       <div>
-        <h2 className="text-xl font-bold">Dashboard Overview</h2>
-        <p className="text-sm text-muted-foreground">Manage your BudgetLoom website</p>
+        <h1 className="text-3xl font-semibold">Dashboard</h1>
+        <p className="text-sm text-muted-foreground mt-1">Manage content and site settings</p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        {cards.map(card => (
-          <Link key={card.label} href={card.href}>
-            <Card className="hover:shadow-md transition-shadow cursor-pointer">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className={cn('text-3xl font-bold', card.color)}>{card.value}</div>
-                    <div className="text-sm text-muted-foreground mt-1">{card.label}</div>
-                  </div>
-                  <card.icon className={cn('h-10 w-10 opacity-20', card.color)} />
-                </div>
-              </CardContent>
-            </Card>
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-8">
+        {[
+          { label: 'Posts', value: stats.posts, href: '/admin/dashboard/posts' },
+          { label: 'Printables', value: stats.printables, href: '/admin/dashboard/printables' },
+          { label: 'Ads enabled', value: stats.adsEnabled, href: '/admin/dashboard/ads' },
+        ].map(stat => (
+          <Link key={stat.label} href={stat.href} className="group">
+            <div className="space-y-2">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{stat.label}</p>
+              <p className="text-4xl font-semibold group-hover:text-primary transition-colors">{stat.value}</p>
+            </div>
           </Link>
         ))}
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <Database className="h-5 w-5" />
-            Database Setup
-          </CardTitle>
-          <CardDescription>Initialize creates all tables. Seed copies existing content into the database.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex gap-3 flex-wrap">
-            <Button onClick={initDB} disabled={loading}>
-              <Database className="h-4 w-4 mr-2" />
-              Initialize Database
-            </Button>
-            <Button onClick={seedContent} disabled={loading} variant="secondary">
-              <Sparkles className="h-4 w-4 mr-2" />
-              Seed Existing Content
-            </Button>
+      {/* Actions Section */}
+      <div className="space-y-8">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">Content</h2>
+          <div className="space-y-3">
+            {[
+              { href: '/admin/dashboard/posts/new', label: 'New blog post' },
+              { href: '/admin/dashboard/printables/new', label: 'New printable' },
+              { href: '/admin/dashboard/ads', label: 'Manage ads' },
+            ].map(action => (
+              <Link key={action.label} href={action.href}>
+                <div className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-muted/50 transition-colors group cursor-pointer">
+                  <span className="text-sm font-medium group-hover:text-foreground">{action.label}</span>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground opacity-0 group-hover:opacity-100 transition-all" />
+                </div>
+              </Link>
+            ))}
           </div>
-          {initMsg && (
-            <p className={cn('text-sm', initMsg.includes('Error') ? 'text-destructive' : 'text-primary')}>{initMsg}</p>
-          )}
-          {seedMsg && (
-            <p className={cn('text-sm', seedMsg.includes('Error') ? 'text-destructive' : 'text-primary')}>{seedMsg}</p>
-          )}
-        </CardContent>
-      </Card>
+        </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Quick Actions</CardTitle>
-        </CardHeader>
-        <CardContent className="grid gap-2 sm:grid-cols-2">
-          <Link href="/admin/dashboard/posts/new" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Create New Post</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">Site</h2>
+          <Link href="/admin/dashboard/settings">
+            <div className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-muted/50 transition-colors group cursor-pointer">
+              <span className="text-sm font-medium group-hover:text-foreground">Settings</span>
+              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground opacity-0 group-hover:opacity-100 transition-all" />
+            </div>
           </Link>
-          <Link href="/admin/dashboard/printables/new" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Create New Printable</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-          </Link>
-          <Link href="/admin/dashboard/ads" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Manage Ads</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-          </Link>
-          <Link href="/admin/dashboard/settings" className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent transition-colors">
-            <span className="text-sm font-medium">Edit Settings</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground" />
-          </Link>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
+
+      {/* Database Section */}
+      <div className="space-y-6 pt-8 border-t">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Database</h2>
+          <p className="text-xs text-muted-foreground mt-1">Initialize tables and seed sample data</p>
+        </div>
+
+        <div className="flex gap-3">
+          <Button onClick={initDB} disabled={loading} variant="outline">
+            Initialize
+          </Button>
+          <Button onClick={seedContent} disabled={loading} variant="outline">
+            Seed data
+          </Button>
+        </div>
+
+        {initMsg && (
+          <div className={cn(
+            'text-xs p-3 rounded border',
+            initMsg.includes('Error')
+              ? 'border-destructive/30 bg-destructive/10 text-destructive'
+              : 'border-primary/30 bg-primary/10 text-primary'
+          )}>
+            {initMsg}
+          </div>
+        )}
+
+        {seedMsg && (
+          <div className={cn(
+            'text-xs p-3 rounded border',
+            seedMsg.includes('Error')
+              ? 'border-destructive/30 bg-destructive/10 text-destructive'
+              : 'border-primary/30 bg-primary/10 text-primary'
+          )}>
+            {seedMsg}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
-
-import { cn } from '@/lib/utils'
