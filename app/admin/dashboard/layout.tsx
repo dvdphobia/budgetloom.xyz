@@ -44,7 +44,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const currentLabel = navItems.find(n => pathname === n.href || pathname?.startsWith(n.href + '/'))?.label || 'Admin'
 
   return (
-    <div className="min-h-screen bg-muted/30 flex">
+    <div className="min-h-screen bg-muted/30 flex admin-shell">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 bg-black/50 md:hidden" onClick={() => setSidebarOpen(false)} />

@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#0c1a1e' }}>
+    <div className="min-h-screen flex items-center justify-center admin-shell" style={{ background: '#0c1a1e' }}>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">BudgetLoom Admin</CardTitle>

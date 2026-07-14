@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
+@import "tailwindcss";
 
 @theme inline {
   --color-background: hsl(var(--background));
@@ -66,7 +66,7 @@
   --light: #f9fafb;
   --cream: #fdfcf7;
   --white: #ffffff;
-  --border: #e5e7eb;
+  --brand-border: #e5e7eb;
   --border-light: #f3f4f6;
 
   /* 8px spacing system */
@@ -85,10 +85,10 @@
   --shadow-md: 0 10px 20px rgba(12,26,30,0.06), 0 3px 6px rgba(12,26,30,0.04);
   --shadow-lg: 0 20px 40px rgba(12,26,30,0.08), 0 8px 16px rgba(12,26,30,0.04);
 
-  --radius-sm: 8px;
-  --radius: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --brand-radius-sm: 8px;
+  --brand-radius: 14px;
+  --brand-radius-lg: 20px;
+  --brand-radius-xl: 28px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --transition: 0.3s var(--ease);
@@ -163,7 +163,7 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-cta:hover { background: var(--green-dark); color: white !important; }
 .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; color: var(--dark); }
 @media (max-width: 768px) {
-  .nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); flex-direction: column; padding: 0.75rem; gap: 0.15rem; box-shadow: var(--shadow-md); }
+  .nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--brand-border); flex-direction: column; padding: 0.75rem; gap: 0.15rem; box-shadow: var(--shadow-md); }
   .nav.open { display: flex; }
   .nav a { padding: 0.75rem 1rem; border-radius: 10px; width: 100%; }
   .mobile-toggle { display: block; }
@@ -216,7 +216,7 @@ img { max-width: 100%; height: auto; display: block; }
 .btn:active { transform: translateY(0); }
 .btn-primary { background: var(--green); }
 .btn-primary:hover { background: var(--green-dark); }
-.btn-ghost { background: transparent; color: var(--dark); border: 1px solid var(--border); }
+.btn-ghost { background: transparent; color: var(--dark); border: 1px solid var(--brand-border); }
 .btn-ghost:hover { background: var(--light); color: var(--dark); border-color: var(--gray-light); }
 .btn-lg { padding: 0.95rem 1.8rem; font-size: 1rem; }
 .btn-sm { padding: 0.45rem 0.95rem; font-size: 0.83rem; }
@@ -235,11 +235,11 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* === CARDS === */
 .card {
-  background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-lg);
+  background: var(--white); border: 1px solid var(--border-light); border-radius: var(--brand-radius-lg);
   overflow: hidden; transition: all var(--transition); display: flex; flex-direction: column;
   text-decoration: none; color: inherit;
 }
-.card:hover { box-shadow: var(--shadow-md); border-color: var(--border); transform: translateY(-3px); }
+.card:hover { box-shadow: var(--shadow-md); border-color: var(--brand-border); transform: translateY(-3px); }
 .card:hover h3 { color: var(--green); }
 
 .card-cover {
@@ -267,14 +267,14 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* === EMAIL CAPTURE === */
 .lead-box {
-  background: var(--cream); border: 1px solid var(--border-light); border-radius: var(--radius-xl);
+  background: var(--cream); border: 1px solid var(--border-light); border-radius: var(--brand-radius-xl);
   padding: 3rem 2.5rem; text-align: center; margin: 3rem 0;
 }
 .lead-box h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
 .lead-box p { color: var(--gray); font-size: 1rem; margin-bottom: 1.5rem; }
 .email-form { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; max-width: 420px; margin: 0 auto; }
 .email-form input {
-  padding: 0.8rem 1.1rem; border: 1px solid var(--border); border-radius: 999px;
+  padding: 0.8rem 1.1rem; border: 1px solid var(--brand-border); border-radius: 999px;
   min-width: 240px; flex: 1; font-size: 0.92rem; transition: all var(--transition);
   font-family: var(--font); background: white;
 }
@@ -291,13 +291,13 @@ img { max-width: 100%; height: auto; display: block; }
 .breadcrumbs { font-size: 0.82rem; color: var(--gray-light); margin-bottom: 1.5rem; display: flex; gap: 0.35rem; align-items: center; flex-wrap: wrap; }
 .breadcrumbs a { color: var(--gray); }
 .breadcrumbs a:hover { color: var(--green); }
-.breadcrumbs .sep { color: var(--border); }
+.breadcrumbs .sep { color: var(--brand-border); }
 .breadcrumbs .current { color: var(--slate); font-weight: 500; }
 
 /* === ARTICLE === */
 .article-meta { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
 .article-meta .cat { color: var(--green-dark); font-size: 0.8rem; font-weight: 600; }
-.article-meta .dot { color: var(--border); }
+.article-meta .dot { color: var(--brand-border); }
 .article-meta .time { color: var(--gray-light); font-size: 0.82rem; }
 .article-title {
   font-size: 2.4rem; font-weight: 800; line-height: 1.12; letter-spacing: -0.03em;
@@ -333,7 +333,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* === TABLE OF CONTENTS === */
 .toc {
-  background: var(--light); border: 1px solid var(--border-light); border-radius: var(--radius);
+  background: var(--light); border: 1px solid var(--border-light); border-radius: var(--brand-radius);
   padding: 1.1rem 1.4rem; margin: 0 0 2.5rem;
 }
 .toc-label { font-size: 0.75rem; font-weight: 600; color: var(--gray); margin-bottom: 0.5rem; text-transform: none; letter-spacing: 0; }
@@ -353,7 +353,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* === AUTHOR === */
 .author-box {
   display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem;
-  background: var(--light); border-radius: var(--radius); margin: 2rem 0;
+  background: var(--light); border-radius: var(--brand-radius); margin: 2rem 0;
 }
 .author-avatar {
   width: 40px; height: 40px; border-radius: 50%;
@@ -372,7 +372,7 @@ img { max-width: 100%; height: auto; display: block; }
 .printable-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; margin-bottom: 2.5rem; }
 @media (max-width: 768px) { .printable-hero { grid-template-columns: 1fr; } }
 .printable-preview {
-  border-radius: var(--radius-lg); overflow: hidden;
+  border-radius: var(--brand-radius-lg); overflow: hidden;
   background: var(--cream); border: 1px solid var(--border-light);
   min-height: 300px; display: flex; align-items: center; justify-content: center;
   position: relative;
@@ -393,7 +393,7 @@ img { max-width: 100%; height: auto; display: block; }
 .category-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
 .category-pill {
   padding: 0.35rem 0.9rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;
-  background: var(--white); border: 1px solid var(--border); color: var(--slate);
+  background: var(--white); border: 1px solid var(--brand-border); color: var(--slate);
   transition: all var(--transition); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;
 }
 .category-pill:hover { border-color: var(--green); color: var(--green-dark); background: var(--green-mint); }
@@ -426,7 +426,7 @@ img { max-width: 100%; height: auto; display: block; }
 .share-row { display: flex; gap: 0.4rem; margin: 0 0 1.5rem; align-items: center; }
 .share-row .label { font-size: 0.8rem; color: var(--gray-light); margin-right: 0.3rem; }
 .share-btn {
-  width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+  width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--brand-border);
   display: flex; align-items: center; justify-content: center;
   color: var(--gray); transition: all var(--transition); cursor: pointer; background: white;
 }
@@ -437,7 +437,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* === AMAZON PRODUCT CARD === */
 .product-card {
   display: flex; align-items: center; gap: 0.9rem;
-  border: 1px solid var(--border); border-radius: var(--radius);
+  border: 1px solid var(--brand-border); border-radius: var(--brand-radius);
   padding: 0.9rem 1.1rem; margin: 1.5rem 0; background: var(--white);
   transition: all var(--transition);
 }
@@ -469,4 +469,27 @@ img { max-width: 100%; height: auto; display: block; }
   .section { padding: 3rem 0; }
   .section-header h2 { font-size: 1.5rem; }
   .lead-box { padding: 2rem 1.5rem; }
+}
+
+/* === ADMIN OVERRIDES === */
+/* Reset public-site global styles inside admin pages */
+.admin-reset, .admin-reset * {
+  font-family: inherit;
+  color: inherit;
+  background: inherit;
+}
+.admin-reset body, .admin-reset body * {
+  color: revert;
+  background: revert;
+}
+/* Override the public-site body styles for /admin routes */
+body:has(.admin-shell) {
+  background: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+body:has(.admin-shell) a {
+  color: inherit;
+}
+body:has(.admin-shell) a:hover {
+  color: inherit;
 }
