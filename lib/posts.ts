@@ -1031,47 +1031,151 @@ Download the Budget Starter Bundle for a free no-spend tracker, habit tracker, a
   {
     slug: 'how-to-pay-off-debt-fast',
     title: 'How to Pay Off Debt Faster (Even on a Low Income)',
-    description: 'The debt snowball vs avalanche method explained simply, plus a free payoff tracker.',
+    description: 'Debt snowball vs avalanche explained with a real example, step-by-step plan, where to find extra money, and how to stay motivated when progress feels slow.',
     date: '2026-07-14',
     category: 'Debt',
     readTime: '10 min',
     content: `## Debt is expensive
-Credit card debt at 20% interest means a $1,000 balance costs you $200/year just in interest. The faster you pay it off, the more money stays in your pocket.
+
+Credit card debt at 20% interest means a $1,000 balance costs you $200/year just in interest. That is money you are burning for nothing. The longer the debt sits, the more it costs.
+
+The faster you pay it off, the more money stays in your pocket. But "faster" requires a strategy. Without one, you make minimum payments for years and pay 2-3x the original amount.
+
+This guide covers two payoff methods, a real example with numbers, and what to do when your income is low.
 
 ## Two payoff methods
 
-### Debt Snowball
-Pay off smallest balance first, regardless of interest rate.
-- Pros: Quick wins, motivation, momentum.
-- Cons: May cost more in interest over time.
+### The Debt Snowball
 
-### Debt Avalanche
-Pay off highest interest debt first.
-- Pros: Mathematically cheapest, saves the most money.
-- Cons: Slower wins, harder to stay motivated.
+Pay off your smallest balance first, regardless of interest rate. When that debt is gone, roll its payment into the next smallest balance.
 
-## Which one is best?
-Pick the one you will actually stick with. If motivation is your problem, snowball wins. If you are disciplined, avalanche saves more.
+- Best for: People who need motivation to stay the course
+- Pros: Quick wins. Eliminating debts one by one feels good. Behavioral research shows people stick with the snowball method longer.
+- Cons: You may pay more in interest overall if your smallest debts are not your highest-interest ones.
+
+### The Debt Avalanche
+
+Pay off your highest interest debt first. When that is gone, roll its payment into the next highest interest debt.
+
+- Best for: People who are disciplined and motivated by math
+- Pros: Mathematically the cheapest option. You save the most money in interest.
+- Cons: If your highest-interest debt is also your largest balance, it takes a long time to see the first "win." Some people lose motivation and quit.
+
+### A real example
+
+Say you have four debts:
+
+| Debt | Balance | Interest Rate | Minimum Payment |
+|---|---|---|---|
+| Credit Card A | $500 | 22% | $25 |
+| Credit Card B | $3,000 | 18% | $60 |
+| Car Loan | $8,000 | 6% | $200 |
+| Student Loan | $15,000 | 5% | $150 |
+
+Total minimum payments: $435/month.
+
+You find an extra $200/month to put toward debt. Total debt payment budget: $635/month.
+
+**Snowball order**: Credit Card A first ($500 balance). You pay $225/month (minimum + extra) and clear it in about 3 months. Then roll that $225 into Credit Card B. You are now paying $285/month on Card B. It is gone in about 11 months. Then roll into the car loan, then the student loan.
+
+**Avalanche order**: Credit Card A first anyway (it is both smallest and highest rate). Then Credit Card B (18%). Then car loan (6%). Then student loan (5%). In this case, the order is the same — but if the car loan was $2,000 and Card B was $5,000, the orders would differ.
+
+The avalanche saves more in interest. The snowball gives faster psychological wins. Pick the one you will actually finish.
+
+## Which one should you pick?
+
+If your highest-interest debt is also your smallest balance, the question is moot — both methods start in the same place.
+
+If they differ:
+- You have struggled with motivation before: snowball
+- You are disciplined and want to save the most: avalanche
+- You are not sure: start with snowball, switch to avalanche once you have momentum
+
+The best method is the one you will not quit.
 
 ## Step-by-step plan
-1. List all debts: balance, minimum payment, interest rate.
-2. Pick your method.
-3. Pay minimums on everything.
-4. Put all extra money toward your target debt.
-5. When that debt is gone, roll the payment into the next one.
-6. Repeat until debt-free.
 
-## Find extra money
-- Tax refund: put 100% toward debt.
-- Side income: driving, freelancing, selling items.
-- Cut one subscription and redirect the money.
-- Negotiate lower interest rates with your credit card company.
+1. List every debt: balance, interest rate, minimum payment. Write it on paper or use a debt inventory printable.
+2. Pick your method: snowball (smallest balance first) or avalanche (highest rate first).
+3. Pay the minimum on every debt, every month. Never miss a minimum — that triggers late fees and credit score damage.
+4. Put every extra dollar toward your target debt (the first one in your chosen order).
+5. When the target debt is paid off, do not spend that freed-up money. Roll the entire payment (minimum + extra) into the next debt in your order.
+6. Repeat until every debt is gone.
 
-## Track your payoff
-A visual debt payoff chart keeps you motivated. Color in each square as you pay down the balance. Our debt payoff planner includes snowball and avalanche trackers.
+The key is step 5. When you pay off a debt, that freed payment does not go back into your budget. It goes into the next debt. This is the "snowball" or "avalanche" — the payment grows as each debt falls.
 
-## Download the debt payoff planner
-Get the 10-page printable with debt inventory, trackers, and milestone charts.`
+## Find extra money for debt
+
+You need extra money beyond minimum payments to make either method work. Where does it come from?
+
+### Cut expenses
+- Cancel subscriptions you barely use: $20-60/month
+- Stop eating out: $200-400/month
+- Switch to store brands: $30-80/month
+- Negotiate one bill (phone, internet, insurance): $10-40/month
+
+### Earn extra
+- Sell items you do not use: $50-300 one-time
+- Delivery driving on weekends: $100-200/weekend
+- Freelance work: $100-500/project
+- Pet sitting or tutoring: $50-200/week
+
+### Redirect windfalls
+- Tax refund: 100% toward debt
+- Work bonus: 100% toward debt
+- Birthday or holiday money: redirect before you spend it
+- Cashback rewards: apply directly to debt
+
+## What if your income is too low?
+
+If you cannot find extra money because your income barely covers the Four Walls (food, shelter, utilities, transportation), focus on this order:
+
+1. Build a $500 starter emergency fund first. This prevents new debt when something breaks.
+2. Pay minimums on all debts. Do not skip — missed payments damage your credit and increase your interest rates.
+3. Increase income by $200-300/month with a side gig. Even one weekend of delivery driving per month changes the math.
+4. Once you have the $500 buffer, redirect all extra money to debt payoff using the snowball method.
+
+Read our guide on budgeting when you are broke for the full Four Walls system.
+
+## Stay motivated
+
+Debt payoff is a marathon. If you have $20,000 in debt and can pay $500/month, it takes 40 months. That is over 3 years. Motivation is the bottleneck.
+
+### Track visually
+
+Print a debt payoff chart. Color in each square as you pay down the balance. Seeing the chart fill up is more motivating than seeing a number change on a screen.
+
+### Celebrate milestones
+
+Every time a debt is fully paid off, celebrate — but not by spending. Tell a friend. Take a photo of the $0 balance. Write the date. These small celebrations keep you going.
+
+### Remember the cost of not doing this
+
+$20,000 in debt at 18% average interest costs $3,600/year in interest alone. That is $300/month you are paying for nothing. Every month you delay, you lose $300. Every month you pay it down, you recover some of that.
+
+## Debt consolidation: when it helps
+
+Consolidation means combining multiple debts into one loan with a lower interest rate. It can help if:
+
+- You qualify for a personal loan at 8-12% and your credit cards are at 18-25%
+- You use a 0% balance transfer credit card and pay it off before the promotional period ends
+- You are not adding new debt while paying off the consolidated loan
+
+Consolidation does not help if:
+- You consolidate and then run up the credit cards again
+- The new loan has fees that offset the interest savings
+- You use your home as collateral (risk losing it if you cannot pay)
+
+## Get the debt payoff planner
+
+The Debt Payoff Planner includes:
+
+- Debt inventory sheet (balance, rate, minimum for each debt)
+- Snowball tracker
+- Avalanche tracker
+- Milestone charts (first debt paid, 25%, 50%, 75%, debt-free)
+
+Download it free and fill in your debt inventory today. The first step is knowing the full number.`
   },
   {
     slug: 'cheap-date-ideas',
