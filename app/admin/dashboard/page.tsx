@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { FileText, FilePlus, Megaphone, Database, Sparkles, ArrowRight } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export default function OverviewPage() {
   const [stats, setStats] = useState({ posts: 0, printables: 0, adsEnabled: 0 })
@@ -131,5 +132,3 @@ export default function OverviewPage() {
     </div>
   )
 }
-
-import { cn } from '@/lib/utils'
