@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FileText, FilePlus, Megaphone, Database, Sparkles, ArrowRight, TrendingUp } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card'
-import { Button } from '@/app/components/ui/button'
+import { FileText, FilePlus, Megaphone, Database, Sparkles, ArrowRight, TrendingUp, Zap, CheckCircle2 } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 
 export default function OverviewPage() {
@@ -47,170 +50,191 @@ export default function OverviewPage() {
     setLoading(false)
   }
 
-  const cards = [
-    { label: 'Blog Posts', value: stats.posts, href: '/admin/dashboard/posts', icon: FileText, gradient: 'from-emerald-500/20 to-transparent', accentColor: 'text-emerald-600' },
-    { label: 'Printables', value: stats.printables, href: '/admin/dashboard/printables', icon: FilePlus, gradient: 'from-amber-500/20 to-transparent', accentColor: 'text-amber-600' },
-    { label: 'Active Ads', value: stats.adsEnabled, href: '/admin/dashboard/ads', icon: Megaphone, gradient: 'from-violet-500/20 to-transparent', accentColor: 'text-violet-600' },
-  ]
-
   return (
-    <div className="space-y-8 pb-8">
-      {/* Header with Gradient Background */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-8 text-white">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -mr-48 -mt-48" />
+    <div className="space-y-8">
+      {/* Hero Banner */}
+      <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-8 md:p-12">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -right-40 -top-40 size-80 bg-primary/20 rounded-full blur-3xl" />
+        </div>
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <TrendingUp className="h-6 w-6 text-primary" />
-            <span className="text-xs font-semibold text-primary uppercase tracking-widest">Welcome Back</span>
+          <div className="mb-4 flex items-center gap-2">
+            <div className="size-2 rounded-full bg-primary animate-pulse" />
+            <Badge variant="secondary" className="font-semibold">Dashboard v1</Badge>
           </div>
-          <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
-          <p className="text-slate-300 text-lg">Manage your BudgetLoom content, settings, and performance</p>
+          <h1 className="mb-2 text-5xl font-black">Welcome, Admin</h1>
+          <p className="max-w-2xl text-lg text-muted-foreground">
+            Manage all your content, resources, and monetization settings from one beautiful interface.
+          </p>
         </div>
       </div>
 
-      {/* Stats Cards Grid */}
-      <div className="grid gap-4 sm:grid-cols-3">
-        {cards.map((card, idx) => (
-          <Link key={card.label} href={card.href}>
-            <Card className={cn(
-              "relative overflow-hidden transition-all duration-300 cursor-pointer group h-full",
-              "hover:shadow-xl hover:-translate-y-2 border border-slate-200/40 hover:border-primary/50"
-            )}>
-              {/* Background Gradient */}
-              <div className={cn("absolute inset-0 bg-gradient-to-br", card.gradient, "opacity-40 group-hover:opacity-60 transition-opacity")} />
-              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-2xl -mr-20 -mt-20 group-hover:from-primary/10 transition-all" />
-              
-              <CardContent className="pt-6 relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-2">{card.label}</p>
-                    <div className={cn("text-5xl font-black tracking-tighter", card.accentColor)}>
-                      {card.value}
+      {/* KPI Stats */}
+      <div>
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-2xl font-bold flex items-center gap-3">
+            <Zap className="size-6 text-primary" />
+            Your Content
+          </h2>
+          <Badge>Live</Badge>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {[
+            { label: 'Blog Posts', value: stats.posts, href: '/admin/dashboard/posts', icon: FileText },
+            { label: 'Printables', value: stats.printables, href: '/admin/dashboard/printables', icon: FilePlus },
+            { label: 'Active Ads', value: stats.adsEnabled, href: '/admin/dashboard/ads', icon: Megaphone },
+          ].map(stat => (
+            <Link key={stat.label} href={stat.href}>
+              <Card className="group relative overflow-hidden border-primary/10 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
+                <CardContent className="pt-6">
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between">
+                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{stat.label}</p>
+                      <div className="rounded-lg bg-primary/10 p-2 transition-colors group-hover:bg-primary/20">
+                        <stat.icon className="size-4 text-primary" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-4xl font-black tracking-tight">{stat.value}</p>
+                      <div className="h-1 w-16 rounded-full bg-gradient-to-r from-primary to-transparent" />
                     </div>
                   </div>
-                  <div className={cn(
-                    "h-14 w-14 rounded-lg flex items-center justify-center flex-shrink-0",
-                    "bg-gradient-to-br from-slate-100 to-slate-50 group-hover:scale-110 transition-transform duration-300",
-                    "shadow-sm group-hover:shadow-md"
-                  )}>
-                    <card.icon className={cn("h-7 w-7", card.accentColor)} />
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 text-xs text-slate-600 group-hover:text-slate-900 transition-colors">
-                  <TrendingUp className="h-3 w-3" />
-                  <span>View all items</span>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </div>
 
-      {/* Database Setup Section */}
-      <Card className="relative overflow-hidden border-primary/30 bg-gradient-to-br from-slate-50/50 to-slate-50/20">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -mr-40 -mt-40" />
-        
-        <CardHeader className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-              <Database className="h-5 w-5 text-primary" />
-            </div>
-            <CardTitle className="text-xl font-bold">Database Setup</CardTitle>
-          </div>
-          <CardDescription className="text-sm">Initialize creates all required tables. Seed copies existing content into the database.</CardDescription>
-        </CardHeader>
-        <CardContent className="relative z-10 space-y-4">
-          <div className="flex gap-3 flex-wrap">
-            <Button 
-              onClick={initDB} 
-              disabled={loading}
-              className="gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white"
-            >
-              <Database className="h-4 w-4" />
-              Initialize Database
-            </Button>
-            <Button 
-              onClick={seedContent} 
-              disabled={loading} 
-              variant="secondary"
-              className="gap-2"
-            >
-              <Sparkles className="h-4 w-4" />
-              Seed Content
-            </Button>
-          </div>
-          {initMsg && (
-            <div className={cn(
-              'p-3 rounded-lg text-sm font-medium transition-all',
-              initMsg.includes('Error') 
-                ? 'bg-destructive/10 text-destructive border border-destructive/20' 
-                : 'bg-primary/10 text-primary border border-primary/20'
-            )}>
-              {initMsg}
-            </div>
-          )}
-          {seedMsg && (
-            <div className={cn(
-              'p-3 rounded-lg text-sm font-medium transition-all',
-              seedMsg.includes('Error')
-                ? 'bg-destructive/10 text-destructive border border-destructive/20'
-                : 'bg-primary/10 text-primary border border-primary/20'
-            )}>
-              {seedMsg}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      {/* Main Content with Tabs */}
+      <Tabs defaultValue="actions" className="w-full">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="actions" className="gap-2">
+            <FilePlus className="size-4" />
+            Quick Actions
+          </TabsTrigger>
+          <TabsTrigger value="setup" className="gap-2">
+            <Database className="size-4" />
+            Database
+          </TabsTrigger>
+        </TabsList>
 
-      {/* Quick Actions Section */}
-      <Card className="border-slate-200/40">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold">Quick Actions</CardTitle>
-          <CardDescription>Frequently used shortcuts to manage your content</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-3 sm:grid-cols-2">
-          {[
-            { href: "/admin/dashboard/posts/new", label: "Create New Post", icon: FilePlus, color: 'emerald' },
-            { href: "/admin/dashboard/printables/new", label: "Create Printable", icon: FileText, color: 'amber' },
-            { href: "/admin/dashboard/ads", label: "Manage Ads", icon: Megaphone, color: 'violet' },
-            { href: "/admin/dashboard/settings", label: "Site Settings", icon: Database, color: 'slate' }
-          ].map(action => {
-            const IconComponent = action.icon
-            const colorMap: any = {
-              emerald: { bg: 'from-emerald-500/10 to-emerald-500/5', icon: 'text-emerald-600', border: 'hover:border-emerald-500/50' },
-              amber: { bg: 'from-amber-500/10 to-amber-500/5', icon: 'text-amber-600', border: 'hover:border-amber-500/50' },
-              violet: { bg: 'from-violet-500/10 to-violet-500/5', icon: 'text-violet-600', border: 'hover:border-violet-500/50' },
-              slate: { bg: 'from-slate-500/10 to-slate-500/5', icon: 'text-slate-600', border: 'hover:border-slate-500/50' }
-            }
-            const colors = colorMap[action.color]
-            return (
-              <Link 
-                key={action.label}
-                href={action.href} 
-                className={cn(
-                  "group relative overflow-hidden rounded-lg border border-slate-200/40 p-4",
-                  "transition-all duration-300 hover:shadow-md",
-                  colors.border
-                )}
-              >
-                <div className={cn("absolute inset-0 bg-gradient-to-br", colors.bg, "opacity-0 group-hover:opacity-100 transition-opacity")} />
-                <div className="relative z-10 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={cn(
-                      "h-10 w-10 rounded-lg flex items-center justify-center",
-                      "bg-gradient-to-br from-slate-100 to-slate-50 group-hover:scale-110 transition-transform"
-                    )}>
-                      <IconComponent className={cn("h-5 w-5", colors.icon)} />
+        {/* Quick Actions Tab */}
+        <TabsContent value="actions" className="space-y-4 mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Content Management</CardTitle>
+              <CardDescription>Create and manage all your content</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {[
+                  { href: '/admin/dashboard/posts/new', label: 'Create New Blog Post', desc: 'Write and publish blog content', icon: FileText },
+                  { href: '/admin/dashboard/printables/new', label: 'Create Printable Resource', desc: 'Add new printable products', icon: FilePlus },
+                  { href: '/admin/dashboard/ads', label: 'Manage Advertisements', desc: 'Configure monetization ads', icon: Megaphone },
+                  { href: '/admin/dashboard/settings', label: 'Site Configuration', desc: 'Update site settings', icon: Database },
+                ].map(item => {
+                  const Icon = item.icon
+                  return (
+                    <Link key={item.label} href={item.href}>
+                      <div className="group flex items-center justify-between rounded-lg border border-border/50 p-4 transition-all duration-200 hover:border-primary/50 hover:bg-primary/5">
+                        <div className="flex items-center gap-4 flex-1">
+                          <div className="flex size-10 items-center justify-center rounded-lg bg-muted transition-colors group-hover:bg-primary/20">
+                            <Icon className="size-5 text-muted-foreground transition-colors group-hover:text-primary" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-semibold">{item.label}</p>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
+                          </div>
+                        </div>
+                        <ArrowRight className="size-4 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Database Setup Tab */}
+        <TabsContent value="setup" className="space-y-4 mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Database Setup</CardTitle>
+              <CardDescription>Initialize and manage your database</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Initialize */}
+              <div className="space-y-3">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="size-5 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Initialize Database</h3>
+                      <p className="text-sm text-muted-foreground">Create all required tables and schema</p>
                     </div>
-                    <span className="text-sm font-semibold text-slate-900">{action.label}</span>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  <Button 
+                    onClick={initDB} 
+                    disabled={loading}
+                    size="sm"
+                    className="gap-2 flex-shrink-0"
+                  >
+                    <Database className="size-4" />
+                    Initialize
+                  </Button>
                 </div>
-              </Link>
-            )
-          })}
-        </CardContent>
-      </Card>
+                {initMsg && (
+                  <div className={cn(
+                    'p-3 rounded-lg text-sm border-l-4',
+                    initMsg.includes('Error')
+                      ? 'border-l-destructive bg-destructive/5 text-destructive'
+                      : 'border-l-primary bg-primary/5 text-primary'
+                  )}>
+                    {initMsg}
+                  </div>
+                )}
+              </div>
+
+              <Separator />
+
+              {/* Seed Content */}
+              <div className="space-y-3">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <Sparkles className="size-5 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Seed Sample Data</h3>
+                      <p className="text-sm text-muted-foreground">Populate with example posts and printables</p>
+                    </div>
+                  </div>
+                  <Button 
+                    onClick={seedContent} 
+                    disabled={loading} 
+                    variant="secondary"
+                    size="sm"
+                    className="gap-2 flex-shrink-0"
+                  >
+                    <Sparkles className="size-4" />
+                    Seed
+                  </Button>
+                </div>
+                {seedMsg && (
+                  <div className={cn(
+                    'p-3 rounded-lg text-sm border-l-4',
+                    seedMsg.includes('Error')
+                      ? 'border-l-destructive bg-destructive/5 text-destructive'
+                      : 'border-l-primary bg-primary/5 text-primary'
+                  )}>
+                    {seedMsg}
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
