@@ -1968,6 +1968,7 @@ Break that association. Use this list. Every time you choose a free activity ove
 Print a no-spend tracker and cross off each day you go without spending. The visual streak keeps you going. Pair it with our 30-day savings challenge for a bigger goal.
 
 Download the Budget Starter Bundle for a free no-spend tracker and savings goal worksheet.`
+  }
 ]
 
 export function getPostBySlug(slug: string): Post | undefined {
