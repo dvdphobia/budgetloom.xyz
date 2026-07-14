@@ -499,23 +499,132 @@ Download it free, print it, and fill it in today. The first step is always the h
   {
     slug: 'no-spend-weekend-ideas',
     title: 'No-Spend Weekend Ideas That Are Actually Fun',
-    description: 'Free activities to fill a weekend without spending a dollar.',
+    description: '50 free activities for a no-spend weekend — at home, outdoors, with friends, with kids, and for self-improvement. Plus rules to make it work.',
     date: '2026-07-07',
     category: 'Lifestyle',
-    readTime: '4 min',
+    readTime: '6 min',
     content: `## Why try a no-spend weekend?
-It resets your spending habits and shows you how much fun is free.
 
-## Ideas
-- Host a movie night with snacks you already have.
-- Go hiking, walking, or biking.
-- Declutter and sell items online.
-- Try a new recipe with pantry ingredients.
-- Game night or puzzle marathon.
-- Visit free museums or library events.
+Most weekend spending is not planned. It is boredom spending. You have nothing to do on Saturday afternoon, so you browse Amazon. You are hungry on Sunday morning, so you order delivery. You are restless, so you wander Target.
 
-## Make it a game
-Set a rule: if you want to buy something, wait 48 hours. Most urges disappear.`
+A no-spend weekend interrupts that pattern. The rule is simple: zero spending from Friday evening to Monday morning. Groceries you already bought are fine. Bills on autopay are fine. Everything else is off limits.
+
+The average person spends $80-180 on a typical weekend — takeout, shopping, drinks, movies, delivery. One no-spend weekend per month saves $100-150. Do that for a year and you have $1,200-1,800.
+
+But the real benefit is not the money. It is learning that you do not need to spend to enjoy yourself.
+
+## Rules that make it work
+
+### Define your boundaries before Friday
+
+Decide what counts and what does not. Generally:
+
+- Allowed: groceries already in your fridge, bills on autopay, free activities, things you already own
+- Not allowed: restaurants, delivery, online shopping, coffee shops, paid events, app purchases
+
+If you need groceries for the week, buy them Thursday, not Saturday.
+
+### Plan your weekend before it starts
+
+The number one reason no-spend weekends fail is Saturday morning. You wake up with no plan, get bored by noon, and order food. Pick your activities on Thursday or Friday. Write them down.
+
+### Do not stock up in advance
+
+Buying extra snacks on Thursday "for the weekend" defeats the purpose. Use what you have. Cook with pantry ingredients. Watch movies on streaming you already pay for.
+
+### Tell someone
+
+Accountability works. Tell a friend you are doing a no-spend weekend. Text them when you succeed. Text them when you are tempted.
+
+## 50 things to do
+
+### At home (free and already paid for)
+- Movie marathon with streaming you already have
+- Cook a new recipe with pantry ingredients
+- Bake something sweet from scratch
+- Board game night or card tournament
+- Puzzle marathon — 500 or 1,000 pieces
+- Rearrange one room
+- Declutter one closet or drawer
+- Deep clean one area of your home
+- Start a journal
+- Read a book you already own
+- Take a long bath
+- Do a home workout (YouTube has thousands free)
+- Meditate for 10 minutes
+- Call or FaceTime a friend you have not talked to in months
+- Write a letter to someone
+
+### Outdoors
+- Go for a walk in a neighborhood you have not explored
+- Hike a trail within driving distance (gas is allowed)
+- Visit a park
+- Ride a bike
+- Go stargazing — bring blankets and a thermos
+- Watch a sunset or sunrise
+- Take photos of nature with your phone
+- Start a garden with seeds you have
+- Play basketball, tennis, or soccer at a public court
+- Geocaching (free treasure hunting app)
+- Go fishing if you have gear
+- Play frisbee or catch
+- Collect leaves, rocks, or shells
+- Have a picnic with food you already have
+
+### In your community
+- Visit the library — borrow books, movies, and audiobooks
+- Attend a free community event or festival
+- Browse a farmers market (looking is free)
+- Watch a free outdoor concert or movie screening
+- Visit a free museum on discount days
+- Attend a free workshop at the library or community center
+- Volunteer at an animal shelter
+- Join a free meetup group
+- Visit a free zoo or botanical garden
+
+### With friends or a partner
+- Host a potluck (everyone brings something)
+- Game tournament night
+- Coffee and a walk (coffee from home in a thermos)
+- Book swap — trade books you already read
+- Clothes swap — trade clothes you are tired of
+- Cook dinner together with what you have
+- Talent show night
+- Photo challenge — pick a theme, take photos, compare
+- Storytelling night — share your best memories
+- Movie night at home with popcorn
+
+### For yourself
+- Update your resume
+- Start a budget
+- Plan your goals for the next 3 months
+- Learn a new skill on YouTube
+- Organize your digital photos
+- Do a digital detox — no phone for 24 hours
+- Make a vision board from old magazines
+- Plan a no-spend month
+
+## What to do when you are tempted
+
+The urge to spend will hit. Usually around Saturday afternoon when you are bored.
+
+When it does:
+
+1. Wait 30 minutes. Most spending urges pass in under 20 minutes.
+2. Do something from the list above immediately. Replace the urge with an activity.
+3. If you still want it after 30 minutes, write it on a "later list." You can buy it Monday if you still want it. Most items on later lists never get bought.
+
+## How much can you save?
+
+One no-spend weekend per month, saving $120 on average, adds up to $1,440/year. That is a full emergency fund starter or a debt payment.
+
+Two no-spend weekends per month saves $2,880/year.
+
+The money is real. The habit is more valuable. Once you learn that weekends do not require spending, every weekend becomes an option, not an expense.
+
+## Track your no-spend weekends
+
+Print a no-spend tracker and cross off each weekend you complete. The visual streak keeps you going. Pair this with our 30-day savings challenge for a bigger goal.`
   },
   {
     slug: 'how-to-save-1000-emergency-fund',
