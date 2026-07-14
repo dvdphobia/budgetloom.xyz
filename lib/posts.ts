@@ -1660,54 +1660,162 @@ Download the Budget Starter Bundle for a free expense tracker and monthly budget
   {
     slug: 'low-income-budget-tips',
     title: 'Budgeting Tips That Work When You Are Low Income',
-    description: 'Real budgeting advice for people who do not have extra money lying around.',
+    description: 'Real, practical budgeting advice for people on tight incomes. Track every dollar, prioritize the Four Walls, cut what you can, increase income, and use free resources.',
     date: '2026-07-14',
     category: 'Budgeting',
     readTime: '9 min',
     content: `## Standard budget advice does not work when you are broke
-"You should save 20% of your income" is useless when 100% goes to rent and food. Here is what actually works.
+
+"You should save 20% of your income" is useless when 100% goes to rent and food. "Cut your discretionary spending" means nothing when you have no discretionary spending.
+
+Most budget guides are written for middle-class people who have margin. This guide is for people who do not.
+
+When your income is low, budgeting is not about optimization. It is about survival — making sure the most important things get paid first, finding money you did not know you had, and building a small buffer so one surprise does not spiral into debt.
 
 ## 1. Track every dollar
-When money is tight, every dollar matters. Write down everything you spend for one month. You will find money you did not know you had.
 
-## 2. Prioritize the four walls
-Pay these first, in this order:
-- Food
-- Housing/rent
-- Utilities
-- Transportation to work
-Everything else is secondary.
+When money is tight, every dollar matters more, not less. A $10 leak that a middle-class person would not notice is a meal you do not get.
+
+Write down everything you spend for one month. Not estimates — actual amounts from your bank app or receipts. Sort into:
+
+- Fixed: rent, phone, insurance, car payment
+- Variable: groceries, gas, utilities
+- Everything else
+
+You will find money you did not know you had. A $7 monthly subscription you forgot about. A $3 fee you could avoid. These small leaks add up to $30-100/month when your margin is thin.
+
+Use a printable expense tracker. Write it down the same day you spend it. If you wait, you will forget the small purchases — and those are the ones that matter.
+
+## 2. Prioritize the Four Walls
+
+When you cannot pay everyone, you need an order. The Four Walls method gives you one:
+
+1. Food — groceries, not restaurants
+2. Shelter — rent or mortgage
+3. Utilities — electricity, water, gas
+4. Transportation — gas or bus fare to get to work
+
+These come first. Everything else — credit cards, personal loans, subscriptions, medical bills — waits until the Four Walls are covered.
+
+This is not about ignoring debts. It is about making sure you eat and keep your home first. If you cannot cover all four, pay them in order. Food before shelter. Shelter before utilities. Utilities before transportation.
 
 ## 3. Cut what you can
-- Phone: switch to a prepaid plan ($15-25/month vs $80+).
-- Internet: call and ask for the promo rate.
-- Insurance: shop around yearly.
-- Subscriptions: cancel all of them. You can re-add later.
+
+### Phone
+Switch to a prepaid plan. MVNOs like Mint Mobile, Visible, or Tello offer plans for $15-25/month. The major carriers charge $60-90/month for the same service. The difference is $35-75/month back in your pocket.
+
+### Internet
+Call your provider and ask for the promo rate or a low-income discount. Many providers offer $10-30/month plans for qualifying households through the Affordable Connectivity Program or similar. It takes one phone call.
+
+### Insurance
+Shop around yearly. Use sites like The Zebra or Gabi to compare rates. Many people save $20-60/month by switching car or renter's insurance.
+
+### Subscriptions
+Cancel all of them. Every single one. If you miss something, re-add it later. Most people do not miss anything. Use the library for movies (Libby and Hoopla are free with a library card).
+
+### Groceries
+Switch to store brands. Buy rice, beans, pasta, and frozen vegetables instead of pre-made meals. Shop at Aldi if you have one. Check ethnic markets for cheaper spices, rice, and produce. Read our guide on frugal grocery tips for 15 specific strategies.
 
 ## 4. Increase income
-Cutting only goes so far. Even $200/month extra changes everything:
-- Side gig: delivery, pet sitting, online tutoring.
-- Sell what you do not use.
-- Ask for overtime or a raise.
-- Freelance skills: writing, design, admin work.
+
+Cutting has a floor. You can only cut so far before you are living in a dark apartment eating rice. Income does not have a floor.
+
+Even $200/month extra changes everything when you are low income. It turns a deficit into a break-even, or a break-even into a small buffer.
+
+### Side income ideas
+- Delivery driving (DoorDash, Uber Eats, Grubhub): $100-200/weekend
+- Pet sitting or dog walking (Rover, Wag): $50-100/week
+- Selling items on Facebook Marketplace or eBay: $30-200/one-time
+- Freelance work on Fiverr or Upwork (writing, design, admin): $100-500/project
+- Online tutoring or teaching English (VIPKid, Cambly): $100-300/month
+- TaskRabbit or Handy: $50-150/task
+- Donate plasma: $50-100/week (two sessions)
+
+### Ask for more
+- Ask for overtime at your current job
+- Ask for a raise if you have been there 6+ months and are performing well
+- Look for a higher-paying job — even a $2/hour raise is $4,000/year
 
 ## 5. Build a $500 buffer first
-Forget the 3-month emergency fund for now. Just get $500 saved. This covers most small emergencies without debt.
+
+Forget the 3-month emergency fund. That feels impossible when you are barely making rent. Set a smaller goal: $500.
+
+$500 covers most small emergencies — a car repair, a medical bill, a utility spike. It means the next surprise does not push you into credit card debt or a payday loan.
+
+Save it in a separate account at a different bank. Not checking — you will spend it. Transfer whatever you can, even $5/week. The point is to start, not to finish fast.
+
+Once you have $500, you can aim for $1,000. Read our guide on building a $1,000 emergency fund for the next step.
 
 ## 6. Use cash envelopes
-When money is tight, cash is king. Put budget cash in envelopes. When the envelope is empty, you stop spending. A cash envelope system makes this automatic.
 
-## 7. Use free resources
-- Food banks: no shame in using them.
-- SNAP/WIC if you qualify.
-- Free clinics for healthcare.
-- Library for entertainment, internet, and classes.
+When money is tight, cash is king. Put your budget cash in envelopes labeled by category (groceries, gas, personal). When the envelope is empty, you stop spending in that category.
+
+Cash envelopes work because they are physical. You can see the money. You can feel it getting thinner. A card does not give you that feedback — it just says "approved."
+
+A cash envelope system makes this automatic. You can also use a budget binder with envelopes built in.
+
+## 7. Use every free resource available
+
+There is no shame in using programs designed for this exact situation. That is what they exist for.
+
+### Food
+- SNAP (food stamps) — eligibility varies by state, check benefits.gov
+- WIC if you have children under 5
+- Local food banks and pantries — find one at feedingamerica.org
+- School meal programs (free or reduced lunch)
+- Community gardens — free produce in some areas
+
+### Healthcare
+- Medicaid — free or low-cost health insurance
+- Free clinics — find one at findahealthcenter.hrsa.gov
+- Community health centers — sliding scale based on income
+- Prescription discount cards (GoodRx, SingleCare)
+
+### Utilities
+- LIHEAP — energy bill assistance
+- Weatherization Assistance Program — free home insulation and repairs
+- Water bill assistance programs — check with your local water utility
+
+### Other
+- Lifeline — free or $9.25/month phone service
+- Section 8 housing vouchers
+- Earned Income Tax Credit (EITC) — a tax refund worth up to $7,430 for qualifying families
+- Free tax preparation (VITA program)
+
+If you do not know if you qualify, check. Many people qualify for programs they have never heard of.
+
+## 8. Avoid debt traps
+
+When money is tight, the temptation is to borrow. But certain types of borrowing make things worse:
+
+- Payday loans: 400-700% APR. A $500 loan costs $75 in fees per 2 weeks. Avoid at all costs.
+- Title loans: you can lose your car, which means you cannot get to work.
+- Buy-now-pay-later (Klarna, Afterpay): not technically interest, but late fees and overspending risk.
+- Credit card cash advances: 25-30% APR starts immediately, no grace period.
+
+If you need to borrow, look for:
+- Small personal loans from credit unions (8-18% APR)
+- PAL (Payday Alternative Loan) from some credit unions (28% APR cap)
+- 0% APR credit card introductory offers (if you can pay it off during the promo period)
 
 ## You are not alone
-Being low income is not a moral failure. Budgeting is harder when money is tight, not easier. But tracking and small wins build momentum.
+
+Being low income is not a moral failure. Budgeting is harder when money is tight, not easier. The standard advice does not apply to you, and that is not your fault.
+
+But tracking, prioritizing, and small wins build momentum. The first month is the hardest. By month three, you have a system. By month six, you have a buffer. By month twelve, you have a habit.
+
+Start with tracking. Then the Four Walls. Then one cut. Then one income boost. One step at a time.
 
 ## Download the free budget starter pack
-Get our beginner-friendly budget printables designed for tight budgets.`
+
+The Budget Starter Bundle is designed for tight budgets. It includes:
+
+- Monthly budget worksheet (works with any income level)
+- Expense tracker
+- Savings tracker ($500 and $1,000 milestone versions)
+- Debt payoff chart
+
+Download it free and start with step one: track your spending for one month.`
   },
   {
     slug: 'free-fun-things-to-do',
