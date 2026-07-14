@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { sql } from '@vercel/postgres'
 import bcrypt from 'bcryptjs'
 import { signToken } from '@/lib/auth'
+import { initDB } from '@/lib/db'
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,6 +10,16 @@ export async function POST(request: NextRequest) {
 
     if (!username || !password) {
       return NextResponse.json({ error: 'Username and password required' }, { status: 400 })
+    }
+
+    // Auto-init DB if tables don't exist yet
+    try {
+      await initDB()
+    } catch {
+      // If init fails, the database might not be connected yet
+      return NextResponse.json({ 
+        error: 'Database not connected. Go to Vercel Dashboard > Storage > Create Postgres database, connect it to this project, then visit /api/admin/init to initialize.' 
+      }, { status: 503 })
     }
 
     const result = await sql`
@@ -38,8 +49,10 @@ export async function POST(request: NextRequest) {
     })
 
     return response
-  } catch (error) {
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  } catch (error: any) {
+    return NextResponse.json({ 
+      error: 'Database not connected. Make sure Vercel Postgres is enabled. Visit /api/admin/init to initialize tables.' 
+    }, { status: 503 })
   }
 }
 

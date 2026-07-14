@@ -25,6 +25,8 @@ export default function AdminLoginPage() {
 
       if (res.ok) {
         router.push('/admin/dashboard')
+      } else if (res.status === 503) {
+        setError(data.error || 'Database not connected. Visit /api/admin/init first.')
       } else {
         setError(data.error || 'Login failed')
       }
