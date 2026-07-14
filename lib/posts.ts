@@ -1180,52 +1180,109 @@ Download it free and fill in your debt inventory today. The first step is knowin
   {
     slug: 'cheap-date-ideas',
     title: '50 Cheap Date Ideas That Do Not Feel Cheap',
-    description: 'Fun, memorable dates under $10 that actually impress.',
+    description: '50 fun, memorable dates organized by budget — free, under $5, and under $10. Plus tips for dating on a budget without feeling cheap.',
     date: '2026-07-14',
     category: 'Lifestyle',
     readTime: '7 min',
     content: `## Dating on a budget is not lame
-The best dates are about connection, not spending. Some of the most memorable dates cost nothing.
+
+The best dates are about connection, not spending. A $100 dinner says "I can afford this." A handwritten letter and a sunset walk says "I thought about you."
+
+Experienced people know this. The most memorable dates often cost nothing — the effort is what makes them feel special.
+
+The average date night costs $100-200. Two dates per week at $150 each is $1,200/month. That is rent money. You do not need to spend that much to have a great relationship.
+
+Here are 50 date ideas organized by budget. None of them feel cheap. All of them feel intentional.
 
 ## Free dates
-- Picnic in the park with homemade sandwiches.
-- Stargazing with blankets and hot chocolate.
-- Hiking a new trail.
-- Free outdoor concerts or movie nights.
-- Cooking dinner together with pantry ingredients.
-- Board game night or card games.
-- Visit a free museum or art gallery.
-- Sunset walk on the beach.
-- Bike ride around the city.
-- Library date: pick books for each other.
+
+These cost $0. The effort is the currency.
+
+- Picnic in the park with homemade sandwiches
+- Stargazing with blankets and a thermos of hot chocolate
+- Hike a trail you have never tried
+- Free outdoor concerts or movie nights in summer
+- Cooking dinner together with pantry ingredients
+- Board game night or card tournament
+- Visit a free museum or art gallery
+- Sunset walk on the beach or through the city
+- Bike ride exploring a new neighborhood
+- Library date: pick books for each other and read in the park
+- At-home spa night: face masks, music, candles
+- Write letters to each other and read them aloud
+- Plan a future trip together — research, make itineraries, dream
+- Teach each other a skill you know (cooking, drawing, coding)
+- Photo walk: pick a theme, take photos, compare results
 
 ## Under $5 dates
-- Coffee date at a local cafe.
-- Ice cream cones and a walk.
-- Farmers market browsing (free samples!).
-- Dollar store challenge: $2 each, buy something fun.
-- Thrift store scavenger hunt.
-- Rent a movie from the library.
-- Bake cookies together (ingredients are cheap).
-- Feed ducks at a pond (bring old bread).
+
+A few dollars makes things feel slightly more like a "real date" without breaking the budget.
+
+- Coffee date at a local cafe (one coffee each)
+- Ice cream cones and a walk through a park
+- Farmers market browsing (free samples, maybe buy one thing)
+- Dollar store challenge: $2 each, buy something to make the other laugh
+- Thrift store scavenger hunt: $5 each, find the weirdest outfit
+- Rent a movie from the library (free) and make popcorn at home
+- Bake cookies together (ingredients cost $3-5)
+- Feed ducks at a pond with old bread from home
+- Buy a single flower and hand-deliver it
+- Play tourist in your own town with a coffee to go
 
 ## Under $10 dates
-- Matinee movie tickets.
-- Bowling during discount hours.
-- Taco Tuesday at a local spot.
-- Mini golf.
-- Visit a botanical garden.
-- Buy art supplies and paint together.
-- Try a new food truck.
-- Karaoke night at home with YouTube.
-- Build a blanket fort and tell stories.
-- Visit a pet store and play with puppies.
 
-## The secret
-Effort beats money every time. A handwritten note costs nothing but means more than a $50 dinner.
+$10 buys you into a few activities that feel like a "proper date" but still cost less than a single movie ticket.
 
-## Save more with budget printables
-Track your entertainment budget and find more money for things that matter. Download our free budget starter bundle.`
+- Matinee movie tickets (cheaper than evening shows)
+- Bowling during discount hours
+- Taco Tuesday at a local spot
+- Mini golf
+- Visit a botanical garden (many are free or $5-10)
+- Buy art supplies and paint together at home
+- Try a new food truck
+- Karaoke night at home with YouTube
+- Build a blanket fort and tell stories
+- Visit a pet store and play with puppies (free, but $10 for coffee after)
+- Ice skating or roller skating discount sessions
+- Used bookstore: $10 each, buy a book for the other person
+- Farmers market breakfast: pastries and coffee
+- Rent a canoe or kayak at a state park ($5-10/hour)
+- Plant a herb garden together (seeds and pot cost $8)
+
+## Tips for dating on a budget
+
+### Frame it as intentional, not cheap
+
+Do not say "I cannot afford a real date." Say "I planned something special." The framing matters. A picnic you planned is more impressive than a restaurant you googled.
+
+### Effort beats money every time
+
+A handwritten note costs nothing. A playlist of songs that remind you of the other person costs nothing. A home-cooked meal costs $5-10 and shows more effort than a $50 restaurant.
+
+### Rotate who plans
+
+Take turns planning date night. The planner picks the activity and covers the cost. This prevents one person from always paying and makes both people invest in the relationship.
+
+### Mix free and paid dates
+
+Alternate: one free date (picnic, hike, movie at home), one low-cost date (coffee, ice cream, bowling). You average $5-15/date instead of $100+, and the variety keeps things fresh.
+
+### Save the big spending for milestones
+
+Birthdays, anniversaries, and achievements deserve a bigger budget. Save your $100 for those. For regular date nights, keep it under $10.
+
+## The math
+
+Two date nights per week at $10 each: $80/month, $960/year.
+Two date nights per week at $100 each: $800/month, $9,600/year.
+
+The difference is $8,640/year. That is a vacation. An emergency fund. A debt payment. And the $10 dates are often more memorable.
+
+## Track your entertainment budget
+
+Use a monthly budget worksheet to track what you spend on dates and entertainment. Most people are shocked by the total. Redirect the savings to a goal that matters — see our guide on the 30-day savings challenge to put the money to work.
+
+Download the Budget Starter Bundle for a free monthly budget worksheet and expense tracker.`
   },
   {
     slug: 'how-to-stop-impulse-buying',
