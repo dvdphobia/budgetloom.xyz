@@ -11,18 +11,18 @@ export const monetization = {
 
 export const affiliateProducts = {
   budgetPlannerNotebook: {
-    name: "Budget Planner Notebook",
-    asin: "B0EXAMPLE1",
+    name: "Clever Fox Budget Planner",
+    asin: "B07VMDWPQR",
     slug: "budget-planner-notebook",
   },
   cashEnvelopes: {
     name: "Cash Envelope Budget System",
-    asin: "B0EXAMPLE2",
+    asin: "B0833G372F",
     slug: "cash-envelope-system",
   },
   mealPrepContainers: {
-    name: "Meal Prep Containers",
-    asin: "B0EXAMPLE3",
+    name: "Bentgo Meal Prep Containers",
+    asin: "B08DKMQFNG",
     slug: "meal-prep-containers",
   },
   labelMaker: {
