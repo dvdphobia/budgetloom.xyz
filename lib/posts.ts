@@ -1820,130 +1820,154 @@ Download it free and start with step one: track your spending for one month.`
   {
     slug: 'free-fun-things-to-do',
     title: '100 Free Things to Do Instead of Spending Money',
-    description: 'A massive list of free activities for when you are bored but broke.',
+    description: '100 free activities organized by category — at home, outdoors, in your community, with friends, with kids, creative, and productive. Stop boredom spending.',
     date: '2026-07-14',
     category: 'Lifestyle',
     readTime: '10 min',
     content: `## Boredom is the enemy of your budget
-Most impulse spending happens because people are bored. Here are 100 free things to do instead.
+
+Most impulse spending is not planned. It happens because you are bored, restless, or looking for a quick dopamine hit. You open Amazon, scroll, and buy something you forgot about by Tuesday.
+
+The fix is not more willpower. The fix is having a list of things to do that are free and immediately available. When the urge to spend hits, you redirect to something on this list instead.
+
+Here are 100 free activities. None of them cost money. All of them are more satisfying than buying something you do not need.
 
 ## At home
-- Learn a new language with free apps like Duolingo.
-- Read a book from the library.
-- Try a new recipe with pantry ingredients.
-- Rearrange your furniture.
-- Declutter one room.
-- Start a journal.
-- Do a home workout.
-- Meditate for 10 minutes.
-- Call an old friend.
-- Write a letter.
-- Play board games.
-- Do a puzzle.
-- Watch a free documentary.
-- Learn to code with free courses.
-- Draw or paint.
-- Write a story.
-- Take a nap.
-- Do a digital detox day.
-- Organize your photos.
-- Make a vision board.
+- Learn a new language with free apps like Duolingo
+- Read a book from the library
+- Try a new recipe with pantry ingredients
+- Rearrange your furniture
+- Declutter one room
+- Start a journal
+- Do a home workout
+- Meditate for 10 minutes
+- Call an old friend
+- Write a letter
+- Play board games
+- Do a puzzle
+- Watch a free documentary
+- Learn to code with free courses
+- Draw or paint
+- Write a story
+- Take a nap
+- Do a digital detox day
+- Organize your photos
+- Make a vision board
 
 ## Outdoors
-- Go for a walk.
-- Hike a new trail.
-- Visit a park.
-- Ride a bike.
-- Go stargazing.
-- Watch a sunset or sunrise.
-- Feed birds at a pond.
-- Start a garden with seeds you have.
-- Play basketball or soccer at a public court.
-- Geocaching (free treasure hunting app).
-- Have a picnic.
-- Collect leaves or rocks.
-- Take photos of nature.
-- Go fishing if you have gear.
-- Play frisbee.
+- Go for a walk
+- Hike a new trail
+- Visit a park
+- Ride a bike
+- Go stargazing
+- Watch a sunset or sunrise
+- Feed birds at a pond
+- Start a garden with seeds you have
+- Play basketball or soccer at a public court
+- Geocaching (free treasure hunting app)
+- Have a picnic
+- Collect leaves or rocks
+- Take photos of nature
+- Go fishing if you have gear
+- Play frisbee
 
 ## In your community
-- Visit the library.
-- Attend free community events.
-- Go to a free museum on discount days.
-- Browse a farmers market.
-- Watch a free outdoor concert.
-- Attend a free workshop or class.
-- Volunteer at an animal shelter.
-- Join a free meetup group.
-- Visit a free zoo or botanical garden.
-- Go to a free movie screening.
+- Visit the library
+- Attend free community events
+- Go to a free museum on discount days
+- Browse a farmers market
+- Watch a free outdoor concert
+- Attend a free workshop or class
+- Volunteer at an animal shelter
+- Join a free meetup group
+- Visit a free zoo or botanical garden
+- Go to a free movie screening
 
 ## Self-improvement
-- Learn a new skill on YouTube.
-- Start a budget.
-- Update your resume.
-- Learn personal finance basics.
-- Practice public speaking.
-- Learn to type faster.
-- Start a side hustle brainstorm.
-- Plan your goals for the year.
-- Read personal finance articles.
-- Create a debt payoff plan.
+- Learn a new skill on YouTube
+- Start a budget
+- Update your resume
+- Learn personal finance basics
+- Practice public speaking
+- Learn to type faster
+- Start a side hustle brainstorm
+- Plan your goals for the year
+- Read personal finance articles
+- Create a debt payoff plan
 
 ## With friends
-- Host a potluck.
-- Movie night at home.
-- Game tournament.
-- Coffee and a walk.
-- Book club.
-- Swap clothes.
-- Cook together.
-- Talent show night.
-- Storytelling night.
-- Photo challenge.
+- Host a potluck
+- Movie night at home
+- Game tournament
+- Coffee and a walk
+- Book club
+- Swap clothes
+- Cook together
+- Talent show night
+- Storytelling night
+- Photo challenge
 
 ## With kids
-- Build a blanket fort.
-- Make paper airplanes.
-- Bake cookies.
-- Read together.
-- Draw with chalk outside.
-- Play tag or hide and seek.
-- Scavenger hunt at home.
-- Dance party.
-- Build with cardboard boxes.
-- Tell stories.
+- Build a blanket fort
+- Make paper airplanes
+- Bake cookies
+- Read together
+- Draw with chalk outside
+- Play tag or hide and seek
+- Scavenger hunt at home
+- Dance party
+- Build with cardboard boxes
+- Tell stories
 
 ## Creative
-- Write a poem.
-- Learn origami.
-- Make a collage from old magazines.
-- Try calligraphy.
-- Make a playlist.
-- Start a blog.
-- Learn magic tricks.
-- Make a time capsule.
-- Try watercolor painting.
-- Write a song.
+- Write a poem
+- Learn origami
+- Make a collage from old magazines
+- Try calligraphy
+- Make a playlist
+- Start a blog
+- Learn magic tricks
+- Make a time capsule
+- Try watercolor painting
+- Write a song
 
 ## Productive
-- Deep clean your home.
-- Organize your closet.
-- Digitize old photos.
-- Fix something broken.
-- Meal plan the week.
-- Cancel unused subscriptions.
-- Update your budget.
-- Make a grocery list.
-- Plan a no-spend week.
-- Review your spending habits.
+- Deep clean your home
+- Organize your closet
+- Digitize old photos
+- Fix something broken
+- Meal plan the week
+- Cancel unused subscriptions
+- Update your budget
+- Make a grocery list
+- Plan a no-spend week
+- Review your spending habits
+
+## How to use this list
+
+### Save it on your phone
+
+Screenshot this page or bookmark it. When you are bored and tempted to spend, open it and pick one thing. The urge to buy passes in 20 minutes. A free activity fills that gap.
+
+### Pair activities with spending triggers
+
+Know what triggers your impulse buying. Boredom? Pick something from the "at home" or "creative" list. Stress? Try "outdoors" or "self-improvement." Social pressure? Invite a friend to do something from the "with friends" list.
+
+### Make a no-spend weekend out of it
+
+Pick 5-7 activities from this list and plan a full no-spend weekend. Saturday: hike in the morning, picnic lunch, library in the afternoon, movie at home in the evening. Sunday: cook a new recipe, declutter one room, call a friend, start a book.
 
 ## Stop spending, start living
-Entertainment does not have to cost money. Keep this list handy for when boredom strikes.
 
-## Download the free no-spend tracker
-Track your no-spend days and watch your savings grow.`
-  }
+Entertainment does not have to cost money. Most of the best things in life — walks, conversations, creativity, learning — are free. The problem is not that fun costs money. The problem is that we have been taught to associate spending with enjoyment.
+
+Break that association. Use this list. Every time you choose a free activity over a purchase, you save money and prove to yourself that you do not need to spend to enjoy life.
+
+## Track your no-spend days
+
+Print a no-spend tracker and cross off each day you go without spending. The visual streak keeps you going. Pair it with our 30-day savings challenge for a bigger goal.
+
+Download the Budget Starter Bundle for a free no-spend tracker and savings goal worksheet.`
 ]
 
 export function getPostBySlug(slug: string): Post | undefined {
