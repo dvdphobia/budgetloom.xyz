@@ -340,27 +340,161 @@ Download it free and plan your first $40 week.`
   {
     slug: 'how-to-build-a-budget-when-broke',
     title: 'How to Build a Budget When You Feel Broke',
-    description: 'A step-by-step guide for budgeting when money is tight.',
+    description: 'A practical step-by-step guide to budgeting when money is tight. Learn the Four Walls method, zero-based budgeting, and where to find money you did not know you had.',
     date: '2026-07-07',
     category: 'Budgeting',
-    readTime: '7 min',
-    content: `## Stop guessing where your money goes
-Most people who feel broke are not overspending on luxuries — they are leaking money on small things that add up.
+    readTime: '8 min',
+    content: `## The problem with budget advice when you are broke
 
-## Step 1: Track one week
-Write down every purchase for 7 days. No judgment.
+Most budget guides assume you have money left over at the end of the month. They tell you to "save 20% of your income" or "invest the difference." That advice is useless when 100% of your income goes to rent, food, and bills — and sometimes that is not enough.
 
-## Step 2: Pick one bill to cut
-Phone plan, subscription, or insurance. One call can save $20/month.
+When you are broke, budgeting is not about optimizing. It is about surviving. You need a different approach.
 
-## Step 3: Use the 50/30/20 rule later
-Right now, aim for 80% needs, 20% future you.
+This guide is for people who have no margin. If you have $0 or negative money at the end of the month, start here.
 
-## Step 4: Use a planner notebook
-Writing your budget by hand makes it real. A budget planner notebook helps you stay consistent and see progress.
+## Step 1: Find out where your money is actually going
 
-## Get the free starter budget printable
-It includes an income tracker, expense tracker, and weekly check-in.`
+You cannot fix what you cannot see. Before you cut anything, you need to know exactly what is happening.
+
+Pull your last two months of bank and credit card statements. Write down every single charge. Do not estimate. Look at the actual numbers.
+
+Sort everything into three buckets:
+
+- Fixed costs: rent, car payment, insurance, phone, internet
+- Variable costs: groceries, gas, utilities
+- Discretionary: eating out, subscriptions, shopping, entertainment
+
+Most people who feel broke are not overspending on big things. They are leaking $5-15 at a time — a subscription they forgot about, a coffee every morning, a delivery fee on an order they could have picked up. These small leaks add up to $100-300/month.
+
+This step is uncomfortable. Seeing the numbers forces you to confront spending you have been avoiding. Do it anyway.
+
+## Step 2: Cover the Four Walls first
+
+When money is tight, you cannot pay everyone. You need a priority order. The Four Walls method, popularized by Dave Ramsey, gives you one:
+
+1. Food. Groceries, not restaurants. This comes first because you need to eat.
+2. Shelter. Rent or mortgage. Keep your home.
+3. Utilities. Electricity, water, gas. Keep the lights on.
+4. Transportation. Gas, car payment, bus fare. You need to get to work.
+
+Everything else is secondary. Credit cards, personal loans, medical bills, subscriptions — these wait until the Four Walls are covered.
+
+If you cannot cover all four, start at the top and work down. Food before shelter. Shelter before utilities. Utilities before transportation. This is not about ignoring other bills. It is about making sure you survive the month.
+
+## Step 3: Cut everything that is not a Wall
+
+Go back to your three buckets. Everything in the discretionary column gets cut or paused:
+
+- Cancel streaming subscriptions. You can re-add them later. Use the library for free movies.
+- Stop eating out. Even one $15 meal is money that should go to groceries.
+- Pause the gym. Walk or run outside. Use free YouTube workouts.
+- Cancel app subscriptions. Audit your phone for recurring charges.
+- Switch to store brands for groceries. The price difference is 20-40%.
+
+If this feels extreme, remember: this is temporary. You are not cutting these forever. You are cutting them until your income exceeds your basic costs.
+
+## Step 4: Switch to zero-based budgeting
+
+Zero-based budgeting means every dollar has a job before the month starts. Income minus expenses equals zero. Nothing is unassigned.
+
+Here is how it works:
+
+1. Write down your total monthly income (after taxes).
+2. Subtract your Four Walls costs.
+3. Subtract minimum payments on debts.
+4. Whatever is left goes to one thing: building a small buffer.
+
+If the number is negative, you have two options: cut more or earn more. Usually both.
+
+If the number is zero, you are breaking even. That is a starting point, not a failure.
+
+If the number is positive, put every extra dollar toward a $500 starter emergency fund. Not investing, not debt payoff, not treats. A $500 buffer stops you from going deeper into debt when the car breaks down or a bill is higher than expected.
+
+Writing your budget by hand makes it real. A budget planner notebook helps you see the numbers, adjust throughout the month, and track what actually happens versus what you planned.
+
+## Step 5: Find money you did not know you had
+
+Cutting is only half the equation. The other half is finding money that is already available to you.
+
+### Negotiate one bill (30 minutes, saves $10-40/month)
+
+Call your phone or internet provider. Say: "I am considering switching to a competitor. Is there a better rate you can offer?" This works more often than people expect. The call takes ten minutes.
+
+### Sell what you are not using (earns $30-200)
+
+Walk through your home with a box. Anything you have not touched in 6 months goes in. List it on Facebook Marketplace or eBay. Old phones, clothes, electronics, furniture. One person's clutter is another person's bargain.
+
+### Claim benefits you qualify for
+
+If your income is low, you may qualify for programs you have not checked:
+
+- SNAP (food assistance) — eligibility varies by state
+- WIC if you have children under 5
+- LIHEAP (energy bill assistance)
+- Medicaid for healthcare
+- Free phone service through Lifeline
+
+There is no shame in using programs designed for this exact situation. That is what they exist for.
+
+### Increase income by $200/month
+
+Cutting has a floor. Income does not. Even $200/month extra changes everything when you are broke:
+
+- Delivery driving (DoorDash, Uber Eats) — 2-3 hours on weekends
+- Pet sitting or dog walking
+- Selling baked goods or crafts
+- Freelance work: writing, design, admin on Fiverr or Upwork
+- Online tutoring or teaching English
+
+## Step 6: Track weekly, not monthly
+
+Monthly budgets fail because by the time you realize you are off track, the month is over. Check in weekly instead.
+
+Every Sunday, spend 10 minutes reviewing:
+- What did I spend this week?
+- Is there enough left for the Four Walls next week?
+- What needs to change?
+
+Use a printable expense tracker. Write it down. The act of physically recording spending makes you more conscious of it.
+
+## Step 7: Build a $500 buffer
+
+Do not try to save 3 months of expenses. That feels impossible when you are broke. Instead, aim for $500.
+
+$500 covers most small emergencies: a car repair, a medical bill, a utility spike. It means the next surprise does not push you into credit card debt.
+
+Save it in a separate account. Not checking — you will spend it. A basic savings account at a different bank from your main account. Out of sight, out of temptation.
+
+Once you have $500, you can start thinking about debt payoff. But the buffer comes first. Read our guide on building a $1,000 emergency fund for the next step.
+
+## Common mistakes
+
+### Trying to pay off debt before having a buffer
+
+If you put every extra dollar toward credit card debt but have no savings, the next emergency puts you back in debt. Build the $500 buffer first, then attack debt.
+
+### Budgeting in your head
+
+Mental budgets do not work. Numbers disappear. Write it down — on paper, in a spreadsheet, or in a budget notebook. The physical act of writing makes it real.
+
+### Giving up after one bad month
+
+The first month of budgeting is the hardest. You will mess up. You will overspend in a category. That is normal. Adjust and try again next month. Budgeting is a skill, and skills take practice.
+
+### Not asking for help
+
+If you cannot cover the Four Walls, talk to your creditors before you miss a payment. Most utility companies, landlords, and lenders have hardship programs. They would rather get partial payment on time than no payment at all.
+
+## Get the free budget starter pack
+
+Start with a printable budget worksheet and expense tracker. The Budget Starter Bundle includes:
+
+- Monthly budget worksheet
+- Expense tracker
+- Savings tracker
+- Debt payoff chart
+
+Download it free, print it, and fill it in today. The first step is always the hardest.`
   },
   {
     slug: 'no-spend-weekend-ideas',
