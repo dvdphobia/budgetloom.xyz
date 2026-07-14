@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FileText, FilePlus, Megaphone, Database, Sparkles, ArrowRight } from 'lucide-react'
+import { FileText, FilePlus, Megaphone, Database, Sparkles, ArrowRight, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -48,34 +48,57 @@ export default function OverviewPage() {
   }
 
   const cards = [
-    { label: 'Blog Posts', value: stats.posts, href: '/admin/dashboard/posts', icon: FileText, color: 'text-primary' },
-    { label: 'Printables', value: stats.printables, href: '/admin/dashboard/printables', icon: FilePlus, color: 'text-amber-600' },
-    { label: 'Active Ads', value: stats.adsEnabled, href: '/admin/dashboard/ads', icon: Megaphone, color: 'text-purple-600' },
+    { label: 'Blog Posts', value: stats.posts, href: '/admin/dashboard/posts', icon: FileText, gradient: 'from-emerald-500/20 to-transparent', accentColor: 'text-emerald-600' },
+    { label: 'Printables', value: stats.printables, href: '/admin/dashboard/printables', icon: FilePlus, gradient: 'from-amber-500/20 to-transparent', accentColor: 'text-amber-600' },
+    { label: 'Active Ads', value: stats.adsEnabled, href: '/admin/dashboard/ads', icon: Megaphone, gradient: 'from-violet-500/20 to-transparent', accentColor: 'text-violet-600' },
   ]
 
   return (
     <div className="space-y-8 pb-8">
-      {/* Header Section */}
-      <div className="border-b pb-6">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Dashboard</h1>
-        <p className="text-muted-foreground">Manage your BudgetLoom content and settings</p>
+      {/* Header with Gradient Background */}
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-8 text-white">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -mr-48 -mt-48" />
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-2">
+            <TrendingUp className="h-6 w-6 text-primary" />
+            <span className="text-xs font-semibold text-primary uppercase tracking-widest">Welcome Back</span>
+          </div>
+          <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
+          <p className="text-slate-300 text-lg">Manage your BudgetLoom content, settings, and performance</p>
+        </div>
       </div>
 
-      {/* Stats Cards */}
+      {/* Stats Cards Grid */}
       <div className="grid gap-4 sm:grid-cols-3">
-        {cards.map(card => (
+        {cards.map((card, idx) => (
           <Link key={card.label} href={card.href}>
-            <Card className="relative overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer group">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Card className={cn(
+              "relative overflow-hidden transition-all duration-300 cursor-pointer group h-full",
+              "hover:shadow-xl hover:-translate-y-2 border border-slate-200/40 hover:border-primary/50"
+            )}>
+              {/* Background Gradient */}
+              <div className={cn("absolute inset-0 bg-gradient-to-br", card.gradient, "opacity-40 group-hover:opacity-60 transition-opacity")} />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-2xl -mr-20 -mt-20 group-hover:from-primary/10 transition-all" />
+              
               <CardContent className="pt-6 relative z-10">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <div className={cn('text-4xl font-bold tracking-tight', card.color)}>{card.value}</div>
-                    <p className="text-xs text-muted-foreground mt-2 font-medium uppercase tracking-wide">{card.label}</p>
+                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-2">{card.label}</p>
+                    <div className={cn("text-5xl font-black tracking-tighter", card.accentColor)}>
+                      {card.value}
+                    </div>
                   </div>
-                  <div className={cn('h-12 w-12 rounded-lg bg-gradient-to-br from-background to-muted flex items-center justify-center', 'group-hover:scale-110 transition-transform')}>
-                    <card.icon className={cn('h-6 w-6', card.color)} />
+                  <div className={cn(
+                    "h-14 w-14 rounded-lg flex items-center justify-center flex-shrink-0",
+                    "bg-gradient-to-br from-slate-100 to-slate-50 group-hover:scale-110 transition-transform duration-300",
+                    "shadow-sm group-hover:shadow-md"
+                  )}>
+                    <card.icon className={cn("h-7 w-7", card.accentColor)} />
                   </div>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-slate-600 group-hover:text-slate-900 transition-colors">
+                  <TrendingUp className="h-3 w-3" />
+                  <span>View all items</span>
                 </div>
               </CardContent>
             </Card>
@@ -84,22 +107,24 @@ export default function OverviewPage() {
       </div>
 
       {/* Database Setup Section */}
-      <Card className="border-l-4 border-l-primary/50">
-        <CardHeader className="bg-gradient-to-r from-primary/5 to-transparent pb-4">
-          <CardTitle className="text-xl flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10">
+      <Card className="relative overflow-hidden border-primary/30 bg-gradient-to-br from-slate-50/50 to-slate-50/20">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -mr-40 -mt-40" />
+        
+        <CardHeader className="relative z-10">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
               <Database className="h-5 w-5 text-primary" />
             </div>
-            Database Setup
-          </CardTitle>
-          <CardDescription className="mt-2">Initialize creates all tables. Seed copies existing content into the database.</CardDescription>
+            <CardTitle className="text-xl font-bold">Database Setup</CardTitle>
+          </div>
+          <CardDescription className="text-sm">Initialize creates all required tables. Seed copies existing content into the database.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 pt-6">
+        <CardContent className="relative z-10 space-y-4">
           <div className="flex gap-3 flex-wrap">
             <Button 
               onClick={initDB} 
               disabled={loading}
-              className="gap-2"
+              className="gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white"
             >
               <Database className="h-4 w-4" />
               Initialize Database
@@ -115,12 +140,22 @@ export default function OverviewPage() {
             </Button>
           </div>
           {initMsg && (
-            <div className={cn('p-3 rounded-lg text-sm font-medium', initMsg.includes('Error') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary')}>
+            <div className={cn(
+              'p-3 rounded-lg text-sm font-medium transition-all',
+              initMsg.includes('Error') 
+                ? 'bg-destructive/10 text-destructive border border-destructive/20' 
+                : 'bg-primary/10 text-primary border border-primary/20'
+            )}>
               {initMsg}
             </div>
           )}
           {seedMsg && (
-            <div className={cn('p-3 rounded-lg text-sm font-medium', seedMsg.includes('Error') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary')}>
+            <div className={cn(
+              'p-3 rounded-lg text-sm font-medium transition-all',
+              seedMsg.includes('Error')
+                ? 'bg-destructive/10 text-destructive border border-destructive/20'
+                : 'bg-primary/10 text-primary border border-primary/20'
+            )}>
               {seedMsg}
             </div>
           )}
@@ -128,31 +163,49 @@ export default function OverviewPage() {
       </Card>
 
       {/* Quick Actions Section */}
-      <Card>
+      <Card className="border-slate-200/40">
         <CardHeader>
-          <CardTitle className="text-xl">Quick Actions</CardTitle>
+          <CardTitle className="text-xl font-bold">Quick Actions</CardTitle>
+          <CardDescription>Frequently used shortcuts to manage your content</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-3 sm:grid-cols-2">
           {[
-            { href: "/admin/dashboard/posts/new", label: "Create New Post", icon: FilePlus },
-            { href: "/admin/dashboard/printables/new", label: "Create New Printable", icon: FileText },
-            { href: "/admin/dashboard/ads", label: "Manage Ads", icon: Megaphone },
-            { href: "/admin/dashboard/settings", label: "Edit Settings", icon: Database }
+            { href: "/admin/dashboard/posts/new", label: "Create New Post", icon: FilePlus, color: 'emerald' },
+            { href: "/admin/dashboard/printables/new", label: "Create Printable", icon: FileText, color: 'amber' },
+            { href: "/admin/dashboard/ads", label: "Manage Ads", icon: Megaphone, color: 'violet' },
+            { href: "/admin/dashboard/settings", label: "Site Settings", icon: Database, color: 'slate' }
           ].map(action => {
             const IconComponent = action.icon
+            const colorMap: any = {
+              emerald: { bg: 'from-emerald-500/10 to-emerald-500/5', icon: 'text-emerald-600', border: 'hover:border-emerald-500/50' },
+              amber: { bg: 'from-amber-500/10 to-amber-500/5', icon: 'text-amber-600', border: 'hover:border-amber-500/50' },
+              violet: { bg: 'from-violet-500/10 to-violet-500/5', icon: 'text-violet-600', border: 'hover:border-violet-500/50' },
+              slate: { bg: 'from-slate-500/10 to-slate-500/5', icon: 'text-slate-600', border: 'hover:border-slate-500/50' }
+            }
+            const colors = colorMap[action.color]
             return (
               <Link 
                 key={action.label}
                 href={action.href} 
-                className="group flex items-center justify-between rounded-lg border border-border p-4 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+                className={cn(
+                  "group relative overflow-hidden rounded-lg border border-slate-200/40 p-4",
+                  "transition-all duration-300 hover:shadow-md",
+                  colors.border
+                )}
               >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-muted group-hover:bg-primary/20 transition-colors">
-                    <IconComponent className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                <div className={cn("absolute inset-0 bg-gradient-to-br", colors.bg, "opacity-0 group-hover:opacity-100 transition-opacity")} />
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={cn(
+                      "h-10 w-10 rounded-lg flex items-center justify-center",
+                      "bg-gradient-to-br from-slate-100 to-slate-50 group-hover:scale-110 transition-transform"
+                    )}>
+                      <IconComponent className={cn("h-5 w-5", colors.icon)} />
+                    </div>
+                    <span className="text-sm font-semibold text-slate-900">{action.label}</span>
                   </div>
-                  <span className="text-sm font-medium text-foreground">{action.label}</span>
+                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                 </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
               </Link>
             )
           })}

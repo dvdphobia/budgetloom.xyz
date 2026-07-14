@@ -100,16 +100,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-border bg-background/95 backdrop-blur-sm px-6 py-4 shadow-xs">
+      <div className="flex-1 min-w-0 flex flex-col bg-gradient-to-br from-slate-50 via-slate-50 to-slate-100/50">
+        <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-slate-200/50 bg-white/80 backdrop-blur-md px-6 py-4 shadow-sm">
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSidebarOpen(true)}>
               <Menu className="h-5 w-5" />
             </Button>
-            <h1 className="text-xl font-semibold text-foreground">{currentLabel}</h1>
+            <h1 className="text-lg font-semibold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">{currentLabel}</h1>
           </div>
         </header>
-        <main className="flex-1 overflow-auto p-6 bg-muted/30">{children}</main>
+        <main className="flex-1 overflow-auto px-6 py-8">{children}</main>
       </div>
     </div>
   )
