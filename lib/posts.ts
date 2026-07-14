@@ -629,31 +629,147 @@ Print a no-spend tracker and cross off each weekend you complete. The visual str
   {
     slug: 'how-to-save-1000-emergency-fund',
     title: 'How to Build a $1,000 Emergency Fund Fast',
-    description: 'A practical plan to save your first $1,000 emergency fund even on a tight income.',
+    description: 'A practical plan to save your first $1,000 emergency fund. Three speed options, where to keep it, what counts as an emergency, and how to rebuild after using it.',
     date: '2026-07-14',
     category: 'Savings',
     readTime: '8 min',
     content: `## Why $1,000 first?
-Most financial experts agree: before investing, before paying off debt aggressively, your first goal is a $1,000 emergency fund. This covers unexpected car repairs, medical bills, or a sudden job gap without going into debt.
 
-## The math
-Save $100/week for 10 weeks. Or $33/day for 30 days. Or $4/day for 250 days. Pick your pace.
+Before investing, before paying off debt aggressively, before anything else: build a $1,000 emergency fund.
+
+Why $1,000? Because it covers the most common financial surprises. A car repair. A medical bill. A utility spike. A week of missed work. Without $1,000, these events push you into credit card debt, which compounds the problem.
+
+$1,000 is not your final savings goal. It is the floor. The minimum to stop the cycle of debt. Once you have it, you can shift focus to debt payoff or a larger emergency fund.
+
+The average American cannot cover a $400 emergency without borrowing. $1,000 puts you ahead of most people.
+
+## Three ways to get there
+
+Pick the speed that fits your situation. All three end at the same place.
+
+### Speed 1: The 30-Day Sprint ($33/day)
+
+If you can find $33/day for 30 days, you have $1,000. This requires aggressive cuts and possibly extra income.
+
+Where $33/day comes from:
+- Cancel 3-4 subscriptions: $30-60/month
+- Cook all meals at home: $15-25/day savings vs eating out
+- No-spend weekends (2 per month): $200-300 total
+- Sell 3-5 items you do not use: $50-200
+- Weekend side gig (delivery, pet sitting): $100-200
+
+This is hard. It requires daily commitment. But it is only 30 days, and the result is permanent: a financial floor that stops the debt cycle.
+
+### Speed 2: The 90-Day Plan ($11/day or $77/week)
+
+Three months at $11/day. This is the sweet spot for most people — challenging but sustainable.
+
+Break it into three phases:
+
+Month 1: Cut and find. Cancel subscriptions, switch to store brands, negotiate one bill. Target: $200 saved.
+Month 2: Sell and earn. Sell unwanted items, pick up one weekend gig. Target: $350 saved.
+Month 3: Automate and sustain. Set up automatic transfer of $11/day. Target: $450 saved.
+
+Total: $1,000 in 90 days.
+
+### Speed 3: The 6-Month Slow Build ($5.50/day or $167/month)
+
+If your income is tight and cutting is not enough, this is the realistic path. Save $167/month for 6 months.
+
+This requires almost no daily sacrifice — just consistent monthly saving. The risk is lower motivation because progress feels slow. Use a visual tracker to stay engaged.
 
 ## Where to find the money
-- Cancel 2-3 subscriptions you barely use.
-- Sell old clothes, electronics, or furniture on Facebook Marketplace.
-- Pick up a side gig for one weekend: pet sitting, yard work, delivery.
-- Switch to store-brand groceries for one month.
-- Call your phone or internet provider and ask for a lower rate.
+
+### Cut expenses
+- Cancel 2-3 subscriptions you barely use: $20-60/month
+- Switch to store-brand groceries for one month: $30-80/month
+- Call your phone or internet provider and ask for a lower rate: $10-40/month
+- Stop eating out for 30 days: $200-400/month
+- Use a no-spend weekend twice per month: $200-300/month
+
+### Earn extra
+- Sell old clothes, electronics, or furniture on Facebook Marketplace: $50-300
+- Delivery driving (DoorDash, Uber Eats) on weekends: $100-200/weekend
+- Pet sitting or dog walking: $50-100/week
+- Freelance work on Fiverr or Upwork: $100-500/project
+- Online tutoring or teaching English: $100-300/month
+
+### Use windfalls
+- Tax refund: put 50-100% toward the fund
+- Birthday or holiday money: deposit directly
+- Work bonus or overtime pay: redirect before you spend it
+- Cashback rewards from credit cards or apps like Ibotta
 
 ## Where to keep it
-Not in your checking account. Open a separate high-yield savings account so it is out of sight but accessible in emergencies.
 
-## Use a savings tracker
-Print a savings tracker and color in each milestone. Visual progress keeps you motivated. A cash envelope system also works if you prefer cash.
+Not in your checking account. Money in checking gets spent. The whole point of an emergency fund is that it is there when you need it, not tempting you every day.
 
-## Download the free savings tracker
-Get our printable $1,000 emergency fund tracker plus a savings goal worksheet.`
+### Option 1: High-yield savings account (recommended)
+
+A separate savings account at a different bank from your checking. Look for one paying 4-5% APY. The money earns interest while sitting there. Transfer takes 1-3 business days, which prevents impulse spending but is fast enough for real emergencies.
+
+### Option 2: Money market account
+
+Similar to a savings account but may come with a debit card for faster access. Slightly higher interest than basic savings.
+
+### Option 3: A separate checking account
+
+If you need same-day access, open a second checking account at a different bank. No debit card in your wallet. Transfer online only. Less interest but faster access.
+
+Do not put it in:
+- An investment account (too volatile, may lose value when you need it)
+- A CD (penalties for early withdrawal)
+- A jar in your kitchen (inflation eats it, and it is not safe)
+
+## What counts as an emergency
+
+Define this before you need it. If you do not define it, everything becomes an emergency.
+
+An emergency is:
+- Car repair needed to get to work
+- Medical or dental bill not covered by insurance
+- Home repair (broken water heater, leaking roof)
+- Job loss or income gap
+- Essential travel (family emergency, funeral)
+
+An emergency is not:
+- A sale on something you have been wanting
+- A vacation
+- Holiday gifts
+- A new phone when yours works fine
+- Dinner out because you are tired
+
+When in doubt, ask: "If I do not spend this money, will something bad happen?" If the answer is no, it is not an emergency.
+
+## How to use the fund without derailing
+
+The first time you use the fund, it feels like failure. It is not. That is what it is for.
+
+When you spend from the fund:
+1. Use only what is necessary. If the car repair is $600, take $600, not $1,000.
+2. Transfer the exact amount. Do not round up.
+3. The next day, start rebuilding. Switch to the 90-day plan or the 6-month plan to refill.
+4. Do not wait until it is fully rebuilt to use it again if another emergency hits. That is the point — it is a buffer, not a wall.
+
+## After $1,000: what is next?
+
+$1,000 is the starter. Once you have it, two paths:
+
+### Path A: Build to 3 months of expenses
+
+Multiply your monthly essential expenses by 3. If your Four Walls (food, shelter, utilities, transportation) cost $2,000/month, your next goal is $6,000. This covers a job loss or major income disruption.
+
+### Path B: Pay off debt
+
+If you have high-interest debt (credit cards at 15-25%), the interest is costing you more than your savings earns. Keep the $1,000 as a buffer, then redirect all extra money to debt payoff. Read our guide on paying off debt faster for the snowball and avalanche methods.
+
+Do not do both at once. Pick one, focus, then switch. Splitting effort between saving and debt payoff means neither gets done fast enough.
+
+## Get the free savings tracker
+
+Print a savings tracker and color in each milestone. Visual progress keeps you motivated when the goal feels far away.
+
+The Budget Starter Bundle includes a savings tracker, savings goal worksheet, and a $1,000 milestone chart. Download it free and start your first $1,000 today.`
   },
   {
     slug: 'frugal-grocery-shopping-tips',
