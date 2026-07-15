@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={cn("font-sans bg-background", geist.variable)}>
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
         <meta name="p:domain_verify" content="REPLACE_WITH_PINTEREST_TAG" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       </head>

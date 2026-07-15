@@ -55,10 +55,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         "fixed inset-y-0 left-0 z-50 w-64 flex flex-col transition-transform md:sticky md:top-0 md:h-screen md:translate-x-0 bg-card border-r border-border",
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
-        <div className="flex items-center justify-between p-6 border-b border-border">
-          <div className="flex flex-col gap-1">
-            <div className="text-base font-bold text-foreground">BudgetLoom</div>
-            <div className="text-xs text-muted-foreground font-medium">Management</div>
+        <div className="flex items-center gap-2 p-5 border-b border-white/10">
+          <img src="/logo.png" alt="BudgetLoom" width={28} height={28} style={{ borderRadius: 6 }} />
+          <div>
+            <div className="text-lg font-bold text-primary">BudgetLoom</div>
+            <div className="text-xs text-gray-400">Admin Panel</div>
           </div>
           <Button variant="ghost" size="icon" className="md:hidden text-foreground" onClick={() => setSidebarOpen(false)}>
             <X className="h-5 w-5" />

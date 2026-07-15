@@ -11,7 +11,7 @@ export default function Header() {
     <header className="header">
       <div className="container header-inner">
         <Link href="/" className="logo" onClick={() => setOpen(false)}>
-          <LogoMark size={28} />
+          <img src="/logo.png" alt="BudgetLoom" width={28} height={28} style={{ borderRadius: 6 }} />
           BudgetLoom
         </Link>
         <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu" aria-expanded={open}>
