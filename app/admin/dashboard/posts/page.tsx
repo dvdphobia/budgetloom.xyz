@@ -26,9 +26,9 @@ export default function PostsList() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h2 className="text-xl font-bold">Blog Posts ({posts.length})</h2>
-        <Button asChild>
+        <Button asChild className="w-full sm:w-auto">
           <Link href="/admin/dashboard/posts/new"><Plus className="h-4 w-4 mr-2" />New Post</Link>
         </Button>
       </div>

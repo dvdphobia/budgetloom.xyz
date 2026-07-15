@@ -505,11 +505,61 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* === MOBILE FINE-TUNING === */
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; gap: 1rem; }
+  .container { padding: 0 1rem; }
+  .section { padding: 2.5rem 0; }
+  .section-header { margin-bottom: 1.5rem; }
+  .section-header h2 { font-size: 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .header-inner { height: 56px; }
+  .logo { font-size: 1.1rem; }
+  .logo img { width: 24px; height: 24px; }
+}
+
 @media (max-width: 600px) {
   .article-title { font-size: 1.8rem; }
-  .section { padding: 3rem 0; }
+  .section { padding: 2.5rem 0; }
   .section-header h2 { font-size: 1.5rem; }
   .lead-box { padding: 2rem 1.5rem; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero p { font-size: 1.05rem; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; gap: 1rem; }
+  .container { padding: 0 1rem; }
+  .hero { padding: 2.5rem 0 2rem; }
+  .hero h1 { font-size: 1.9rem; line-height: 1.1; }
+  .hero p { font-size: 1rem; }
+  .hero-cta { flex-direction: column; gap: 0.5rem; }
+  .hero-cta .btn { width: 100%; }
+  .article-title { font-size: 1.6rem; }
+  .article-body { font-size: 1rem !important; }
+  .article-body p { line-height: 1.65; }
+  .lead-box { padding: 1.5rem 1.25rem; }
+  .lead-box h2 { font-size: 1.3rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer { padding: 2rem 0 1rem; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.75rem; }
+  .section-header h2 { font-size: 1.35rem; }
+  .card-body { padding: 1rem; }
+  .card-body h3 { font-size: 1rem; }
+  .product-card { flex-direction: column; gap: 0.5rem; padding: 1rem; text-align: center; }
+  .product-card-icon { margin: 0 auto; }
+  .product-card a { width: 100%; }
+  .product-card a .btn { width: 100%; }
+  .share-row { flex-wrap: wrap; gap: 0.3rem; }
+  .faq-item { padding: 0.75rem; }
+  .faq-item h3 { font-size: 0.95rem; }
+  .faq-item p { font-size: 0.9rem; }
+  .toc { padding: 1rem; }
+  .toc ol { padding-left: 1rem; }
+  .author-box { flex-direction: column; text-align: center; gap: 0.5rem; }
+  .printable-info h1 { font-size: 1.5rem; }
+  .printable-hero { gap: 1.5rem; margin-bottom: 1.5rem; }
+  .category-pills { gap: 0.3rem; }
+  .category-pill { font-size: 0.8rem; padding: 0.3rem 0.75rem; }
 }
 
 /* === ADMIN OVERRIDES === */

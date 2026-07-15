@@ -60,12 +60,12 @@ export default function EditPrintable() {
       <form onSubmit={save}>
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2"><Label htmlFor="slug">Slug</Label><Input id="slug" name="slug" defaultValue={item.slug} required /></div>
               <div className="space-y-2"><Label htmlFor="title">Title</Label><Input id="title" name="title" defaultValue={item.title} required /></div>
             </div>
             <div className="space-y-2"><Label htmlFor="description">Description</Label><Input id="description" name="description" defaultValue={item.description} /></div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2"><Label htmlFor="price">Price</Label><Input id="price" name="price" defaultValue={item.price} /></div>
               <div className="space-y-2"><Label htmlFor="pages">Pages</Label><Input id="pages" name="pages" type="number" defaultValue={item.pages} /></div>
               <div className="space-y-2"><Label htmlFor="file_url">File URL</Label><Input id="file_url" name="file_url" defaultValue={item.file_url} /></div>

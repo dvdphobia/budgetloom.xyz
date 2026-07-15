@@ -110,7 +110,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <h1 className="text-lg font-semibold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">{currentLabel}</h1>
           </div>
         </header>
-        <main className="flex-1 overflow-auto px-6 py-8">{children}</main>
+        <main className="flex-1 overflow-auto px-4 py-6 sm:px-6 sm:py-8">{children}</main>
       </div>
     </div>
   )

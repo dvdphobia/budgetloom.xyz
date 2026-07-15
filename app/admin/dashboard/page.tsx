@@ -55,7 +55,7 @@ export default function OverviewPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
         {[
           { label: 'Posts', value: stats.posts, href: '/admin/dashboard/posts' },
           { label: 'Printables', value: stats.printables, href: '/admin/dashboard/printables' },

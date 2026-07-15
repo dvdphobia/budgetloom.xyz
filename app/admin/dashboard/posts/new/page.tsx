@@ -51,7 +51,7 @@ export default function NewPost() {
       <form onSubmit={save}>
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="slug">Slug (URL)</Label>
                 <Input id="slug" name="slug" placeholder="my-post-slug" required />
@@ -62,7 +62,7 @@ export default function NewPost() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label>Category</Label>
                 <Select value={category} onValueChange={setCategory}>
