@@ -5,6 +5,7 @@ import AmazonLink, { AffiliateDisclaimer, AmazonProductCard } from '../../compon
 import Breadcrumbs from '../../components/Breadcrumbs'
 import ShareButtons from '../../components/ShareButtons'
 import AuthorBox from '../../components/AuthorBox'
+import AdSlot from '../../components/AdSlot'
 import { Icon } from '../../components/Icons'
 import { posts, getPostBySlug, type Post } from '@/lib/posts'
 import { affiliateProducts } from '@/lib/config'
@@ -133,6 +134,8 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           <ShareButtons title={post.title} url={postUrl} />
           <AffiliateDisclaimer />
 
+          <AdSlot placement="blog_post_top" />
+
           {tocItems.length > 2 && (
             <nav className="toc" aria-label="Table of contents">
               <div className="toc-label">In this article</div>
@@ -147,6 +150,8 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           <div className="article-body" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.12rem' }}>
             {parseContent(post.content)}
           </div>
+
+          <AdSlot placement="blog_post_middle" />
 
           {/* Single affiliate product — contextually relevant */}
           <div style={{ marginTop: '2rem' }}>
@@ -172,6 +177,8 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           </div>
 
           <AuthorBox />
+
+          <AdSlot placement="blog_post_bottom" />
 
           {/* Email CTA */}
           <div className="lead-box">

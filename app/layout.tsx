@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import SiteWideAds from './components/SiteWideAds';
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('js', new Date());
           gtag('config', 'G-CRZCXM56DQ');
         `}</Script>
+        <SiteWideAds />
         {children}
       </body>
     </html>

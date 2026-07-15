@@ -110,7 +110,7 @@ export async function initDB() {
 
   // Insert default ad placements
   const placements = [
-    { placement: 'header_banner', label: 'Header Banner (below nav, all pages)' },
+    { placement: 'header_banner', label: 'Social Bar (site-wide, all pages)' },
     { placement: 'blog_list_top', label: 'Blog List Top (above post grid)' },
     { placement: 'blog_post_top', label: 'Blog Post Top (above article)' },
     { placement: 'blog_post_middle', label: 'Blog Post Middle (mid-article)' },
@@ -118,7 +118,7 @@ export async function initDB() {
     { placement: 'sidebar', label: 'Sidebar (blog pages)' },
     { placement: 'printables_top', label: 'Printables Page Top' },
     { placement: 'printables_bottom', label: 'Printables Page Bottom' },
-    { placement: 'footer_banner', label: 'Footer Banner (all pages)' },
+    { placement: 'footer_banner', label: 'Popunder (site-wide, all pages)' },
   ]
 
   for (const p of placements) {
