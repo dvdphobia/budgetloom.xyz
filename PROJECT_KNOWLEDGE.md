@@ -55,7 +55,7 @@ budget-printables/
 │   ├── contact/page.tsx
 │   ├── privacy/page.tsx
 │   ├── terms/page.tsx
-│   ├── sitemap.ts              # Dynamic sitemap (25 URLs: 7 static + 14 blog + 4 printables)
+│   ├── sitemap.ts              # Dynamic sitemap (26 URLs: 7 static + 15 blog + 4 printables)
 │   ├── robots.ts               # Disallow /api/ and /admin/
 │   ├── admin/
 │   │   ├── login/page.tsx      # Admin login (shadcn Card, Input, Button)
@@ -110,7 +110,7 @@ budget-printables/
 │           └── separator.tsx
 ├── lib/
 │   ├── config.ts               # Site URL, Amazon ASINs, affiliate ID
-│   ├── posts.ts                # 14 blog posts (~93KB, all rewritten)
+│   ├── posts.ts                # 15 blog posts, including the budget home-office Pinterest funnel
 │   ├── printables.ts           # 4 printables
 │   ├── db.ts                   # pg Pool, query(), initDB(), getAdByPlacement()
 │   ├── auth.ts                 # JWT signToken/verifyToken with jose
@@ -132,7 +132,7 @@ budget-printables/
 
 ## Content
 
-### Blog Posts (14 total in lib/posts.ts)
+### Blog Posts (15 total in lib/posts.ts)
 
 1. 30-day-money-saving-challenge (Savings, 9 min)
 2. budget-meal-plan-for-one (Food, 8 min)
@@ -148,6 +148,7 @@ budget-printables/
 12. save-money-on-utilities (Savings, 6 min)
 13. budgeting-for-beginners (Budgeting, 8 min)
 14. debt-snowball-vs-avalanche (Debt, 7 min)
+15. modern-home-office-setup-on-a-budget (Lifestyle, 9 min)
 
 Categories: Savings, Budgeting, Food, Debt, Lifestyle
 
@@ -275,14 +276,14 @@ Admin pages use `admin-shell` class on root div. CSS `body:has(.admin-shell)` ov
 ## Current Status
 
 ### Working
-- 14 blog posts (all rewritten, research-based content)
+- 15 blog posts (all rewritten, research-based content)
 - 4 free printables (PDFs in public/printables/)
 - 18 Pinterest pins generated
 - Homepage, blog, printables, about, contact, privacy, terms pages
 - Admin CMS with shadcn/ui dashboard
 - Adsterra ads hardcoded (native banner on blog posts, popunder + social bar site-wide)
 - Google Analytics (G-CRZCXM56DQ)
-- Sitemap (25 URLs, accessible to Googlebot)
+- Sitemap (26 URLs, accessible to Googlebot)
 - robots.txt (disallows /api/ and /admin/)
 - Mobile responsive (all breakpoints)
 - AI-generated logo + favicon

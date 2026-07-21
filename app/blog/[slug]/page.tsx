@@ -8,7 +8,7 @@ import AuthorBox from '../../components/AuthorBox'
 import AdSlot from '../../components/AdSlot'
 import { Icon } from '../../components/Icons'
 import { posts, getPostBySlug, type Post } from '@/lib/posts'
-import { affiliateProducts } from '@/lib/config'
+import { affiliateProducts, monetization } from '@/lib/config'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -92,6 +92,8 @@ function parseContent(content: string) {
         elements.push(<p key={i}>{line} — <AmazonLink asin={affiliateProducts.cashEnvelopes.asin}>see envelope systems on Amazon</AmazonLink>.</p>)
       } else if (line.includes('meal prep')) {
         elements.push(<p key={i}>{line} — <AmazonLink asin={affiliateProducts.mealPrepContainers.asin}>browse meal prep containers</AmazonLink>.</p>)
+      } else if (line === 'Browse budget-friendly standing desks on Amazon only after you know your required width and height range.') {
+        elements.push(<p key={i}>Once you know your required width and height range, <AmazonLink href={`https://www.amazon.com/s?k=budget+standing+desk&tag=${monetization.amazonTrackingId}`}>compare budget-friendly standing desks on Amazon</AmazonLink>.</p>)
       } else {
         elements.push(<p key={i}>{line}</p>)
       }
@@ -118,6 +120,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
   const relatedPosts = posts.filter(p => p.slug !== slug && p.category === post.category).slice(0, 3)
   const tocItems = generateTOC(post.content)
   const postUrl = `${site.url}/blog/${post.slug}`
+  const isHomeOffice = post.slug === 'modern-home-office-setup-on-a-budget'
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -132,7 +135,13 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
     publisher: { '@type': 'Organization', name: site.name, url: site.url, logo: { '@type': 'ImageObject', url: `${site.url}/logo.png` } },
   }
 
-  const affiliateProduct = post.category === 'Food'
+  const affiliateProduct = isHomeOffice
+    ? {
+        name: 'Budget-Friendly Standing Desks',
+        href: `https://www.amazon.com/s?k=budget+standing+desk&tag=${monetization.amazonTrackingId}`,
+        desc: 'Compare desk sizes, height ranges, weight capacities, and current customer feedback before choosing a model for your space.',
+      }
+    : post.category === 'Food'
     ? { ...affiliateProducts.mealPrepContainers, desc: 'Good containers keep food fresh longer and make batch cooking actually work.' }
     : post.category === 'Savings'
     ? { ...affiliateProducts.cashEnvelopes, desc: 'Cash envelopes make savings visible. When the envelope is empty, you stop spending.' }
@@ -185,24 +194,25 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           {/* Single affiliate product — contextually relevant */}
           <div style={{ marginTop: '2rem' }}>
             <h3 style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--gray)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem' }}>Recommended</h3>
-            <AmazonProductCard asin={affiliateProduct.asin} name={affiliateProduct.name} description={affiliateProduct.desc} />
+            <AmazonProductCard asin={'asin' in affiliateProduct ? affiliateProduct.asin : undefined} href={'href' in affiliateProduct ? affiliateProduct.href : undefined} name={affiliateProduct.name} description={affiliateProduct.desc} />
           </div>
 
           {/* FAQ */}
           <div className="faq">
             <h2>Common Questions</h2>
-            <div className="faq-item">
-              <h3>Is this guide free?</h3>
-              <p>Yes, all guides on BudgetLoom are free to read. Printable downloads are also free.</p>
-            </div>
-            <div className="faq-item">
-              <h3>Do I need special software?</h3>
-              <p>No. All printables are PDF files — download and print at home.</p>
-            </div>
-            <div className="faq-item">
-              <h3>Will this work on a low income?</h3>
-              <p>Yes. These tips are designed for real people, including those on tight budgets.</p>
-            </div>
+            {isHomeOffice ? (
+              <>
+                <div className="faq-item"><h3>Do I need a standing desk?</h3><p>No. A stable desk at the right working height is more important. A standing desk is useful if you want to alternate positions during the day.</p></div>
+                <div className="faq-item"><h3>What should I upgrade first?</h3><p>Start with the item causing daily discomfort or friction. That is usually the chair, monitor height, lighting, or cable placement—not decoration.</p></div>
+                <div className="faq-item"><h3>Can a small room fit two monitors?</h3><p>Often, yes. A monitor arm can recover desk depth, but check the desk thickness, clamp clearance, and arm weight rating before buying.</p></div>
+              </>
+            ) : (
+              <>
+                <div className="faq-item"><h3>Is this guide free?</h3><p>Yes, all guides on BudgetLoom are free to read. Printable downloads are also free.</p></div>
+                <div className="faq-item"><h3>Do I need special software?</h3><p>No. All printables are PDF files — download and print at home.</p></div>
+                <div className="faq-item"><h3>Will this work on a low income?</h3><p>Yes. These tips are designed for real people, including those on tight budgets.</p></div>
+              </>
+            )}
           </div>
 
           <AuthorBox />
@@ -211,9 +221,9 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
 
           {/* Email CTA */}
           <div className="lead-box">
-            <h2>Get the matching printable</h2>
-            <p>Join the library and download the free printable that goes with this guide.</p>
-            <EmailForm cta="Download free printable" tag="matching printable" />
+            <h2>{isHomeOffice ? 'Plan the cost before you upgrade' : 'Get the matching printable'}</h2>
+            <p>{isHomeOffice ? 'Use our free budget tools to set a workspace limit and avoid impulse upgrades.' : 'Join the library and download the free printable that goes with this guide.'}</p>
+            <EmailForm cta={isHomeOffice ? 'Get free budget tools' : 'Download free printable'} tag={isHomeOffice ? 'home office budget' : 'matching printable'} />
             <div className="lead-perks">
               <span className="lead-perk"><Icon.check className="" /> Instant download</span>
               <span className="lead-perk"><Icon.check className="" /> No spam</span>
