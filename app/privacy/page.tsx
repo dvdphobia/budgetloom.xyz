@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 export const metadata = {
   title: 'Privacy Policy',
   description: 'Privacy policy for BudgetLoom.',
-  alternates: { canonical: 'https://budgetloom.xyz/privacy/' },
+  alternates: { canonical: 'https://budgetloom.xyz/privacy' },
 }
 
 export default function Privacy() {

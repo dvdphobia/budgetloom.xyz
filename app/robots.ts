@@ -7,6 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/"],
     },
-    sitemap: "https://www.budgetloom.xyz/sitemap.xml",
+    host: "https://budgetloom.xyz",
+    sitemap: "https://budgetloom.xyz/sitemap.xml",
   };
 }

@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 export const metadata = {
   title: 'About',
   description: 'BudgetLoom helps people save money with simple printables and practical guides.',
-  alternates: { canonical: 'https://budgetloom.xyz/about/' },
+  alternates: { canonical: 'https://budgetloom.xyz/about' },
 }
 
 export default function About() {
@@ -27,7 +27,9 @@ export default function About() {
               <li><strong>Debt payoff trackers</strong> to keep you motivated</li>
             </ul>
             <h2>How we make money</h2>
-            <p>BudgetLoom is reader-supported. We earn commissions through affiliate links (like Amazon) at no extra cost to you. Some premium printables are paid. Most content is free. This keeps the site running without paywalls.</p>
+            <p>BudgetLoom is reader-supported. We may earn commissions through affiliate links, including Amazon, at no extra cost to you. Our printables and guides are free. Advertising and affiliate commissions help keep the site available without paywalls.</p>
+            <h2>Our editorial approach</h2>
+            <p>We create educational content using established budgeting methods, transparent calculations, and practical examples. We review guides for clarity and update them when facts or recommendations change. BudgetLoom does not provide individualized financial, tax, legal, or investment advice.</p>
           </div>
         </article>
       </main>

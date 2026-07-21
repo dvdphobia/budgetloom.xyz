@@ -8,7 +8,7 @@ import { posts } from '@/lib/posts'
 export const metadata = {
   title: 'Money Guides',
   description: 'Free guides on budgeting, saving money, meal planning, debt payoff, and no-spend challenges.',
-  alternates: { canonical: 'https://budgetloom.xyz/blog/' },
+  alternates: { canonical: 'https://budgetloom.xyz/blog' },
 }
 
 const categoryIcons: Record<string, { label: string, cat: string }> = {
@@ -56,7 +56,7 @@ export default function BlogPage() {
               <h2 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--dark)' }}>{cat}</h2>
               <div className="grid">
                 {catPosts.map(post => (
-                  <Link href={`/blog/${post.slug}/`} className="card" key={post.slug}>
+                  <Link href={`/blog/${post.slug}`} className="card" key={post.slug}>
                     <div className="card-cover">
                       <CardCover category={categoryIcons[post.category]?.cat || 'printable'} />
                     </div>

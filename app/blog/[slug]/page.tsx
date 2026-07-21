@@ -11,6 +11,8 @@ import { posts, getPostBySlug, type Post } from '@/lib/posts'
 import { affiliateProducts } from '@/lib/config'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+import { site } from '@/lib/config'
 
 type Params = { slug: string }
 
@@ -18,15 +20,26 @@ export async function generateStaticParams() {
   return posts.map(p => ({ slug: p.slug }))
 }
 
-export async function generateMetadata({ params }: { params: Promise<Params> }) {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) return { title: 'Not Found' }
   return {
     title: post.title,
     description: post.description,
-    openGraph: { title: post.title, description: post.description, type: 'article', publishedTime: post.date },
-    alternates: { canonical: `https://budgetloom.xyz/blog/${post.slug}/` },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      url: `${site.url}/blog/${post.slug}`,
+      publishedTime: post.date,
+      modifiedTime: post.date,
+      authors: [site.publisher],
+      section: post.category,
+      images: [{ url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: { card: 'summary_large_image', title: post.title, description: post.description, images: [`/blog/${post.slug}/opengraph-image`] },
+    alternates: { canonical: `${site.url}/blog/${post.slug}` },
   }
 }
 
@@ -104,7 +117,20 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
 
   const relatedPosts = posts.filter(p => p.slug !== slug && p.category === post.category).slice(0, 3)
   const tocItems = generateTOC(post.content)
-  const postUrl = `https://budgetloom.xyz/blog/${post.slug}/`
+  const postUrl = `${site.url}/blog/${post.slug}`
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    mainEntityOfPage: postUrl,
+    image: `${postUrl}/opengraph-image`,
+    articleSection: post.category,
+    author: { '@type': 'Organization', name: site.publisher, url: `${site.url}/about` },
+    publisher: { '@type': 'Organization', name: site.name, url: site.url, logo: { '@type': 'ImageObject', url: `${site.url}/logo.png` } },
+  }
 
   const affiliateProduct = post.category === 'Food'
     ? { ...affiliateProducts.mealPrepContainers, desc: 'Good containers keep food fresh longer and make batch cooking actually work.' }
@@ -117,9 +143,10 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
       <Header />
       <main id="main" className="container section">
         <article style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
           <Breadcrumbs items={[
             { label: 'Home', href: '/' },
-            { label: 'Guides', href: '/blog/' },
+            { label: 'Guides', href: '/blog' },
             { label: post.title },
           ]} />
 
@@ -127,6 +154,8 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
             <span className="cat">{post.category}</span>
             <span className="dot">·</span>
             <span className="time">{post.readTime} read</span>
+            <span className="dot">·</span>
+            <time dateTime={post.date}>Published {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${post.date}T00:00:00Z`))}</time>
           </div>
           <h1 className="article-title">{post.title}</h1>
           <p className="article-sub">{post.description}</p>
@@ -198,7 +227,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
               <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '1rem' }}>Keep reading</h2>
               <div className="grid">
                 {relatedPosts.map(rp => (
-                  <Link href={`/blog/${rp.slug}/`} className="card" key={rp.slug}>
+                  <Link href={`/blog/${rp.slug}`} className="card" key={rp.slug}>
                     <div className="card-body">
                       <span className="card-badge">{rp.category}</span>
                       <h3>{rp.title}</h3>

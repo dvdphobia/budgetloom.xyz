@@ -8,3 +8,4 @@ dist/
 .vercel
 scripts/.venv/
 __pycache__/
+*.tsbuildinfo

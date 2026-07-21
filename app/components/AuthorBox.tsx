@@ -7,8 +7,8 @@ export default function AuthorBox() {
         <Icon.user />
       </div>
       <div className="author-info">
-        <div className="author-name">BudgetLoom Team</div>
-        <div className="author-bio">Creating simple budget tools for real life.</div>
+        <div className="author-name">BudgetLoom Editorial Team</div>
+        <div className="author-bio">We research practical budgeting methods and turn them into clear, actionable guides and free tools. Content is educational, not individualized financial advice.</div>
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 export const metadata = {
   title: 'Terms of Use',
   description: 'Terms of use for BudgetLoom.',
-  alternates: { canonical: 'https://budgetloom.xyz/terms/' },
+  alternates: { canonical: 'https://budgetloom.xyz/terms' },
 }
 
 export default function Terms() {

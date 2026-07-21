@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 export const metadata = {
   title: 'Contact',
   description: 'Contact BudgetLoom for partnership, press, or product questions.',
-  alternates: { canonical: 'https://budgetloom.xyz/contact/' },
+  alternates: { canonical: 'https://budgetloom.xyz/contact' },
 }
 
 export default function Contact() {

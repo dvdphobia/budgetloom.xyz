@@ -1,6 +1,9 @@
 export const site = {
   name: "BudgetLoom",
   url: "https://budgetloom.xyz",
+  description: "Free budget printables, savings challenges, and practical money guides for everyday life.",
+  email: "hello@budgetloom.xyz",
+  publisher: "BudgetLoom Editorial Team",
 };
 
 export const monetization = {

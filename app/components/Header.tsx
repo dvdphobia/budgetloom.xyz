@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
-import { LogoMark } from './Icons'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -11,7 +11,7 @@ export default function Header() {
     <header className="header">
       <div className="container header-inner">
         <Link href="/" className="logo" onClick={() => setOpen(false)}>
-          <img src="/logo.png" alt="BudgetLoom" width={28} height={28} style={{ borderRadius: 6 }} />
+          <Image src="/logo.png" alt="" width={28} height={28} sizes="28px" priority style={{ borderRadius: 6 }} />
           BudgetLoom
         </Link>
         <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu" aria-expanded={open}>
@@ -20,9 +20,9 @@ export default function Header() {
           </svg>
         </button>
         <nav className={`nav ${open ? 'open' : ''}`} onClick={() => setOpen(false)} aria-label="Main navigation">
-          <Link href="/blog/">Guides</Link>
-          <Link href="/printables/">Printables</Link>
-          <Link href="/about/">About</Link>
+          <Link href="/blog">Guides</Link>
+          <Link href="/printables">Printables</Link>
+          <Link href="/about">About</Link>
           <Link href="/#free-library" className="nav-cta">Free Library</Link>
         </nav>
       </div>

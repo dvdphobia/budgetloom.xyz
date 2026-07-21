@@ -8,7 +8,7 @@ import { printables } from '@/lib/printables'
 export const metadata = {
   title: 'Budget Printables',
   description: 'Printable budget planners, savings challenges, meal planners, and debt payoff trackers. Instant download.',
-  alternates: { canonical: 'https://budgetloom.xyz/printables/' },
+  alternates: { canonical: 'https://budgetloom.xyz/printables' },
 }
 
 export default function PrintablesPage() {
@@ -28,7 +28,7 @@ export default function PrintablesPage() {
 
         <div className="grid">
           {printables.map(p => (
-            <Link href={`/printables/${p.slug}/`} className="card" key={p.slug}>
+            <Link href={`/printables/${p.slug}`} className="card" key={p.slug}>
               <div className="card-cover">
                 <CardCover variant="printable" />
                 <span className={`card-cover-tag ${p.price === 'Free' ? 'free' : ''}`}>{p.price}</span>

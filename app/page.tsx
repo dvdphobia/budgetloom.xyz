@@ -28,8 +28,8 @@ export default function Home() {
             <h1>Save more. <span className="accent">Stress less.</span><br /><span className="serif">Start today.</span></h1>
             <p>Free budget printables and simple money guides designed for real life — not spreadsheets.</p>
             <div className="hero-cta">
-              <Link href="/printables/" className="btn btn-primary btn-lg">Browse Printables</Link>
-              <Link href="/blog/" className="btn btn-ghost btn-lg">Read Guides</Link>
+              <Link href="/printables" className="btn btn-primary btn-lg">Browse Printables</Link>
+              <Link href="/blog" className="btn btn-ghost btn-lg">Read Guides</Link>
             </div>
           </div>
         </section>
@@ -43,7 +43,7 @@ export default function Home() {
             </div>
             <div className="grid">
               {featured.map(p => (
-                <Link href={`/printables/${p.slug}/`} className="card" key={p.slug}>
+                <Link href={`/printables/${p.slug}`} className="card" key={p.slug}>
                   <div className="card-cover">
                     <CardCover variant="printable" />
                     <span className={`card-cover-tag ${p.price === 'Free' ? 'free' : ''}`}>{p.price}</span>
@@ -57,7 +57,7 @@ export default function Home() {
               ))}
             </div>
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-              <Link href="/printables/" className="btn btn-ghost btn-sm">View all printables <Icon.arrow className="" /></Link>
+              <Link href="/printables" className="btn btn-ghost btn-sm">View all printables <Icon.arrow className="" /></Link>
             </div>
           </div>
         </section>
@@ -71,7 +71,7 @@ export default function Home() {
             </div>
             <div className="grid">
               {recentPosts.map(post => (
-                <Link href={`/blog/${post.slug}/`} className="card" key={post.slug}>
+                <Link href={`/blog/${post.slug}`} className="card" key={post.slug}>
                   <div className="card-cover">
                     <CardCover category={categoryMap[post.category]} />
                   </div>
@@ -88,7 +88,7 @@ export default function Home() {
               ))}
             </div>
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-              <Link href="/blog/" className="btn btn-ghost btn-sm">Read all guides <Icon.arrow className="" /></Link>
+              <Link href="/blog" className="btn btn-ghost btn-sm">Read all guides <Icon.arrow className="" /></Link>
             </div>
           </div>
         </section>

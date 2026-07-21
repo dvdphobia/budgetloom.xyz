@@ -7,6 +7,8 @@ import { PrintablePreview, Icon } from '../../components/Icons'
 import { printables, getPrintableBySlug } from '@/lib/printables'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+import { site } from '@/lib/config'
 
 type Params = { slug: string }
 
@@ -14,15 +16,16 @@ export async function generateStaticParams() {
   return printables.map(p => ({ slug: p.slug }))
 }
 
-export async function generateMetadata({ params }: { params: Promise<Params> }) {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params
   const p = getPrintableBySlug(slug)
   if (!p) return { title: 'Not Found' }
   return {
     title: p.title,
     description: p.description,
-    openGraph: { title: p.title, description: p.description, type: 'article' },
-    alternates: { canonical: `https://budgetloom.xyz/printables/${p.slug}/` },
+    openGraph: { title: p.title, description: p.description, type: 'website', url: `${site.url}/printables/${p.slug}`, images: [{ url: `/printables/${p.slug}/opengraph-image`, width: 1200, height: 630, alt: p.title }] },
+    twitter: { card: 'summary_large_image', title: p.title, description: p.description, images: [`/printables/${p.slug}/opengraph-image`] },
+    alternates: { canonical: `${site.url}/printables/${p.slug}` },
   }
 }
 
@@ -31,15 +34,28 @@ export default async function PrintablePage({ params }: { params: Promise<Params
   const p = getPrintableBySlug(slug)
   if (!p) return notFound()
 
-  const printableUrl = `https://budgetloom.xyz/printables/${p.slug}/`
+  const printableUrl = `${site.url}/printables/${p.slug}`
+  const printableSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'DigitalDocument',
+    name: p.title,
+    description: p.description,
+    url: printableUrl,
+    image: `${printableUrl}/opengraph-image`,
+    inLanguage: 'en-US',
+    isAccessibleForFree: true,
+    encodingFormat: 'application/pdf',
+    publisher: { '@type': 'Organization', name: site.name, url: site.url },
+  }
 
   return (
     <>
       <Header />
       <main id="main" className="container section">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(printableSchema) }} />
         <Breadcrumbs items={[
           { label: 'Home', href: '/' },
-          { label: 'Printables', href: '/printables/' },
+          { label: 'Printables', href: '/printables' },
           { label: p.title },
         ]} />
 
