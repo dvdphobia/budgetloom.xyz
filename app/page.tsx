@@ -28,8 +28,8 @@ export default function Home() {
             <h1>Save more. <span className="accent">Stress less.</span><br /><span className="serif">Start today.</span></h1>
             <p>Free budget printables and simple money guides designed for real life — not spreadsheets.</p>
             <div className="hero-cta">
-              <Link href="/printables" className="btn btn-primary btn-lg">Browse Printables</Link>
-              <Link href="/blog" className="btn btn-ghost btn-lg">Read Guides</Link>
+              <Link href="/free-budget-template" className="btn btn-primary btn-lg">Get Free Budget Template</Link>
+              <Link href="/budget-calculator" className="btn btn-ghost btn-lg">Try Budget Calculator</Link>
             </div>
           </div>
         </section>
@@ -58,6 +58,21 @@ export default function Home() {
             </div>
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
               <Link href="/printables" className="btn btn-ghost btn-sm">View all printables <Icon.arrow className="" /></Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="section tools-strip">
+          <div className="container">
+            <div className="section-header">
+              <h2>Free Budget Tools</h2>
+              <p>Choose paper, spreadsheet, or calculator—then build your monthly plan.</p>
+            </div>
+            <div className="tool-link-grid">
+              <Link href="/free-budget-template"><strong>Budget Template</strong><span>Free 12-page printable PDF</span></Link>
+              <Link href="/monthly-budget-worksheet"><strong>Monthly Worksheet</strong><span>Instructions and completed example</span></Link>
+              <Link href="/budget-calculator"><strong>Budget Calculator</strong><span>Calculate needs, wants, and goals</span></Link>
+              <Link href="/free-budget-spreadsheet"><strong>Budget Spreadsheet</strong><span>Editable CSV download</span></Link>
             </div>
           </div>
         </section>

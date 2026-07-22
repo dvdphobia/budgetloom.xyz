@@ -189,6 +189,19 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
             {parseContent(post.content)}
           </div>
 
+          {post.category === 'Budgeting' && (
+            <aside className="resource-box" aria-label="Free budgeting resources">
+              <h2>Put this guide into practice</h2>
+              <p>Use the free tools that match the next step in your budget.</p>
+              <div>
+                <Link href="/free-budget-template">Free budget template</Link>
+                <Link href="/monthly-budget-worksheet">Monthly worksheet and example</Link>
+                <Link href="/budget-calculator">Monthly budget calculator</Link>
+                <Link href="/free-budget-spreadsheet">Free budget spreadsheet</Link>
+              </div>
+            </aside>
+          )}
+
           <AdSlot placement="blog_post_middle" />
 
           {/* Single affiliate product — contextually relevant */}

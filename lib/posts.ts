@@ -10,6 +10,377 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: 'how-to-make-a-monthly-budget',
+    title: 'How to Make a Monthly Budget That Works in Real Life',
+    description: 'Build a realistic monthly budget in seven steps using take-home income, true expenses, flexible limits, and a weekly review.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '9 min',
+    content: `## Start with the month you actually have
+
+A useful monthly budget is not an ideal version of your finances. It is a plan for the income, bills, responsibilities, and tradeoffs you have now. Start with recent statements and real due dates rather than guessing what a responsible person should spend.
+
+## 1. Calculate take-home income
+
+Use money that reaches your accounts after taxes and payroll deductions. Include predictable salary, benefits, support, and side income. If income varies, begin with the lowest reliable amount and make a separate plan for extra money.
+
+## 2. List fixed monthly bills
+
+Write down housing, utilities, insurance, childcare, subscriptions, phone service, and minimum debt payments. Add the due date beside each amount. Convert quarterly or annual costs into monthly sinking-fund contributions so they do not become emergencies.
+
+## 3. Estimate flexible essentials
+
+Review two or three months of groceries, transportation, household supplies, medicine, and other necessary spending. Use an honest average. Setting an unrealistically low grocery number does not create savings; it creates a budget you will abandon.
+
+## 4. Choose limits for wants
+
+Dining out, entertainment, hobbies, clothing, and personal spending need clear limits. You do not have to remove every enjoyable category. A sustainable plan decides what you can spend without sacrificing bills or goals.
+
+## 5. Plan savings and debt payments
+
+Give emergency savings, sinking funds, retirement, and extra debt payments their own lines. Automate transfers shortly after payday when possible. Starting with a small repeatable amount is better than choosing a large amount you regularly reverse.
+
+## 6. Check the balance
+
+Subtract every planned expense, savings contribution, and debt payment from take-home income. A positive balance can become a buffer or support a priority. A negative balance means something must change before the month begins.
+
+## 7. Review the budget weekly
+
+Choose one ten-minute check-in. Record recent transactions, compare spending with each limit, and adjust flexible categories. A budget is allowed to change when the facts change; the total simply needs to stay within available income.
+
+## A realistic budget example
+
+For $4,000 of take-home income, a household might plan $2,150 for needs, $750 for wants, $900 for savings and debt, and keep a $200 buffer. The percentages are less important than covering real obligations and making deliberate progress.
+
+Use the free monthly budget worksheet to write down your plan, or calculate the totals first with the BudgetLoom budget calculator.`
+  },
+  {
+    slug: 'budget-categories-and-percentages',
+    title: 'Budget Categories and Recommended Percentages',
+    description: 'A practical list of personal budget categories, flexible percentage ranges, and instructions for adapting them to your income and location.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '10 min',
+    content: `## Percentages are guide rails, not grades
+
+Budget percentages help you notice where money goes, but they cannot account for every rent market, household size, medical need, or income level. Use ranges to start a conversation with your numbers—not to label your budget a failure.
+
+## Housing: 25% to 35%
+
+Include rent or mortgage, property taxes, required fees, and renters or homeowners insurance. In high-cost areas this category may be higher. If it is, reduce other flexible categories rather than hiding part of the housing cost.
+
+## Utilities and communication: 5% to 10%
+
+Include electricity, gas, water, trash, phone, and internet. Annual averages work better than using one mild-weather month. Budget separately for seasonal spikes when possible.
+
+## Food: 10% to 15%
+
+Separate groceries from restaurant spending so you can see which behavior changed. Household size, dietary needs, and local prices matter more than a universal percentage.
+
+## Transportation: 10% to 15%
+
+Count car payments, fuel, public transit, insurance, registration, maintenance, parking, and rideshares. A paid-off vehicle still requires a maintenance and replacement fund.
+
+## Healthcare and insurance: 5% to 15%
+
+Include premiums paid outside payroll, prescriptions, copays, therapy, dental care, and other predictable costs. Medical needs take priority over an arbitrary target.
+
+## Minimum debt payments: variable
+
+Record all required minimums as needs. Put payments above the minimum in the goals category so you can clearly measure additional progress.
+
+## Savings and financial goals: 10% to 20%
+
+This can include an emergency fund, retirement, sinking funds, investing, and extra debt repayment. If 10% is not possible, start with a smaller automatic amount and increase it after a bill ends or income rises.
+
+## Wants and personal spending: 10% to 30%
+
+Dining out, entertainment, hobbies, nonessential shopping, and upgrades belong here. Choose the categories you value instead of spreading money across everything by default.
+
+## Giving and family support: personal
+
+Treat regular giving or support as a planned category. A clear amount protects both your generosity and your required expenses.
+
+## Build percentages from real dollars
+
+First write actual dollar amounts for necessities. Then divide each category by take-home income and multiply by 100. Adjust flexible spending and goals until the plan fits. The finished percentages should describe a workable life, not imitate somebody else's worksheet.`
+  },
+  {
+    slug: '50-30-20-budget-rule-examples',
+    title: 'The 50/30/20 Budget Rule With Real Examples',
+    description: 'Learn what belongs in needs, wants, and savings, with examples for $2,500, $4,000, and $6,000 monthly take-home income.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '8 min',
+    content: `## What the 50/30/20 rule means
+
+The guideline assigns about 50% of take-home income to needs, 30% to wants, and 20% to savings and payments above minimum debt obligations. It is a simple framework for checking balance, not a law every household must meet.
+
+## What counts as a need
+
+Needs include housing, basic utilities, groceries, necessary transportation, insurance, healthcare, childcare, and minimum debt payments. A cost is not automatically a need because it is recurring. Ask whether you could reasonably pause or reduce it without threatening health, work, housing, or obligations.
+
+## What counts as a want
+
+Wants include restaurant meals, entertainment, optional subscriptions, hobby purchases, vacations, upgrades, and convenience spending. Wants are not bad. Giving them a planned limit lets you enjoy them without borrowing from essential bills.
+
+## What belongs in the 20% group
+
+Count emergency savings, retirement contributions not already deducted, sinking funds, investments, and debt payments above the required minimum. Avoid counting a future purchase as savings if it is really planned spending; label it clearly as a sinking fund.
+
+## Example with $2,500 take-home income
+
+- Needs: $1,250
+- Wants: $750
+- Savings and extra debt: $500
+
+If rent alone makes the needs target impossible, try a temporary 65/15/20 plan or 70/20/10 plan. Protect essentials and establish some progress before worrying about the textbook split.
+
+## Example with $4,000 take-home income
+
+- Needs: $2,000
+- Wants: $1,200
+- Savings and extra debt: $800
+
+A household could choose to spend only $800 on wants and direct the other $400 to a home repair fund. The rule provides ceilings and priorities, not instructions to spend the entire allowance.
+
+## Example with $6,000 take-home income
+
+- Needs: $3,000
+- Wants: $1,800
+- Savings and extra debt: $1,200
+
+Higher income can create room to increase the savings rate. Keep lifestyle upgrades deliberate rather than automatically expanding wants to 30%.
+
+## When to modify the rule
+
+Change the percentages when essential costs are unusually high, income is temporarily low, aggressive debt payoff is a priority, or you are catching up on emergency savings. Use the monthly budget calculator to test several versions before choosing one.`
+  },
+  {
+    slug: 'how-to-budget-with-irregular-income',
+    title: 'How to Budget With Irregular Income',
+    description: 'A step-by-step irregular-income budget for freelancers, hourly workers, commission earners, and anyone whose pay changes monthly.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '10 min',
+    content: `## Build around a floor, not an average
+
+When income changes, an average can promise money that will not arrive in a slow month. Review the last six to twelve months and identify the lowest normal month. Use that conservative number as your planning floor.
+
+## Rank expenses by priority
+
+Create four levels. First cover housing, basic food, utilities, necessary transportation, medicine, and insurance. Second cover minimum debt payments and required obligations. Third fund sinking funds and important goals. Fourth cover flexible wants.
+
+This order gives every new payment a clear destination without rebuilding the entire budget each time.
+
+## Use an income holding account
+
+If possible, deposit variable business or freelance income into a separate account. Pay yourself a stable amount for personal spending on scheduled dates. Keep tax money separate and follow guidance appropriate to your location and work structure.
+
+## Create a one-month buffer gradually
+
+A buffer means this month's income pays next month's plan. Begin with a smaller milestone—perhaps one week of essential expenses—then grow it. The buffer smooths timing differences without pretending income is guaranteed.
+
+## Make an extra-income plan
+
+Decide in advance what happens above the planning floor. For example:
+
+- 40% to next month's buffer
+- 25% to taxes if not withheld
+- 20% to savings or debt
+- 10% to irregular business or household costs
+- 5% to guilt-free spending
+
+Your percentages will differ, but choosing them before a strong month prevents accidental lifestyle expansion.
+
+## Plan for irregular expenses too
+
+Annual fees, repairs, holidays, insurance renewals, and slow work seasons belong in sinking funds. Divide the expected amount by the months remaining before it is due.
+
+## Review weekly and close monthly
+
+During weekly check-ins, update income received and pay only the next priorities. At month-end, compare actual income with the planning floor, refill categories used during a slow period, and update the coming month.
+
+Use the free budget spreadsheet to track changing income, or print a fresh monthly budget worksheet for each planning cycle.`
+  },
+  {
+    slug: 'biweekly-budgeting-for-beginners',
+    title: 'Biweekly Budgeting for Beginners: A Paycheck-by-Paycheck Plan',
+    description: 'Split bills, spending, savings, and goals across two-week paychecks and make a plan for the two extra-paycheck months.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '8 min',
+    content: `## Why a monthly budget can feel out of sync
+
+Biweekly pay creates 26 paychecks per year, while most bills follow a monthly calendar. A paycheck plan connects each bill to money that arrives before its due date.
+
+## Make a bill calendar
+
+List every bill with its amount and due date. Put income dates on the same calendar. Assign each bill to the paycheck immediately before it is due, leaving enough processing time for automatic payments.
+
+## Split large expenses between checks
+
+If one paycheck cannot comfortably carry rent or a mortgage, reserve half from each regular check. Keep the first half in a bills account or clearly marked budget category until the second half arrives.
+
+## Give each paycheck four jobs
+
+For every check, plan:
+
+1. Bills due before the next payday
+2. Groceries, transportation, and other two-week essentials
+3. Savings, sinking funds, and debt goals
+4. A limited amount for wants
+
+Do not divide every monthly category exactly in half when real timing says otherwise. One period may include an insurance payment while the next carries a school expense.
+
+## Handle three-paycheck months deliberately
+
+Two months most years contain a third paycheck for biweekly earners. It is not completely extra because food and transportation continue. Cover that pay period's essentials, then direct the remainder to a chosen goal such as an emergency fund, annual bill, repair, or debt balance.
+
+## Example paycheck plan
+
+For a $2,000 check, someone might reserve $1,050 for upcoming bills, $350 for two weeks of groceries and transportation, $350 for savings and debt, $150 for wants, and keep a $100 buffer.
+
+## Prevent the first-paycheck squeeze
+
+If most bills fall early in the month, ask providers whether due dates can be moved. Build a small bills-account cushion over several pay periods. Even a partial buffer reduces dependence on the exact arrival time of the next deposit.
+
+Use a monthly worksheet for the full picture, then write a smaller assignment list for each payday.`
+  },
+  {
+    slug: 'monthly-budget-checklist',
+    title: 'Monthly Budget Checklist: Before, During, and After the Month',
+    description: 'A repeatable monthly budgeting checklist covering income, bills, spending reviews, sinking funds, and month-end adjustments.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '7 min',
+    content: `## Before the month begins
+
+- Estimate take-home income using confirmed pay dates
+- Review the calendar for birthdays, travel, appointments, school costs, and holidays
+- List fixed bills and verify any changed amounts
+- Check sinking funds for annual or seasonal expenses
+- Set realistic grocery, transportation, and personal limits
+- Schedule savings and required debt payments
+- Confirm planned spending does not exceed income
+
+## On each payday
+
+- Assign money to bills due before the next paycheck
+- Transfer planned savings or sinking-fund contributions
+- Reserve grocery and transportation money
+- Leave a small checking buffer when possible
+- Record the assignments on your worksheet
+
+## During the weekly check-in
+
+- Review account balances and recent transactions
+- Update actual spending by category
+- Look for duplicate, incorrect, or unexpected charges
+- Compare remaining category money with the days left
+- Move money between flexible categories if priorities changed
+- Avoid taking money from rent, required bills, or minimum debt payments
+
+## At the middle of the month
+
+Check whether the plan still matches reality. A category running high is information, not proof that budgeting failed. Reduce another flexible category, delay a nonessential purchase, or update the expected month-end balance.
+
+## At month-end
+
+- Record final income and expenses
+- Transfer intentional leftover money to a goal
+- Keep required checking-account buffers in place
+- Note categories that were consistently unrealistic
+- Review progress on one savings or debt goal
+- Prepare known changes for next month
+- Save the completed worksheet for comparison
+
+## Make the checklist sustainable
+
+Keep the weekly process to ten or fifteen minutes. Use the same day, place, and accounts each time. A simple routine repeated imperfectly gives you better information than an elaborate system used once.
+
+Download the free budget template to keep the checklist, monthly plan, and trackers together.`
+  },
+  {
+    slug: 'best-budget-planners-for-beginners',
+    title: 'Best Budget Planners for Beginners: What to Look For',
+    description: 'Choose a paper, printable, spreadsheet, or app-based budget planner based on the features you will actually use.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '8 min',
+    content: `## The best planner is the one you will reopen
+
+A budget planner should reduce decisions, make spending visible, and support regular review. More pages and features do not automatically make a system better. Start with the simplest format that matches your habits.
+
+## Printable budget planners
+
+Printables work well if you like handwriting, want to replace only specific pages, or need a low-cost starting point. Look for a monthly overview, expense tracker, savings page, debt page, and clear instructions. Print one month before producing an entire binder.
+
+## Bound paper planners
+
+A bound planner keeps everything in order and is easy to review later. Check whether it is dated or undated, whether the writing space fits your needs, and whether the binding lies flat. Avoid purchasing a highly specialized planner until you understand your routine.
+
+## Budget spreadsheets
+
+Spreadsheets are useful for automatic totals, category comparisons, and customization. They require consistent data entry and can become unnecessarily complex. Begin with income, planned amount, actual amount, and difference columns.
+
+## Budgeting apps
+
+Apps can import transactions and provide current balances. Compare subscription cost, account compatibility, privacy controls, export options, and whether manual entry is available. Automation still needs review because imported transactions can be delayed or categorized incorrectly.
+
+## Features beginners actually need
+
+- A monthly income section
+- Planned and actual expense columns
+- Flexible categories you can rename
+- Space for savings and debt goals
+- A short weekly review area
+- Enough simplicity to finish in fifteen minutes
+
+## Features you can add later
+
+Net-worth tracking, detailed investment pages, dozens of sinking funds, and yearly projections may be useful later. They should not delay the basic habit of planning and reviewing one month.
+
+## Test before spending money
+
+Use the free BudgetLoom template for one full month. Notice what you complete, what you ignore, and what information you wish you had. Those observations are a better buying guide than a long feature list.`
+  },
+  {
+    slug: 'cash-envelope-categories',
+    title: 'Cash Envelope Categories and How Much to Put in Each',
+    description: 'Choose useful cash-envelope categories, calculate realistic amounts, and adapt the method when you prefer cards or digital banking.',
+    date: '2026-07-22', category: 'Budgeting', readTime: '9 min',
+    content: `## Use envelopes where spending changes
+
+Cash envelopes are most helpful for flexible categories that can be overspent in small decisions. Fixed automatic bills usually do not need envelopes.
+
+## Common envelope categories
+
+- Groceries
+- Restaurants and coffee
+- Transportation or fuel
+- Household supplies
+- Personal care
+- Clothing
+- Entertainment
+- Children or school extras
+- Gifts
+- Pet supplies
+- Miscellaneous spending
+
+Start with two or three problem categories. Managing fifteen envelopes immediately can create more work than awareness.
+
+## How much to put in each envelope
+
+Review the last two or three months of transactions. Choose a realistic amount slightly below the recent average if you want to reduce spending. Divide the monthly amount by the number of shopping periods or paychecks.
+
+For example, a $600 monthly grocery budget could become $300 per biweekly paycheck or about $150 per week. Household size, food prices, dietary needs, and shopping frequency determine the right number.
+
+## What happens when an envelope is empty
+
+Pause spending in that category or intentionally move money from another flexible envelope. Do not take money assigned to housing, utilities, medicine, insurance, or required payments. Recording the transfer preserves an honest picture of the month.
+
+## Carry over or reset?
+
+Carryover works well for categories with uneven spending, such as clothing, gifts, or household supplies. A monthly reset can work for restaurant or entertainment limits. Decide the rule before the month begins.
+
+## Digital envelope alternatives
+
+You can use separate bank buckets, a spreadsheet, an app, or category balances written on paper. The method works because each category has a visible limit—not because physical cash is mandatory.
+
+## Cash safety
+
+Do not carry an entire month's cash if loss or theft is a concern. Keep only the amount needed for the next shopping period, store the remainder securely, and keep receipts until transactions are recorded.
+
+Use the monthly budget worksheet to decide total category amounts before filling physical or digital envelopes.`
+  },
+  {
     slug: '30-day-money-saving-challenge',
     title: '30-Day Money Saving Challenge: Save $500 This Month',
     description: 'Four challenge formats, exact daily amounts, weekly checkpoints, and a free printable tracker to save $100-$500 in 30 days.',

@@ -21,6 +21,7 @@ export default function Header() {
         </button>
         <nav className={`nav ${open ? 'open' : ''}`} onClick={() => setOpen(false)} aria-label="Main navigation">
           <Link href="/blog">Guides</Link>
+          <Link href="/budget-calculator">Calculator</Link>
           <Link href="/printables">Printables</Link>
           <Link href="/about">About</Link>
           <Link href="/#free-library" className="nav-cta">Free Library</Link>

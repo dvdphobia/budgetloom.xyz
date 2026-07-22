@@ -9,6 +9,15 @@ BudgetLoom is a niche content website focused on **budget printables + money-sav
 Monetized through Amazon affiliate links, Adsterra display ads, and email list building.
 Traffic strategy: Pinterest + organic Google search.
 
+### SEO tool cluster (added 2026-07-22)
+- `/free-budget-template` targets budget template/free budget template and promotes the existing 12-page PDF.
+- `/monthly-budget-worksheet` targets monthly budget worksheet and includes a completed example.
+- `/budget-calculator` provides an interactive needs/wants/savings calculator.
+- `/free-budget-spreadsheet` provides `/budgetloom-monthly-budget.csv` for common spreadsheet apps.
+- All four routes are internally linked, use canonical metadata, and are included in the sitemap.
+- Eight supporting guides cover monthly budgeting, budget categories, 50/30/20 examples, irregular income, biweekly budgeting, monthly checklists, planner selection, and cash envelopes.
+- The budgeting cluster contains 23 total blog posts and produces 62 application routes in the verified production build.
+
 - **Domain:** budgetloom.xyz (no www)
 - **GitHub:** https://github.com/dvdphobia/budgetloom.xyz.git
 - **Hosting:** Vercel free tier
@@ -55,7 +64,7 @@ budget-printables/
 │   ├── contact/page.tsx
 │   ├── privacy/page.tsx
 │   ├── terms/page.tsx
-│   ├── sitemap.ts              # Dynamic sitemap (26 URLs: 7 static + 15 blog + 4 printables)
+│   ├── sitemap.ts              # Dynamic sitemap (38 URLs: 11 static + 23 blog + 4 printables)
 │   ├── robots.ts               # Disallow /api/ and /admin/
 │   ├── admin/
 │   │   ├── login/page.tsx      # Admin login (shadcn Card, Input, Button)

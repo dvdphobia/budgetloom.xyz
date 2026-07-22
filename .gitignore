@@ -9,3 +9,4 @@ dist/
 scripts/.venv/
 __pycache__/
 *.tsbuildinfo
+budget_keyword.csv
