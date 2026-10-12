@@ -19,15 +19,26 @@ function getPool(): Pool {
     throw new Error('No database connection string found. Set POSTGRES_URL in Vercel environment variables.')
   }
 
-  // Fix sslmode parameter for pooled connections
-  let url = connectionString
-  if (url.includes('sslmode=') && url.includes('?')) {
-    // Some Vercel Postgres URLs have sslmode=require which doesn't work with pg
-    // when using the pooled connection
+  // pg v8 interprets 'require'/'prefer'/'verify-ca' as 'verify-full', but
+  // pg v9 will adopt weaker libpq semantics for those modes. Preserve strict
+  // certificate and hostname verification explicitly for managed DB URLs.
+  const url = new URL(connectionString)
+  const sslMode = url.searchParams.get('sslmode')?.toLowerCase()
+  if (sslMode === 'require' || sslMode === 'prefer' || sslMode === 'verify-ca') {
+    url.searchParams.set('sslmode', 'verify-full')
+  }
+
+  // Connection-string SSL options override the Pool's ssl object in node-postgres.
+  // Do not let a deployed URL silently disable TLS or certificate verification.
+  if (process.env.NODE_ENV === 'production' && (
+    ['disable', 'allow', 'no-verify'].includes(sslMode || '') ||
+    ['0', 'false'].includes(url.searchParams.get('ssl')?.toLowerCase() || '')
+  )) {
+    throw new Error('Insecure PostgreSQL SSL configuration')
   }
 
   pool = new Pool({
-    connectionString: url,
+    connectionString: url.toString(),
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : undefined,
     max: 10,
     idleTimeoutMillis: 30000,
