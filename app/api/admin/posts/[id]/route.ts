@@ -48,10 +48,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     revalidatePath('/blog')
     revalidatePath('/blog/' + slug)
     revalidatePath('/sitemap.xml')
-    revalidatePath('/')
-    revalidatePath('/blog')
-    revalidatePath('/blog/' + result.rows[0].slug)
-    revalidatePath('/sitemap.xml')
     return NextResponse.json({ success: true })
   } catch (error: any) {
     return NextResponse.json({ error: 'Post operation failed' }, { status: 500 })
@@ -66,6 +62,10 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     if (result.rows.length === 0) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
     }
+    revalidatePath('/')
+    revalidatePath('/blog')
+    revalidatePath('/blog/' + result.rows[0].slug)
+    revalidatePath('/sitemap.xml')
     return NextResponse.json({ success: true })
   } catch (error: any) {
     return NextResponse.json({ error: 'Post operation failed' }, { status: 500 })
