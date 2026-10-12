@@ -5,10 +5,11 @@
     "slug": "how-to-build-a-bare-bones-budget-for-essential-expenses",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "publishedDate": "2026-10-12"
   },
   {
     "id": "BL-002",
@@ -16,10 +17,11 @@
     "slug": "how-to-budget-for-bills-that-arrive-every-three-months",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "publishedDate": "2026-10-12"
   },
   {
     "id": "BL-003",
@@ -49,10 +51,11 @@
     "slug": "weekly-budget-check-in-a-ten-minute-routine",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "publishedDate": "2026-10-12"
   },
   {
     "id": "BL-006",
@@ -60,10 +63,11 @@
     "slug": "how-to-budget-when-bills-are-due-before-payday",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "publishedDate": "2026-10-12"
   },
   {
     "id": "BL-007",
@@ -104,10 +108,11 @@
     "slug": "how-to-create-a-budget-buffer-without-hiding-expenses",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "publishedDate": "2026-10-12"
   },
   {
     "id": "BL-011",
