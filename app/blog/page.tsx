@@ -3,7 +3,7 @@ import Footer from '../components/Footer'
 import Link from 'next/link'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { CardCover, Icon } from '../components/Icons'
-import { posts } from '@/lib/posts'
+import { getVisiblePosts } from '@/lib/content'
 
 export const metadata = {
   title: 'Money Guides',
@@ -21,9 +21,12 @@ const categoryIcons: Record<string, { label: string, cat: string }> = {
 
 const categoryOrder = ['Savings', 'Budgeting', 'Food', 'Debt', 'Lifestyle']
 
-export default function BlogPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function BlogPage() {
+  const posts = await getVisiblePosts()
   const categories = [...new Set(posts.map(p => p.category))].sort(
-    (a, b) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b)
+    (a, b) => (categoryOrder.indexOf(a) < 0 ? 999 : categoryOrder.indexOf(a)) - (categoryOrder.indexOf(b) < 0 ? 999 : categoryOrder.indexOf(b))
   )
 
   return (
@@ -43,12 +46,12 @@ export default function BlogPage() {
         <div className="category-pills">
           {categories.map(cat => (
             <a key={cat} href={`#${cat.toLowerCase()}`} className="category-pill">
-              {categoryIcons[cat].label}
+              {categoryIcons[cat]?.label ?? cat}
             </a>
           ))}
         </div>
 
-        {categoryOrder.filter(c => categories.includes(c)).map(cat => {
+        {categories.map(cat => {
           const catPosts = posts.filter(p => p.category === cat)
           if (catPosts.length === 0) return null
           return (

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Icon } from './Icons'
+import { trackEvent } from '@/lib/analytics'
 
 export default function EmailForm({ cta = "Get the free printable", tag = "budget tips" }: { cta?: string, tag?: string }) {
   const [email, setEmail] = useState('')
@@ -29,6 +30,7 @@ export default function EmailForm({ cta = "Get the free printable", tag = "budge
         setErrorMessage(data.error || 'Something went wrong. Please try again.')
         return
       }
+      trackEvent('newsletter_signup')
       setStatus('ok')
       setEmail('')
     } catch {

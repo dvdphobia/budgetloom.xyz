@@ -17,9 +17,9 @@ export default function Privacy() {
           <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]} />
           <h1 className="article-title">Privacy Policy</h1>
           <div className="article-body">
-            <p><strong>Last updated:</strong> July 14, 2026</p>
-            <p>BudgetLoom respects your privacy. We collect your email only if you join our free printable library. We do not sell your email. We use it to send the requested printables and occasional money-saving tips.</p>
-            <h2>Cookies</h2>
+            <p><strong>Last updated:</strong> October 12, 2026</p>
+            <p>BudgetLoom respects your privacy. We process your email address when you voluntarily join the free printable library. We do not sell your email. We use it to send the requested printables and occasional money-saving tips.</p>
+            <h2>Budget calculator storage</h2><p>If you choose Save on this device, the calculator stores budget categories and amounts locally in your browser. Reset removes that saved plan. Those amounts are not intentionally sent to our servers.</p><h2>Analytics</h2><p>Analytics may measure page views, resource download starts and calculator exports without including private budget amounts or email addresses in those events.</p><h2>Cookies</h2>
             <p>This site may use analytics and advertising cookies from third-party providers. You can disable cookies in your browser settings.</p>
             <h2>Affiliate links</h2>
             <p>This site contains Amazon affiliate links. If you click and purchase, we may earn a commission at no extra cost to you.</p>

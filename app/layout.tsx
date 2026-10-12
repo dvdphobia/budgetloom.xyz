@@ -3,12 +3,12 @@ import Script from 'next/script'
 import './globals.css'
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-import SiteWideAds from './components/SiteWideAds';
 import { site } from '@/lib/config'
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const SITE_URL = site.url
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -73,7 +73,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('js', new Date());
           gtag('config', 'G-CRZCXM56DQ');
         `}</Script>
-        <SiteWideAds />
+        {ADSENSE_CLIENT && /^ca-pub-\d+$/.test(ADSENSE_CLIENT) && (
+          <Script
+            async
+            crossOrigin="anonymous"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            strategy="afterInteractive"
+          />
+        )}
         {children}
       </body>
     </html>

@@ -10,7 +10,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.colors import HexColor
 
-OUT = "../../public/printables"
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public", "printables")
 os.makedirs(OUT, exist_ok=True)
 
 # Brand colors
@@ -93,7 +93,9 @@ def draw_cover(c, title, subtitle, pages_label):
     # Title — large, centered
     c.setFont("Helvetica-Bold", 32)
     c.setFillColor(DARK)
-    c.drawCentredString(W / 2, H / 2 + 0.6 * inch, title)
+    title_lines = title.split("\\n")
+    for idx, line in enumerate(title_lines):
+        c.drawCentredString(W / 2, H / 2 + 0.8 * inch - idx * 0.5 * inch, line)
 
     # Subtitle
     c.setFont("Helvetica", 14)
@@ -214,11 +216,61 @@ def draw_fill_box(c, x, y, w, h, label="", r=4):
         c.drawCentredString(x + w / 2, y + h / 2 - 3, label)
 
 
+
+def challenge_amounts(target, days=30):
+    """Allocate an exact savings target across varied daily amounts."""
+    weights = [3 + ((i * 7) % 15) for i in range(days)]
+    amounts = [target * weight // sum(weights) for weight in weights]
+    remainder = target - sum(amounts)
+    for i in range(remainder):
+        amounts[i % days] += 1
+    assert len(amounts) == days and sum(amounts) == target and all(n > 0 for n in amounts)
+    return amounts
+
+
+def draw_extra_worksheet(c, title, pack, page_number, total_pages, entries):
+    """A practical printable worksheet with usable writable rows and note space."""
+    draw_page_header(c, title, pack)
+    c.setFillColor(GRAY)
+    c.setFont("Helvetica", 10)
+    c.drawString(MARGIN, H - 1.76 * inch, "Fill in the rows below, then review or update this page each week.")
+    top = H - 2.2 * inch
+    c.setFillColor(GREEN_MINT)
+    c.roundRect(MARGIN, top - 4, W - 2 * MARGIN, 28, 5, fill=1, stroke=0)
+    c.setFillColor(GREEN_DARK)
+    c.setFont("Helvetica-Bold", 10)
+    c.drawString(MARGIN + 10, top + 5, "ITEM / CATEGORY")
+    c.drawString(MARGIN + 250, top + 5, "PLANNED")
+    c.drawString(MARGIN + 344, top + 5, "ACTUAL")
+    c.drawString(MARGIN + 434, top + 5, "DONE")
+    y = top - 33
+    for i, label in enumerate(entries[:14]):
+        if i % 2 == 0:
+            c.setFillColor(CREAM)
+            c.rect(MARGIN, y - 9, W - 2 * MARGIN, 31, stroke=0, fill=1)
+        c.setFillColor(DARK)
+        c.setFont("Helvetica", 10)
+        c.drawString(MARGIN + 10, y + 3, label[:35])
+        c.setStrokeColor(BORDER)
+        c.line(MARGIN + 250, y + 1, MARGIN + 333, y + 1)
+        c.line(MARGIN + 344, y + 1, MARGIN + 422, y + 1)
+        draw_checkbox(c, MARGIN + 445, y + 2, 12)
+        y -= 33
+    c.setFont("Helvetica-Bold", 11)
+    c.setFillColor(GREEN_DARK)
+    c.drawString(MARGIN, 115, "NOTES / NEXT ACTIONS")
+    for idx in range(2):
+        c.setStrokeColor(BORDER)
+        c.line(MARGIN, 95 - idx * 22, W - MARGIN, 95 - idx * 22)
+    draw_page_footer(c, page_number, total_pages)
+    c.showPage()
+
+
 # ============================================================
 def make_budget_starter_bundle():
     path = os.path.join(OUT, "budget-starter-bundle.pdf")
     c = canvas.Canvas(path, pagesize=letter)
-    total = 5
+    total = 12
 
     # Cover
     draw_cover(c, "Budget Starter\nBundle", "Everything you need to start budgeting", "12 pages  .  PDF")
@@ -405,6 +457,13 @@ def make_budget_starter_bundle():
 
     draw_page_footer(c, 5, total)
     c.showPage()
+    draw_extra_worksheet(c, "Annual Bills Planner", "Budget Starter Bundle", 6, 12, ["Car insurance","Home insurance","Property tax","Registration","Membership renewals","School supplies","Holiday travel","Professional fees","Medical deductibles","Annual subscriptions","Repairs","Other annual bill"])
+    draw_extra_worksheet(c, "Fixed Expenses", "Budget Starter Bundle", 7, 12, ["Rent or mortgage","Electricity","Water","Gas","Internet","Phone","Insurance","Childcare","Transportation","Minimum debt payment","Subscriptions","Other bill"])
+    draw_extra_worksheet(c, "Variable Expenses", "Budget Starter Bundle", 8, 12, ["Groceries","Household supplies","Fuel or transit","Restaurants","Entertainment","Clothing","Personal care","Pets","Medical co-payments","School expenses","Gifts","Other variable cost"])
+    draw_extra_worksheet(c, "Savings Goals", "Budget Starter Bundle", 9, 12, ["Emergency fund","Vacation fund","Car repairs","Medical buffer","Home maintenance","Future moving costs","Education","Gifts","Taxes","Replacement devices","Other short-term goal","Other long-term goal"])
+    draw_extra_worksheet(c, "Subscription Review", "Budget Starter Bundle", 10, 12, ["Video streaming","Music streaming","Cloud storage","Software tools","Gym","Gaming","News","Delivery membership","Learning platform","Phone add-ons","Family subscriptions","Other recurring charge"])
+    draw_extra_worksheet(c, "Weekly Spending Review", "Budget Starter Bundle", 11, 12, ["Monday purchases","Tuesday purchases","Wednesday purchases","Thursday purchases","Friday purchases","Saturday purchases","Sunday purchases","Groceries total","Transport total","Other essentials","Optional spending","Weekly adjustment"])
+    draw_extra_worksheet(c, "Monthly Closeout", "Budget Starter Bundle", 12, 12, ["Actual income","Housing total","Bills total","Food total","Transportation total","Debt payments","Savings deposits","Entertainment total","Cash buffer","Unplanned costs","Carry-forward","Next month priority"])
     c.save()
     print(f"Created {path}")
 
@@ -413,7 +472,7 @@ def make_budget_starter_bundle():
 def make_savings_challenge():
     path = os.path.join(OUT, "30-day-savings-challenge.pdf")
     c = canvas.Canvas(path, pagesize=letter)
-    total = 3
+    total = 6
 
     # Cover
     draw_cover(c, "30-Day Savings\nChallenge", "Save $500 in 30 days", "6 pages  .  PDF")
@@ -422,7 +481,7 @@ def make_savings_challenge():
     draw_page_header(c, "$100 Challenge", "30-Day Savings Challenge")
     y = H - 2.0 * inch
 
-    amounts_100 = [2, 3, 5, 2, 8, 3, 5, 4, 2, 6, 5, 3, 5, 4, 8, 3, 5, 4, 2, 6, 5, 3, 4, 5, 2, 3, 5, 4, 2, 3]
+    amounts_100 = challenge_amounts(100)
     c.setFont("Helvetica", 10)
     c.setFillColor(GRAY)
     c.drawCentredString(W / 2, y, "Save $100 in 30 days  .  Check each day as you save")
@@ -456,8 +515,7 @@ def make_savings_challenge():
     draw_page_header(c, "$300 Challenge", "30-Day Savings Challenge")
     y = H - 2.0 * inch
 
-    amounts_300 = [5, 10, 8, 15, 12, 8, 10, 15, 12, 8, 10, 12, 8, 15, 10, 12, 8, 10, 15, 12,
-                   8, 10, 12, 8, 15, 10, 12, 8, 10, 3]
+    amounts_300 = challenge_amounts(300)
     c.setFont("Helvetica", 10)
     c.setFillColor(GRAY)
     c.drawCentredString(W / 2, y, "Save $300 in 30 days  .  Check each day as you save")
@@ -487,8 +545,7 @@ def make_savings_challenge():
     draw_page_header(c, "$500 Challenge", "30-Day Savings Challenge")
     y = H - 2.0 * inch
 
-    amounts_500 = [10, 15, 20, 10, 25, 15, 10, 20, 30, 10, 5, 15, 25, 10, 5, 20, 15, 10,
-                   25, 10, 15, 20, 5, 30, 15, 10, 20, 15, 10, 50]
+    amounts_500 = challenge_amounts(500)
     c.setFont("Helvetica", 10)
     c.setFillColor(GRAY)
     c.drawCentredString(W / 2, y, "Save $500 in 30 days  .  Check each day as you save")
@@ -513,6 +570,9 @@ def make_savings_challenge():
 
     draw_page_footer(c, 3, total)
     c.showPage()
+    draw_extra_worksheet(c, "Reverse Savings Challenge", "30-Day Savings Challenge", 4, 6, ["Week 1 contributions","Week 2 contributions","Week 3 contributions","Week 4 contributions","Extra two days","Smallest deposit","Largest deposit","Total deposits","Date completed","What helped","What to change","Next goal"])
+    draw_extra_worksheet(c, "Custom 30-Day Savings Plan", "30-Day Savings Challenge", 5, 6, ["Target savings","Start date","Finish date","Week 1 target","Week 2 target","Week 3 target","Week 4 target","Extra day 29","Extra day 30","Total saved","Remaining to goal","Next savings goal"])
+    draw_extra_worksheet(c, "Savings Challenge Review", "30-Day Savings Challenge", 6, 6, ["Starting balance","Week 1 saved","Week 2 saved","Week 3 saved","Week 4 saved","Extra deposits","Total saved","Unexpected expenses","Money saved by swaps","Most effective habit","Next challenge amount","Celebration budget"])
     c.save()
     print(f"Created {path}")
 
@@ -521,7 +581,7 @@ def make_savings_challenge():
 def make_meal_planner():
     path = os.path.join(OUT, "meal-planner-budget-kit.pdf")
     c = canvas.Canvas(path, pagesize=letter)
-    total = 4
+    total = 8
 
     # Cover
     draw_cover(c, "Meal Planner\nBudget Kit", "Plan meals, cut grocery costs", "8 pages  .  PDF")
@@ -661,6 +721,10 @@ def make_meal_planner():
 
     draw_page_footer(c, 4, total)
     c.showPage()
+    draw_extra_worksheet(c, "Pantry Inventory", "Meal Planner Budget Kit", 5, 8, ["Rice or pasta","Beans and lentils","Canned tomatoes","Cooking oil","Flour and baking","Oats and cereals","Dry spices","Shelf-stable milk","Canned fish","Nut butter","Snacks","Other pantry item"])
+    draw_extra_worksheet(c, "Freezer Inventory", "Meal Planner Budget Kit", 6, 8, ["Frozen vegetables","Frozen fruit","Chicken","Beef or pork","Fish","Bread","Prepared portions","Stock or broth","Frozen herbs","Leftover meals","Ice and cooling","Other frozen item"])
+    draw_extra_worksheet(c, "Recipe Cost Worksheet", "Meal Planner Budget Kit", 7, 8, ["Recipe name","Servings","Ingredient 1","Ingredient 2","Ingredient 3","Ingredient 4","Ingredient 5","Ingredient 6","Total recipe cost","Cost per serving","Leftovers","Next time adjustments"])
+    draw_extra_worksheet(c, "Weekly Meal Budget Review", "Meal Planner Budget Kit", 8, 8, ["Planned grocery budget","Actual groceries","Pantry ingredients used","Restaurant spending","Food waste reduced","Meals prepared","Leftovers frozen","Cost per day","Shopping list accuracy","Expensive ingredient swaps","Next week's budget","Favorite affordable meal"])
     c.save()
     print(f"Created {path}")
 
@@ -669,7 +733,7 @@ def make_meal_planner():
 def make_debt_payoff():
     path = os.path.join(OUT, "debt-payoff-planner.pdf")
     c = canvas.Canvas(path, pagesize=letter)
-    total = 4
+    total = 10
 
     # Cover
     draw_cover(c, "Debt Payoff\nPlanner", "Snowball & avalanche trackers", "10 pages  .  PDF")
@@ -819,6 +883,12 @@ def make_debt_payoff():
 
     draw_page_footer(c, 4, total)
     c.showPage()
+    draw_extra_worksheet(c, "Debt Snowball Order", "Debt Payoff Planner", 5, 10, ["Smallest balance","Second debt","Third debt","Fourth debt","Fifth debt","Sixth debt","Minimum payments","Extra payment","Target debt this month","Amount paid","Remaining total","Next milestone"])
+    draw_extra_worksheet(c, "Debt Avalanche Order", "Debt Payoff Planner", 6, 10, ["Highest interest debt","Second highest APR","Third highest APR","Fourth highest APR","Fifth highest APR","Minimum payments","Extra payment","Highest-rate balance","Estimated interest","Amount paid","Remaining total","Next milestone"])
+    draw_extra_worksheet(c, "Monthly Payment Log", "Debt Payoff Planner", 7, 10, ["Payment 1","Payment 2","Payment 3","Payment 4","Payment 5","Payment 6","Payment 7","Payment 8","Payment 9","Payment 10","Extra payment","Monthly payments total"])
+    draw_extra_worksheet(c, "Interest And Fee Review", "Debt Payoff Planner", 8, 10, ["Debt name","Current balance","Interest rate","Interest charged","Late fees","Annual fees","Monthly payment","Extra payment","Fees to discuss","Rate review date","Statement check","Next action"])
+    draw_extra_worksheet(c, "Debt Payoff Check-In", "Debt Payoff Planner", 9, 10, ["Income available","Total minimums","Extra debt payment","Emergency savings","Payments completed","Payment dates","Balances verified","Fees to avoid","Budget adjustments","Creditor communications","Progress this month","Next month's target"])
+    draw_extra_worksheet(c, "Debt-Free Roadmap", "Debt Payoff Planner", 10, 10, ["Starting debt total","Current debt total","First payoff milestone","25 percent reduced","50 percent reduced","75 percent reduced","Last account balance","Final expected payment","Savings after payoff","Celebration fund","Budget after payoff","Next financial goal"])
     c.save()
     print(f"Created {path}")
 

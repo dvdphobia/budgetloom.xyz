@@ -2,7 +2,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import EmailForm from './components/EmailForm'
 import Link from 'next/link'
-import { posts } from '@/lib/posts'
+import { getVisiblePosts } from '@/lib/content'
 import { printables } from '@/lib/printables'
 import { CardCover, Icon } from './components/Icons'
 
@@ -14,8 +14,10 @@ const categoryMap: Record<string, string> = {
   'Debt': 'debt',
 }
 
-export default function Home() {
-  const recentPosts = posts.slice(0, 6)
+export const dynamic = 'force-dynamic'
+
+export default async function Home() {
+  const recentPosts = (await getVisiblePosts()).slice(0, 6)
   const featured = printables.slice(0, 3)
 
   return (
@@ -71,7 +73,9 @@ export default function Home() {
             <div className="tool-link-grid">
               <Link href="/free-budget-template"><strong>Budget Template</strong><span>Free 12-page printable PDF</span></Link>
               <Link href="/monthly-budget-worksheet"><strong>Monthly Worksheet</strong><span>Instructions and completed example</span></Link>
-              <Link href="/budget-calculator"><strong>Budget Calculator</strong><span>Calculate needs, wants, and goals</span></Link>
+              <Link href="/budget-calculator"><strong>Budget Calculator</strong><span>Plan expenses, track actuals, and export CSV</span></Link>
+              <Link href="/tools/savings-goal-calculator"><strong>Savings Goal Calculator</strong><span>Find the monthly deposit for your target</span></Link>
+              <Link href="/tools/savings-challenge-generator"><strong>Savings Challenge</strong><span>Generate an exact 30-day savings plan</span></Link>
               <Link href="/free-budget-spreadsheet"><strong>Budget Spreadsheet</strong><span>Editable CSV download</span></Link>
             </div>
           </div>

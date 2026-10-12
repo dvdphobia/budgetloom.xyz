@@ -7,7 +7,8 @@ import ShareButtons from '../../components/ShareButtons'
 import AuthorBox from '../../components/AuthorBox'
 import AdSlot from '../../components/AdSlot'
 import { Icon } from '../../components/Icons'
-import { posts, getPostBySlug, type Post } from '@/lib/posts'
+import { posts as staticPosts } from '@/lib/posts'
+import { getVisiblePosts, getVisiblePost } from '@/lib/content'
 import { affiliateProducts, monetization } from '@/lib/config'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -16,13 +17,15 @@ import { site } from '@/lib/config'
 
 type Params = { slug: string }
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
-  return posts.map(p => ({ slug: p.slug }))
+  return staticPosts.map(p => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getVisiblePost(slug)
   if (!post) return { title: 'Not Found' }
   return {
     title: post.title,
@@ -33,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       type: 'article',
       url: `${site.url}/blog/${post.slug}`,
       publishedTime: post.date,
-      modifiedTime: post.date,
+      modifiedTime: post.updatedAt ?? post.date,
       authors: [site.publisher],
       section: post.category,
       images: [{ url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.title }],
@@ -114,10 +117,10 @@ function generateTOC(content: string) {
 
 export default async function PostPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getVisiblePost(slug)
   if (!post) return notFound()
 
-  const relatedPosts = posts.filter(p => p.slug !== slug && p.category === post.category).slice(0, 3)
+  const relatedPosts = (await getVisiblePosts()).filter(p => p.slug !== slug && p.category === post.category).slice(0, 3)
   const tocItems = generateTOC(post.content)
   const postUrl = `${site.url}/blog/${post.slug}`
   const isHomeOffice = post.slug === 'modern-home-office-setup-on-a-budget'
@@ -127,7 +130,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updatedAt ?? post.date,
     mainEntityOfPage: postUrl,
     image: `${postUrl}/opengraph-image`,
     articleSection: post.category,
@@ -172,7 +175,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           <ShareButtons title={post.title} url={postUrl} />
           <AffiliateDisclaimer />
 
-          <AdSlot placement="blog_post_top" />
+          
 
           {tocItems.length > 2 && (
             <nav className="toc" aria-label="Table of contents">
@@ -186,7 +189,19 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           )}
 
           <div className="article-body" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.12rem' }}>
-            {parseContent(post.content)}
+            {(() => {
+              const blocks = parseContent(post.content)
+              const firstBreak = Math.max(3, Math.floor(blocks.length * 0.28))
+              const secondBreak = Math.max(firstBreak + 3, Math.floor(blocks.length * 0.66))
+              if (blocks.length < 10) return blocks
+              return <>
+                {blocks.slice(0, firstBreak)}
+                <AdSlot placement="blog_post_top" />
+                {blocks.slice(firstBreak, secondBreak)}
+                <AdSlot placement="blog_post_middle" />
+                {blocks.slice(secondBreak)}
+              </>
+            })()}
           </div>
 
           {post.category === 'Budgeting' && (
@@ -198,11 +213,23 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
                 <Link href="/monthly-budget-worksheet">Monthly worksheet and example</Link>
                 <Link href="/budget-calculator">Monthly budget calculator</Link>
                 <Link href="/free-budget-spreadsheet">Free budget spreadsheet</Link>
+                <Link href="/tools/savings-goal-calculator">Savings goal calculator</Link>
+                <Link href="/tools/savings-challenge-generator">Savings challenge generator</Link>
               </div>
             </aside>
           )}
 
-          <AdSlot placement="blog_post_middle" />
+          {post.category === 'Savings' && (
+            <aside className="resource-box" aria-label="Free savings calculators">
+              <h2>Make your savings goal manageable</h2>
+              <p>Create your contribution plan or generate a free 30-day schedule.</p>
+              <div>
+                <Link href="/tools/savings-goal-calculator">Savings goal calculator</Link>
+                <Link href="/tools/savings-challenge-generator">Savings challenge generator</Link>
+                <Link href="/printables/30-day-savings-challenge">Free printable savings pack</Link>
+              </div>
+            </aside>
+          )}
 
           {/* Single affiliate product — contextually relevant */}
           <div style={{ marginTop: '2rem' }}>
@@ -230,7 +257,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
 
           <AuthorBox />
 
-          <AdSlot placement="blog_post_bottom" />
+
 
           {/* Email CTA */}
           <div className="lead-box">

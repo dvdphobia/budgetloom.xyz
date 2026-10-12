@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "indexnow": "node scripts/submit-indexnow.mjs"
+    "indexnow": "node scripts/submit-indexnow.mjs",
+    "generate:printables": "node scripts/generate-printables.mjs",
+    "prebuild": "node scripts/generate-printables.mjs",
+    "predev": "node scripts/generate-printables.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

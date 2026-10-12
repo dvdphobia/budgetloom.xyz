@@ -28,7 +28,7 @@ function getPool(): Pool {
 
   pool = new Pool({
     connectionString: url,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : undefined,
     max: 10,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 10000,
@@ -66,11 +66,14 @@ export async function initDB() {
       category TEXT NOT NULL,
       read_time TEXT NOT NULL,
       content TEXT NOT NULL,
-      published BOOLEAN DEFAULT true,
+      published BOOLEAN NOT NULL DEFAULT false,
+      archived BOOLEAN NOT NULL DEFAULT false,
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
     );
   `)
+
+  await db.query('ALTER TABLE posts ADD COLUMN IF NOT EXISTS archived BOOLEAN NOT NULL DEFAULT false')
 
   await db.query(`
     CREATE TABLE IF NOT EXISTS printables (
@@ -110,7 +113,7 @@ export async function initDB() {
 
   // Insert default ad placements
   const placements = [
-    { placement: 'header_banner', label: 'Social Bar (site-wide, all pages)' },
+    { placement: 'header_banner', label: 'Disabled legacy site-wide placement' },
     { placement: 'blog_list_top', label: 'Blog List Top (above post grid)' },
     { placement: 'blog_post_top', label: 'Blog Post Top (above article)' },
     { placement: 'blog_post_middle', label: 'Blog Post Middle (mid-article)' },
@@ -118,7 +121,7 @@ export async function initDB() {
     { placement: 'sidebar', label: 'Sidebar (blog pages)' },
     { placement: 'printables_top', label: 'Printables Page Top' },
     { placement: 'printables_bottom', label: 'Printables Page Bottom' },
-    { placement: 'footer_banner', label: 'Popunder (site-wide, all pages)' },
+    { placement: 'footer_banner', label: 'Disabled legacy site-wide placement' },
   ]
 
   for (const p of placements) {
@@ -129,6 +132,9 @@ export async function initDB() {
       [p.placement, p.label]
     )
   }
+
+  // Permanently disable previous intrusive formats if legacy records exist.
+  await db.query("UPDATE ad_placements SET enabled = false WHERE placement IN ('header_banner', 'footer_banner')")
 
   // Insert default site settings
   const defaults = [
@@ -148,16 +154,6 @@ export async function initDB() {
     )
   }
 
-  // Create default admin user if none exists
-  const existing = await db.query('SELECT id FROM admin_users LIMIT 1')
-  if (existing.rows.length === 0) {
-    const bcrypt = await import('bcryptjs')
-    const hash = await bcrypt.hash('admin123', 10)
-    await db.query(
-      `INSERT INTO admin_users (username, password_hash) VALUES ('admin', $1) ON CONFLICT DO NOTHING`,
-      [hash]
-    )
-  }
 
   return { initialized: true }
 }
