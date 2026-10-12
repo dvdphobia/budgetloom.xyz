@@ -25,7 +25,6 @@ type DbPost = {
   read_time: string
   content: string
   published: boolean
-  archived: boolean
   updated_at: string | Date | null
 }
 
@@ -46,7 +45,7 @@ export async function getVisiblePosts(): Promise<PublicPost[]> {
   let rows: DbPost[]
   try {
     const result = await query(
-      'SELECT slug, title, description, date, category, read_time, content, published, archived, updated_at FROM posts ORDER BY date DESC'
+      'SELECT slug, title, description, date, category, read_time, content, published, updated_at FROM posts ORDER BY date DESC'
     )
     rows = result.rows as DbPost[]
   } catch (error) {
@@ -57,7 +56,7 @@ export async function getVisiblePosts(): Promise<PublicPost[]> {
   }
   const persisted = new Map(rows.map(row => [row.slug, row]))
   const inherited = staticPosts.filter(post => !persisted.has(post.slug))
-  const published = rows.filter(row => row.published && !row.archived).map(toPost)
+  const published = rows.filter(row => row.published).map(toPost)
   return [...published, ...inherited].sort((a, b) => b.date.localeCompare(a.date))
 }
 
@@ -65,11 +64,11 @@ export async function getVisiblePost(slug: string): Promise<PublicPost | null> {
   if (!hasDatabase()) return getPostBySlug(slug) ?? null
   try {
     const result = await query(
-      'SELECT slug, title, description, date, category, read_time, content, published, archived, updated_at FROM posts WHERE slug = $1 LIMIT 1',
+      'SELECT slug, title, description, date, category, read_time, content, published, updated_at FROM posts WHERE slug = $1 LIMIT 1',
       [slug]
     )
     const row = result.rows[0] as DbPost | undefined
-    if (row) return row.published && !row.archived ? toPost(row) : null
+    if (row) return row.published ? toPost(row) : null
     return getPostBySlug(slug) ?? null
   } catch (error) {
     if (tableNotYetCreated(error)) return getPostBySlug(slug) ?? null
