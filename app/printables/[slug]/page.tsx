@@ -1,6 +1,7 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import EmailForm from '../../components/EmailForm'
+import TrackedDownload from '../../components/TrackedDownload'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import ShareButtons from '../../components/ShareButtons'
 import { PrintablePreview, Icon } from '../../components/Icons'
@@ -70,9 +71,7 @@ export default async function PrintablePage({ params }: { params: Promise<Params
               <span className="printable-price-tag">{p.price}</span>
               <span className="printable-price-pages">{p.pages} pages · PDF</span>
             </div>
-            <a href={`/printables/${p.slug}.pdf`} className="btn btn-primary btn-lg" download>
-              <Icon.download className="" /> Download PDF
-            </a>
+            <TrackedDownload slug={p.slug} />
             <div className="printable-trust">
               <span><Icon.check className="" /> No email required</span>
               <span><Icon.print className="" /> Print at home</span>

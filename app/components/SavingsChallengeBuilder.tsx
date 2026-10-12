@@ -1,5 +1,6 @@
 'use client'
 import { useMemo, useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 function schedule(target: number) {
   const cents = Math.round(target * 100)
@@ -22,6 +23,7 @@ export default function SavingsChallengeBuilder() {
     const lines=['Day,Contribution,Total saved',...rows.map(row=>[row.day,row.amount.toFixed(2),row.progress.toFixed(2)].join(','))]
     const url=URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/csv;charset=utf-8'}))
     const a=document.createElement('a');a.href=url;a.download='budgetloom-30-day-savings-challenge.csv';a.click()
+    trackEvent('challenge_schedule_exported')
     window.setTimeout(()=>URL.revokeObjectURL(url),1000)
   }
   return <section aria-label="30-day savings challenge generator">

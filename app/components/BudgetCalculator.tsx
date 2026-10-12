@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 type Category = 'Needs' | 'Wants' | 'Savings & Debt'
 type Item = { id: string; name: string; category: Category; planned: string; actual: string }
@@ -86,6 +87,7 @@ export default function BudgetCalculator() {
   const saveLocal = () => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ income, currency, items }))
+      trackEvent('budget_saved_locally')
       setNotice('Saved on this device only. BudgetLoom does not receive your budget.')
     } catch { setNotice('Browser storage is unavailable; export a CSV instead.') }
   }
@@ -108,6 +110,7 @@ export default function BudgetCalculator() {
     link.click()
     link.remove()
     window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+    trackEvent('budget_exported')
     setNotice('CSV downloaded.')
   }
 

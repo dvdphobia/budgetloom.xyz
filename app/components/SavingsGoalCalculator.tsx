@@ -1,5 +1,6 @@
 'use client'
 import { useMemo, useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 function dollars(value: string) { return Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0 }
@@ -25,6 +26,7 @@ export default function SavingsGoalCalculator() {
     const blob = new Blob([lines.join('\r\n')], { type: 'text/csv;charset=utf-8' })
     const url = URL.createObjectURL(blob), link = document.createElement('a')
     link.href = url; link.download = 'budgetloom-savings-goal.csv'; link.click()
+    trackEvent('savings_schedule_exported')
     window.setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
   return <section className="calculator" aria-label="Savings goal calculator" style={{display:'block'}}>
