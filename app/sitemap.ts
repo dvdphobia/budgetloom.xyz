@@ -14,6 +14,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/free-budget-template`, priority: 0.9, changeFrequency: 'monthly' },
     { url: `${base}/monthly-budget-worksheet`, priority: 0.85, changeFrequency: 'monthly' },
     { url: `${base}/budget-calculator`, priority: 0.9, changeFrequency: 'monthly' },
+    { url: `${base}/tools/savings-goal-calculator`, priority: 0.8, changeFrequency: 'monthly' },
+    { url: `${base}/tools/savings-challenge-generator`, priority: 0.8, changeFrequency: 'monthly' },
     { url: `${base}/free-budget-spreadsheet`, priority: 0.8, changeFrequency: 'monthly' },
     { url: `${base}/about`, priority: 0.5, changeFrequency: 'monthly' },
     { url: `${base}/privacy`, priority: 0.3, changeFrequency: 'yearly' },

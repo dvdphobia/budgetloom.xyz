@@ -33,6 +33,8 @@ export default function Footer() {
             <Link href="/printables">Printables</Link>
             <Link href="/free-budget-template">Budget Template</Link>
             <Link href="/budget-calculator">Budget Calculator</Link>
+            <Link href="/tools/savings-goal-calculator">Savings Goal Calculator</Link>
+            <Link href="/tools/savings-challenge-generator">Savings Challenge Generator</Link>
             <Link href="/about">About</Link>
           </div>
           <div className="footer-col">
