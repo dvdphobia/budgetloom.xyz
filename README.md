@@ -46,3 +46,9 @@ For a new installation, configure `POSTGRES_URL`, a strong `JWT_SECRET` (at leas
 Protect `/api/admin/auth` with Cloudflare/hosting-level rate limiting: in-process rate limiting alone is not reliable on serverless platforms. Use HTTPS and a verified database CA certificate. Do not use `rejectUnauthorized:false` for production database connections.
 
 Use a branch/PR workflow. Do not place actual keys in `.env.example`.
+
+## Privacy-first advertising configuration
+
+The previous Adsterra popunder/social bar scripts are disabled. The public ad component only renders approved AdSense units when `NEXT_PUBLIC_ADSENSE_CLIENT` is a valid `ca-pub-...` identifier and a unique numeric slot is assigned with `NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_INTRO` and `NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_MIDDLE`. The corresponding placement switches in `/admin/dashboard/ads` control enablement when the database is configured. Ad code textareas are not executed.
+
+Publish an `ads.txt` file **only after** receiving your verified seller entry from the network. Handle consent and cookie/privacy requirements for your audience before loading personalized ads. Verify production display, Core Web Vitals, and provider policy compliance. Do not configure a popunder or a social-bar placement.

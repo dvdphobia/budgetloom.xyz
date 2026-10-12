@@ -113,7 +113,7 @@ export async function initDB() {
 
   // Insert default ad placements
   const placements = [
-    { placement: 'header_banner', label: 'Social Bar (site-wide, all pages)' },
+    { placement: 'header_banner', label: 'Disabled legacy site-wide placement' },
     { placement: 'blog_list_top', label: 'Blog List Top (above post grid)' },
     { placement: 'blog_post_top', label: 'Blog Post Top (above article)' },
     { placement: 'blog_post_middle', label: 'Blog Post Middle (mid-article)' },
@@ -121,7 +121,7 @@ export async function initDB() {
     { placement: 'sidebar', label: 'Sidebar (blog pages)' },
     { placement: 'printables_top', label: 'Printables Page Top' },
     { placement: 'printables_bottom', label: 'Printables Page Bottom' },
-    { placement: 'footer_banner', label: 'Popunder (site-wide, all pages)' },
+    { placement: 'footer_banner', label: 'Disabled legacy site-wide placement' },
   ]
 
   for (const p of placements) {
@@ -132,6 +132,9 @@ export async function initDB() {
       [p.placement, p.label]
     )
   }
+
+  // Permanently disable previous intrusive formats if legacy records exist.
+  await db.query("UPDATE ad_placements SET enabled = false WHERE placement IN ('header_banner', 'footer_banner')")
 
   // Insert default site settings
   const defaults = [

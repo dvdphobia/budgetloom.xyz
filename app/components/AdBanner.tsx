@@ -2,79 +2,53 @@
 
 import { useEffect, useRef } from 'react'
 
-// Hardcoded ad codes — works without database
-// Managed via CMS once DB is connected, but these ensure ads show immediately
-
-const NATIVE_BANNER = `<script async="async" data-cfasync="false" src="https://pl30367165.effectivecpmnetwork.com/3e2687892d1d43c8539f6524b4567ffc/invoke.js"></script><div id="container-3e2687892d1d43c8539f6524b4567ffc"></div>`
-
-const POPUNDER = `<script src="https://pl30367166.effectivecpmnetwork.com/16/8f/3e/168f3e03e4f71a06d7a81835149eafed.js"></script>`
-
-const SOCIAL_BAR = `<script src="https://pl30367167.effectivecpmnetwork.com/e7/21/7f/e7217f6a3487bff983f5a28ab3a4a38c.js"></script>`
-
-function injectCode(code: string, target: HTMLElement) {
-  const container = document.createElement('div')
-  container.innerHTML = code
-  Array.from(container.childNodes).forEach(node => {
-    if (node.nodeName === 'SCRIPT') {
-      const oldScript = node as HTMLScriptElement
-      const newScript = document.createElement('script')
-      Array.from(oldScript.attributes).forEach(attr => {
-        newScript.setAttribute(attr.name, attr.value)
-      })
-      if (oldScript.src) {
-        newScript.src = oldScript.src
-      } else {
-        newScript.textContent = oldScript.textContent
-      }
-      newScript.async = true
-      target.appendChild(newScript)
-    } else {
-      target.appendChild(node.cloneNode(true))
-    }
-  })
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[]
+  }
 }
 
-// In-page ad slot (native banner)
-export function AdSlotInline({ placement }: { placement: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-
+// Safe provider integration: never evaluate HTML or arbitrary JavaScript from the CMS.
+export default function AdBanner({ client, slot, placement }: {
+  client: string
+  slot: string
+  placement: string
+}) {
+  const ref = useRef<HTMLElement>(null)
   useEffect(() => {
     if (!ref.current) return
-    // Only inject once
-    if (ref.current.dataset.loaded) return
-    ref.current.dataset.loaded = 'true'
-    injectCode(NATIVE_BANNER, ref.current)
+    let loaded = false
+    const loadAd = () => {
+      if (loaded || !ref.current) return
+      loaded = true
+      try {
+        window.adsbygoogle = window.adsbygoogle || []
+        window.adsbygoogle.push({})
+      } catch {
+        // Ad blockers and network policy may prevent ad display.
+      }
+    }
+    if (typeof IntersectionObserver === 'undefined') {
+      loadAd()
+      return
+    }
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        loadAd()
+        observer.disconnect()
+      }
+    }, { rootMargin: '180px' })
+    observer.observe(ref.current)
+    return () => observer.disconnect()
   }, [])
 
   return (
-    <div
-      ref={ref}
-      data-placement={placement}
-      style={{ width: '100%', margin: '20px 0', textAlign: 'center', overflow: 'hidden', minHeight: '50px' }}
-    />
+    <aside className="ad-placement" data-placement={placement} aria-label="Advertisement"
+      style={{ margin: '2rem 0', textAlign: 'center', minHeight: 250, overflow: 'hidden' }}>
+      <div style={{ fontSize: '0.72rem', color: '#667085', marginBottom: 8 }}>ADVERTISEMENT</div>
+      <ins ref={ref} className="adsbygoogle" style={{ display: 'block', minHeight: 230 }}
+        data-ad-client={client} data-ad-slot={slot}
+        data-ad-format="auto" data-full-width-responsive="true" />
+    </aside>
   )
-}
-
-// Site-wide ads (popunder + social bar) — load once per page
-export default function SiteWideAds() {
-  useEffect(() => {
-    // Check if already loaded
-    if (document.getElementById('adsterra-popunder')) return
-
-    // Popunder
-    const popDiv = document.createElement('div')
-    popDiv.id = 'adsterra-popunder'
-    popDiv.style.display = 'none'
-    document.body.appendChild(popDiv)
-    injectCode(POPUNDER, popDiv)
-
-    // Social Bar
-    const socialDiv = document.createElement('div')
-    socialDiv.id = 'adsterra-socialbar'
-    socialDiv.style.display = 'none'
-    document.body.appendChild(socialDiv)
-    injectCode(SOCIAL_BAR, socialDiv)
-  }, [])
-
-  return null
 }

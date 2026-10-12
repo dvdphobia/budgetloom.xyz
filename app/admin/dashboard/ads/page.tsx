@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { Save, Megaphone } from 'lucide-react'
 import { Button } from '@/app/components/ui/button'
-import { Textarea } from '@/app/components/ui/textarea'
 import { Switch } from '@/app/components/ui/switch'
 import { Label } from '@/app/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
@@ -25,7 +24,7 @@ export default function AdsManager() {
   async function save(id: number) {
     const ad = ads.find(a => a.id === id)
     if (!ad) return
-    const res = await fetch('/api/admin/ads', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, ad_code: ad.ad_code, enabled: ad.enabled }) })
+    const res = await fetch('/api/admin/ads', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, enabled: ad.enabled }) })
     if (res.ok) { setSaved(id); setTimeout(() => setSaved(null), 2000) }
   }
 
@@ -35,7 +34,7 @@ export default function AdsManager() {
     <div className="space-y-4">
       <div>
         <h2 className="text-xl font-bold">Ad Management</h2>
-        <p className="text-sm text-muted-foreground">Paste ad codes from Adsterra, AdsKeeper, Google AdSense, or any ad network.</p>
+        <p className="text-sm text-muted-foreground">Enable supported placements here. Configure your approved AdSense publisher ID and unique slot IDs in hosting environment variables. Scripts pasted into CMS fields are not executed.</p>
       </div>
 
       <div className="space-y-4">
@@ -59,12 +58,9 @@ export default function AdsManager() {
               </div>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Textarea
-                value={ad.ad_code || ''}
-                onChange={e => updateAd(ad.id, 'ad_code', e.target.value)}
-                placeholder="Paste ad code here..."
-                className="min-h-[80px] font-mono text-xs"
-              />
+              <p className="text-xs text-muted-foreground">
+                Ad unit identifiers are configured in your hosting environment. Enabling this switch does not create an ad account.
+              </p>
               <div className="flex items-center gap-3">
                 <Button size="sm" onClick={() => save(ad.id)}>
                   <Save className="h-4 w-4 mr-2" />
