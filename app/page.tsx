@@ -2,7 +2,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import EmailForm from './components/EmailForm'
 import Link from 'next/link'
-import { posts } from '@/lib/posts'
+import { getVisiblePosts } from '@/lib/content'
 import { printables } from '@/lib/printables'
 import { CardCover, Icon } from './components/Icons'
 
@@ -14,8 +14,10 @@ const categoryMap: Record<string, string> = {
   'Debt': 'debt',
 }
 
-export default function Home() {
-  const recentPosts = posts.slice(0, 6)
+export const dynamic = 'force-dynamic'
+
+export default async function Home() {
+  const recentPosts = (await getVisiblePosts()).slice(0, 6)
   const featured = printables.slice(0, 3)
 
   return (

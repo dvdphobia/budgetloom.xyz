@@ -66,11 +66,14 @@ export async function initDB() {
       category TEXT NOT NULL,
       read_time TEXT NOT NULL,
       content TEXT NOT NULL,
-      published BOOLEAN DEFAULT true,
+      published BOOLEAN NOT NULL DEFAULT false,
+      archived BOOLEAN NOT NULL DEFAULT false,
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
     );
   `)
+
+  await db.query('ALTER TABLE posts ADD COLUMN IF NOT EXISTS archived BOOLEAN NOT NULL DEFAULT false')
 
   await db.query(`
     CREATE TABLE IF NOT EXISTS printables (

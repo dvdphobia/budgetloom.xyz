@@ -15,7 +15,7 @@ export default function NewPost() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [category, setCategory] = useState('Budgeting')
-  const [published, setPublished] = useState(true)
+  const [published, setPublished] = useState(false)
   const router = useRouter()
 
   async function save(e: React.FormEvent) {
