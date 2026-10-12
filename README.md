@@ -36,3 +36,13 @@ same variables in Vercel under Project Settings > Environment Variables.
 3. Set framework preset to Next.js.
 4. Add the environment variables above in Vercel's project settings.
 5. Done.
+
+## Secure CMS initialization
+
+**Important:** There is no longer any public GET-based database initializer or default `admin/admin123` credential. The old default login is blocked. If you previously provisioned the default account, reset its password through a trusted database-administration workflow before enabling the CMS.
+
+For a new installation, configure `POSTGRES_URL`, a strong `JWT_SECRET` (at least 32 random characters), `ADMIN_SETUP_TOKEN` (at least 32 random characters) and `ADMIN_BOOTSTRAP_PASSWORD` (at least 16 characters) in your host's secret environment. Make a one-time POST request to `/api/admin/init` with `Authorization: Bearer <ADMIN_SETUP_TOKEN>`. Never paste this token into the web dashboard or publicly accessible code. Remove the bootstrap credentials from your host immediately after account creation. Subsequent schema initialization requires an authenticated admin session.
+
+Protect `/api/admin/auth` with Cloudflare/hosting-level rate limiting: in-process rate limiting alone is not reliable on serverless platforms. Use HTTPS and a verified database CA certificate. Do not use `rejectUnauthorized:false` for production database connections.
+
+Use a branch/PR workflow. Do not place actual keys in `.env.example`.

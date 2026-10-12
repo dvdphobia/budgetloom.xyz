@@ -28,7 +28,7 @@ function getPool(): Pool {
 
   pool = new Pool({
     connectionString: url,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : undefined,
     max: 10,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 10000,
@@ -148,16 +148,6 @@ export async function initDB() {
     )
   }
 
-  // Create default admin user if none exists
-  const existing = await db.query('SELECT id FROM admin_users LIMIT 1')
-  if (existing.rows.length === 0) {
-    const bcrypt = await import('bcryptjs')
-    const hash = await bcrypt.hash('admin123', 10)
-    await db.query(
-      `INSERT INTO admin_users (username, password_hash) VALUES ('admin', $1) ON CONFLICT DO NOTHING`,
-      [hash]
-    )
-  }
 
   return { initialized: true }
 }
