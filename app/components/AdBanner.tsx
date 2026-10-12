@@ -14,7 +14,7 @@ export default function AdBanner({ client, slot, placement }: {
   slot: string
   placement: string
 }) {
-  const ref = useRef<HTMLElement>(null)
+  const ref = useRef<HTMLModElement>(null)
   useEffect(() => {
     if (!ref.current) return
     let loaded = false
