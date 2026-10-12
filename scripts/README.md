@@ -1,19 +1,7 @@
-# BudgetLoom Scripts
+# BudgetLoom scripts
 
-## Generate PDF printables
-```bash
-cd scripts
-pip install reportlab
-python generate_printables.py
-```
+Run `npm run generate:printables` from the project root to regenerate the PDF assets with Node.js (no Python dependencies). The generator runs automatically before `npm run dev` and `npm run build`.
 
-## Generate Pinterest pins
-```bash
-pip install Pillow
-python generate_pins.py
-```
+`scripts/generate_printables.py` is a legacy ReportLab alternative. The Node generator is the production source of truth for printable downloads.
 
-## Generate content outlines
-```bash
-python content_pipeline.py
-```
+Always check page counts, savings challenge totals, PDF rendering, and download URLs before publishing.

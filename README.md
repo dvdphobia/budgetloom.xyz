@@ -52,3 +52,9 @@ Use a branch/PR workflow. Do not place actual keys in `.env.example`.
 The previous Adsterra popunder/social bar scripts are disabled. The public ad component only renders approved AdSense units when `NEXT_PUBLIC_ADSENSE_CLIENT` is a valid `ca-pub-...` identifier and a unique numeric slot is assigned with `NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_INTRO` and `NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_MIDDLE`. The corresponding placement switches in `/admin/dashboard/ads` control enablement when the database is configured. Ad code textareas are not executed.
 
 Publish an `ads.txt` file **only after** receiving your verified seller entry from the network. Handle consent and cookie/privacy requirements for your audience before loading personalized ads. Verify production display, Core Web Vitals, and provider policy compliance. Do not configure a popunder or a social-bar placement.
+
+## Verified budget printables
+
+The `npm run build` and `npm run dev` lifecycle hooks regenerate all four downloadable PDF resources using `scripts/generate-printables.mjs` (Node built-ins only), before Next.js runs. You can also run `npm run generate:printables` explicitly.
+
+Expected PDF page counts: Budget Starter Bundle 12; 30-Day Savings Challenge 6; Meal Planner Budget Kit 8; Debt Payoff Planner 10. The three 30-day savings schedules are algorithmically verified to total exactly $100, $300 and $500. Do not deploy the older committed static PDFs without running the generator first. This build-time generation is required to fix the previously mismatched files.
