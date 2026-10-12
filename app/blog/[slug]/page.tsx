@@ -198,7 +198,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
                 {blocks.slice(0, firstBreak)}
                 <AdSlot placement="blog_post_top" />
                 {blocks.slice(firstBreak, secondBreak)}
-      
+                <AdSlot placement="blog_post_middle" />
                 {blocks.slice(secondBreak)}
               </>
             })()}
@@ -213,11 +213,23 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
                 <Link href="/monthly-budget-worksheet">Monthly worksheet and example</Link>
                 <Link href="/budget-calculator">Monthly budget calculator</Link>
                 <Link href="/free-budget-spreadsheet">Free budget spreadsheet</Link>
+                <Link href="/tools/savings-goal-calculator">Savings goal calculator</Link>
+                <Link href="/tools/savings-challenge-generator">Savings challenge generator</Link>
               </div>
             </aside>
           )}
 
-          <AdSlot placement="blog_post_middle" />
+          {post.category === 'Savings' && (
+            <aside className="resource-box" aria-label="Free savings calculators">
+              <h2>Make your savings goal manageable</h2>
+              <p>Create your contribution plan or generate a free 30-day schedule.</p>
+              <div>
+                <Link href="/tools/savings-goal-calculator">Savings goal calculator</Link>
+                <Link href="/tools/savings-challenge-generator">Savings challenge generator</Link>
+                <Link href="/printables/30-day-savings-challenge">Free printable savings pack</Link>
+              </div>
+            </aside>
+          )}
 
           {/* Single affiliate product — contextually relevant */}
           <div style={{ marginTop: '2rem' }}>
