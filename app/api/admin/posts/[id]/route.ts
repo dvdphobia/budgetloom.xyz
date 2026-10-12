@@ -26,6 +26,12 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Invalid post fields' }, { status: 400 })
     }
 
+    // Preserve indexed permalinks; any slug change requires a dedicated redirect migration.
+    const previous = await query('SELECT slug FROM posts WHERE id = $1 AND archived = false', [id])
+    if (previous.rows.length === 0) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    if (previous.rows[0].slug !== slug) {
+      return NextResponse.json({ error: 'Published URL slugs are immutable. Create a new post with a redirect plan.' }, { status: 409 })
+    }
     const result = await query(
       `UPDATE posts SET
         slug = $1, title = $2, description = $3, date = $4,

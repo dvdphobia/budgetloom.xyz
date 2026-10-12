@@ -72,7 +72,7 @@ export default function EditPost() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="slug">Slug</Label>
-                <Input id="slug" name="slug" defaultValue={post.slug} required />
+                <Input id="slug" name="slug" defaultValue={post.slug} readOnly required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="title">Title</Label>
