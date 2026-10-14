@@ -25,27 +25,29 @@ export default function AdminLoginPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       })
-      const data = await res.json()
+      const data = await res.json().catch(() => ({}))
 
-      if (res.ok) {
+      if (res.ok && data.authenticated) {
         router.push('/admin/dashboard')
+      } else if (res.status === 429) {
+        setError(data.error || 'Too many login attempts. Please wait before trying again.')
       } else if (res.status === 503) {
-        setError(data.error || 'Database not connected. Visit /api/admin/init first.')
+        setError(data.error || 'Authentication service is temporarily unavailable.')
       } else {
-        setError(data.error || 'Login failed')
+        setError(data.error || 'Invalid username or password.')
       }
     } catch {
-      setError('Network error')
+      setError('Network error. Please check your connection.')
     }
     setLoading(false)
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center admin-shell" style={{ background: '#0c1a1e' }}>
+    <div className="min-h-screen flex items-center justify-center admin-shell px-4" style={{ background: '#0c1a1e' }}>
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">BudgetLoom Admin</CardTitle>
-          <CardDescription>Sign in to manage your site</CardDescription>
+          <CardTitle className="text-2xl">BudgetLoom Editorial CMS</CardTitle>
+          <CardDescription>Sign in with your provisioned administrator account</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,9 +56,10 @@ export default function AdminLoginPage() {
               <Input
                 id="username"
                 type="text"
+                autoComplete="username"
                 value={username}
-                onChange={e => setUsername(e.target.value)}
-                placeholder="admin"
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username"
                 required
               />
             </div>
@@ -65,15 +68,16 @@ export default function AdminLoginPage() {
               <Input
                 id="password"
                 type="password"
+                autoComplete="current-password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="••••••••"
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••••••"
                 required
               />
             </div>
 
             {error && (
-              <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              <div role="alert" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
                 {error}
               </div>
             )}
@@ -84,7 +88,7 @@ export default function AdminLoginPage() {
           </form>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
-            Default: admin / admin123 — change after first login
+            Protected administrative area. Unauthenticated bootstrap and default credentials are disabled.
           </p>
         </CardContent>
       </Card>

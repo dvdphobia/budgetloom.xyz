@@ -1,24 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { query } from '@/lib/db'
-import { verifyToken } from '@/lib/auth'
-import { posts as staticPosts } from '@/lib/posts'
+import { query, initDB, recordAuditLog } from '@/lib/db'
+import { getAuthenticatedUser, unauthorized } from '@/lib/auth'
+import { posts as staticPosts, getClusterForPost } from '@/lib/posts'
 import { printables as staticPrintables } from '@/lib/printables'
+import { logger } from '@/lib/logger'
 
 export async function POST(request: NextRequest) {
-  if (!await verifyToken(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
+  const user = await getAuthenticatedUser(request)
+  if (!user) return unauthorized()
+
   try {
+    await initDB()
     let postsCount = 0
     let printablesCount = 0
 
     for (const post of staticPosts) {
       const existing = await query('SELECT id FROM posts WHERE slug = $1', [post.slug])
+      const cluster = getClusterForPost(post)
       if (existing.rows.length === 0) {
         await query(
-          `INSERT INTO posts (slug, title, description, date, category, read_time, content, published)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, true)`,
-          [post.slug, post.title, post.description, post.date, post.category, post.readTime, post.content]
+          `INSERT INTO posts (
+            slug, title, seo_title, description, excerpt, date, category, topic_cluster,
+            read_time, content, published, archived, status
+          )
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, true, false, 'published')`,
+          [
+            post.slug,
+            post.title,
+            post.seoTitle || post.title,
+            post.description,
+            post.excerpt || post.description,
+            post.date,
+            post.category,
+            post.topicCluster || cluster.name,
+            post.readTime,
+            post.content,
+          ]
         )
         postsCount++
       }
@@ -36,8 +53,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    await recordAuditLog(user, 'seed_content', 'system', undefined, { postsCount, printablesCount })
     return NextResponse.json({ success: true, postsSeeded: postsCount, printablesSeeded: printablesCount })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  } catch (error) {
+    logger.error('admin.seed.failed', 'Database seed operation failed', { error })
+    return NextResponse.json({ error: 'Database seed operation failed' }, { status: 500 })
   }
 }

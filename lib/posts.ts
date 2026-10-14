@@ -1,11 +1,442 @@
+export type PublicationStatus =
+  | 'draft'
+  | 'in_review'
+  | 'approved'
+  | 'scheduled'
+  | 'published'
+  | 'archived'
+  | 'updated'
+
 export interface Post {
   slug: string
   title: string
+  seoTitle?: string
   description: string
+  excerpt?: string
   date: string
+  updatedAt?: string
   category: string
+  topicCluster?: string
+  topicSlug?: string
   readTime: string
+  author?: string
+  reviewer?: string
+  featuredImage?: string
+  featuredImageAlt?: string
+  sources?: { title: string; url: string }[]
+  relatedSlugs?: string[]
+  relatedTools?: string[]
+  relatedPrintables?: string[]
+  canonicalUrl?: string
+  status?: PublicationStatus
+  faqs?: { question: string; answer: string }[]
   content: string
+}
+
+export interface TopicClusterMeta {
+  slug: string
+  name: string
+  shortName: string
+  category: 'Budgeting' | 'Savings' | 'Food' | 'Debt' | 'Lifestyle'
+  description: string
+  intro: string
+  startingGuideSlug: string
+  recommendedTools: string[]
+  recommendedPrintables: string[]
+  defaultSources: { title: string; url: string }[]
+  faqs: { question: string; answer: string }[]
+}
+
+export const TOPIC_CLUSTERS: TopicClusterMeta[] = [
+  {
+    slug: 'budget-systems',
+    name: 'Budget Systems',
+    shortName: 'Budgeting Methods',
+    category: 'Budgeting',
+    description:
+      'Step-by-step frameworks for monthly budgeting, zero-based plans, 50/30/20 splits, bare-bones budgets, and weekly check-in routines.',
+    intro:
+      'A reliable budget system gives every dollar of take-home income a clear job before the month begins. Whether you prefer a zero-based plan, a flexible 50/30/20 split, or a bare-bones survival baseline, start with your real bank statements and a 10-minute weekly review.',
+    startingGuideSlug: 'how-to-make-a-monthly-budget',
+    recommendedTools: ['/budget-calculator', '/tools/zero-based-budget-calculator', '/tools/50-30-20-budget-calculator'],
+    recommendedPrintables: ['budget-starter-bundle', 'monthly-budget-planner', 'zero-based-budget-worksheet'],
+    defaultSources: [
+      { title: 'CFPB — Cash Flow Budgeting & Spending Tracker Tools', url: 'https://www.consumerfinance.gov/consumer-tools/educator-tools/your-money-your-goals/' },
+      { title: 'Federal Reserve — Report on the Economic Well-Being of U.S. Households', url: 'https://www.federalreserve.gov/consumerscommunities/shed.htm' },
+    ],
+    faqs: [
+      {
+        question: 'Which budgeting method is best for beginners?',
+        answer:
+          'Start with a simple monthly take-home budget that separates fixed bills, flexible essentials (groceries and transport), savings goals, and discretionary spending. Once you know your baseline numbers, test either 50/30/20 or zero-based budgeting.',
+      },
+      {
+        question: 'What should I do when my budget goes negative mid-month?',
+        answer:
+          'Pause non-essential purchases immediately, cover housing, utilities, food, and minimum debt payments first, and move dollars from flexible categories or your monthly buffer rather than abandoning the plan.',
+      },
+    ],
+  },
+  {
+    slug: 'paycheck-and-variable-income',
+    name: 'Paycheck and Variable Income',
+    shortName: 'Paycheck & Irregular Pay',
+    category: 'Budgeting',
+    description:
+      'Practical cash-flow systems for biweekly earners, weekly paychecks, freelancers, tipped workers, and households where bills arrive before payday.',
+    intro:
+      'Even when total monthly income exceeds total bills, a timing gap between due dates and paydays can trigger overdrafts. Paycheck budgeting aligns each bill to the exact deposit that clears before its due date.',
+    startingGuideSlug: 'biweekly-budgeting-for-beginners',
+    recommendedTools: ['/tools/paycheck-budget-planner', '/tools/biweekly-budget-calculator', '/budget-calculator'],
+    recommendedPrintables: ['paycheck-budget-worksheet', 'biweekly-budget-planner', 'bill-payment-tracker'],
+    defaultSources: [
+      { title: 'CFPB — Managing Income and Expense Timing', url: 'https://www.consumerfinance.gov/consumer-tools/educator-tools/your-money-your-goals/' },
+      { title: 'BLS — Employer Costs and Pay Period Frequencies', url: 'https://www.bls.gov/ces/' },
+    ],
+    faqs: [
+      {
+        question: 'How do biweekly earners handle months with three paychecks?',
+        answer:
+          'Because 26 biweekly paychecks cover 52 weeks, two months each year bring a third paycheck. Fund two weeks of groceries and fuel first, then direct the freed-up monthly bill reserve toward your emergency fund, sinking funds, or high-APR debt.',
+      },
+    ],
+  },
+  {
+    slug: 'budget-printables-and-binders',
+    name: 'Budget Printables and Binders',
+    shortName: 'Printables & Binders',
+    category: 'Budgeting',
+    description:
+      'How to set up a paper budget binder, use cash envelopes, track weekly expenses by hand, and stay consistent without complex software.',
+    intro:
+      'Writing numbers on paper slows down spending decisions and makes trade-offs visible for couples and families. A well-organized budget binder keeps your monthly plan, bill checklist, sinking funds, and debt payoff charts in one place.',
+    startingGuideSlug: 'budget-printables-how-to-use',
+    recommendedTools: ['/budget-calculator', '/tools/expense-tracker'],
+    recommendedPrintables: ['budget-starter-bundle', 'weekly-budget-planner', 'expense-tracker'],
+    defaultSources: [
+      { title: 'CFPB — Printable Financial Empowerment Worksheets', url: 'https://www.consumerfinance.gov/consumer-tools/educator-tools/your-money-your-goals/companion-guides/' },
+    ],
+    faqs: [
+      {
+        question: 'Do I need a color printer for BudgetLoom printables?',
+        answer:
+          'No. Every BudgetLoom PDF is designed with high-contrast typography and clean borders so it prints clearly in black-and-white/grayscale mode on standard US Letter or A4 paper.',
+      },
+    ],
+  },
+  {
+    slug: 'savings-and-sinking-funds',
+    name: 'Savings and Sinking Funds',
+    shortName: 'Savings & Sinking Funds',
+    category: 'Savings',
+    description:
+      'Build a $1,000 starter emergency cushion, grow 3 to 6 months of core living expenses, and fund sinking funds for car repairs, medical costs, and annual bills.',
+    intro:
+      'True financial breathing room comes from separating unexpected emergencies (job loss or medical events) from predictable irregular bills (car tires, annual insurance, and holidays) using dedicated sinking funds.',
+    startingGuideSlug: 'how-to-save-1000-emergency-fund',
+    recommendedTools: ['/tools/emergency-fund-calculator', '/tools/sinking-fund-calculator', '/tools/savings-goal-calculator'],
+    recommendedPrintables: ['emergency-fund-tracker', 'sinking-fund-worksheet', 'savings-goal-tracker'],
+    defaultSources: [
+      { title: 'FDIC — Money Smart & Deposit Insurance Resources', url: 'https://www.fdic.gov/resources/consumers/money-smart/' },
+      { title: 'CFPB — An Essential Guide to Building an Emergency Fund', url: 'https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/' },
+    ],
+    faqs: [
+      {
+        question: 'Should I fund sinking funds or my emergency fund first?',
+        answer:
+          'Secure a starter $1,000 emergency cushion and cover any irregular bill due within the next 60 days first, then build your 3-month emergency reserve alongside core sinking funds.',
+      },
+    ],
+  },
+  {
+    slug: 'groceries-and-meal-planning',
+    name: 'Groceries and Meal Planning',
+    shortName: 'Groceries & Meal Plans',
+    category: 'Food',
+    description:
+      'Lower supermarket receipts without sacrificing nutrition using pantry-first meal planning, unit-price comparisons, and cost-per-serving worksheets.',
+    intro:
+      'Food is usually a household’s largest flexible expense—and the fastest place to recover $100 to $250 a month without renegotiating leases or loans. Planning meals around what is already in your pantry and freezer stops both impulse takeout and spoiled produce.',
+    startingGuideSlug: 'frugal-grocery-shopping-tips',
+    recommendedTools: ['/tools/grocery-budget-calculator', '/budget-calculator'],
+    recommendedPrintables: ['meal-planner-budget-kit', 'weekly-budget-planner'],
+    defaultSources: [
+      { title: 'USDA — Official USDA Food Plans: Cost of Food Reports', url: 'https://www.fns.usda.gov/cnpp/usda-food-plans-cost-food-monthly-reports' },
+    ],
+    faqs: [
+      {
+        question: 'What is a realistic monthly grocery budget for two adults?',
+        answer:
+          'Depending on location and dietary needs, many two-adult households spend between $480 and $680 per month ($110 to $155 per week) on home-cooked groceries and household paper goods.',
+      },
+    ],
+  },
+  {
+    slug: 'debt-tracking-and-payoff-planning',
+    name: 'Debt Tracking and Payoff Planning',
+    shortName: 'Debt Payoff Plans',
+    category: 'Debt',
+    description:
+      'Compare debt snowball and debt avalanche strategies, understand how credit card APR compounds, and organize a realistic payoff order.',
+    intro:
+      'Paying off debt starts with a complete, judgment-free inventory of every balance, interest rate (APR), and required minimum payment. Once all minimums are protected, directing every extra dollar to a single target balance accelerates your debt-free date.',
+    startingGuideSlug: 'how-to-pay-off-debt-fast',
+    recommendedTools: ['/tools/debt-snowball-calculator', '/tools/debt-avalanche-calculator'],
+    recommendedPrintables: ['debt-payoff-planner', 'budget-starter-bundle'],
+    defaultSources: [
+      { title: 'CFPB — Debt Reduction Worksheet & Snowball vs. High-Rate Methods', url: 'https://www.consumerfinance.gov/ask-cfpb/what-is-the-best-way-to-pay-off-multiple-credit-cards-or-loans-en-1567/' },
+    ],
+    faqs: [
+      {
+        question: 'Does the debt snowball or debt avalanche pay off debt faster?',
+        answer:
+          'Mathematically, the debt avalanche (highest APR first) minimizes total interest and finishes slightly sooner. Behaviorally, the debt snowball (smallest balance first) eliminates individual monthly bills quickly, which helps many people stay motivated.',
+      },
+    ],
+  },
+  {
+    slug: 'bills-and-utilities',
+    name: 'Bills and Utilities',
+    shortName: 'Bills & Subscriptions',
+    category: 'Savings',
+    description:
+      'Audit recurring subscriptions, organize irregular bill due dates, lower seasonal electricity and heating costs, and prevent late fees.',
+    intro:
+      'Fixed and semi-fixed bills—utilities, internet, insurance, and recurring subscriptions—quietly expand over time. Auditing recurring charges once per quarter and weatherproofing utility usage lowers your monthly baseline permanently.',
+    startingGuideSlug: 'save-money-on-utilities',
+    recommendedTools: ['/tools/bill-and-subscription-tracker', '/tools/sinking-fund-calculator'],
+    recommendedPrintables: ['bill-payment-tracker', 'subscription-tracker'],
+    defaultSources: [
+      { title: 'U.S. Department of Energy — Energy Saver Consumer Guide', url: 'https://www.energy.gov/energysaver/energy-saver' },
+    ],
+    faqs: [
+      {
+        question: 'How often should I audit my recurring subscriptions?',
+        answer:
+          'Review your last 90 days of bank and credit card statements once every quarter, plus check your annual renewal calendar before 12-month memberships auto-renew.',
+      },
+    ],
+  },
+  {
+    slug: 'household-and-family-budgets',
+    name: 'Household and Family Budgets',
+    shortName: 'Couples & Family Budgets',
+    category: 'Budgeting',
+    description:
+      'Fair bill-splitting methods for couples and roommates, shared vs. separate account structures, and family sinking funds for childcare and school costs.',
+    intro:
+      'Managing money with a partner or family works best when expectations are written down. Whether you combine finances completely or split shared bills proportionally to income, a 20-minute monthly check-in keeps both partners aligned.',
+    startingGuideSlug: 'how-to-split-shared-bills-fairly-with-a-partner',
+    recommendedTools: ['/tools/expense-split-calculator', '/budget-calculator', '/tools/grocery-budget-calculator'],
+    recommendedPrintables: ['family-budget-planner', 'monthly-budget-planner'],
+    defaultSources: [
+      { title: 'CFPB — Money As You Grow & Family Financial Planning', url: 'https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/' },
+    ],
+    faqs: [
+      {
+        question: 'How does proportional bill splitting work for couples?',
+        answer:
+          'Each partner contributes to shared household bills (rent, utilities, groceries) in the same percentage that their take-home income contributes to total household income.',
+      },
+    ],
+  },
+  {
+    slug: 'students-and-first-jobs',
+    name: 'Students and First Jobs',
+    shortName: 'Students & First Jobs',
+    category: 'Budgeting',
+    description:
+      'Practical starter budgets for college students, recent graduates, first apartments, and first full-time paychecks.',
+    intro:
+      'Your first independent budget—whether stretching semester financial aid or managing your first full-time paycheck—sets habits that prevent high-interest credit card debt during major life transitions.',
+    startingGuideSlug: 'first-paycheck-budget-for-a-new-employee',
+    recommendedTools: ['/budget-calculator', '/tools/50-30-20-budget-calculator', '/tools/expense-split-calculator'],
+    recommendedPrintables: ['student-budget-worksheet', 'monthly-budget-planner'],
+    defaultSources: [
+      { title: 'Federal Student Aid — Budgeting for College & Repayment', url: 'https://studentaid.gov/resources/prepare-for-college/students/budgeting' },
+    ],
+    faqs: [
+      {
+        question: 'How do I budget a lump-sum semester financial aid refund?',
+        answer:
+          'Divide the net refund by the number of months in the semester (typically 4 to 4.5 months), hold the lump sum in a separate savings sub-account, and transfer only one month’s allowance into checking on the 1st of each month.',
+      },
+    ],
+  },
+  {
+    slug: 'no-spend-challenges-and-habits',
+    name: 'No-Spend Challenges and Habits',
+    shortName: 'No-Spend & Habits',
+    category: 'Savings',
+    description:
+      '30-day savings challenges, 7-day and 30-day no-spend resets, impulse-buying cooling-off rules, and free weekend ideas.',
+    intro:
+      'Short, structured challenges—like a 7-day no-buy reset or a 30-day savings challenge—interrupt automatic impulse spending and prove how quickly small daily amounts add up when redirected to a goal.',
+    startingGuideSlug: 'no-spend-month-guide',
+    recommendedTools: ['/tools/savings-challenge-generator', '/tools/expense-tracker'],
+    recommendedPrintables: ['30-day-savings-challenge', 'no-spend-challenge-calendar', '52-week-savings-challenge'],
+    defaultSources: [
+      { title: 'CFPB — Understanding Spending Habits & Financial Well-Being', url: 'https://www.consumerfinance.gov/consumer-tools/financial-well-being/' },
+    ],
+    faqs: [
+      {
+        question: 'What are you allowed to buy during a no-spend challenge?',
+        answer:
+          'All essential obligations remain active: rent, utilities, basic supermarket groceries, work transportation, healthcare, and minimum debt payments. Only non-essential discretionary wants are paused for the challenge window.',
+      },
+    ],
+  },
+  {
+    slug: 'seasonal-and-event-budgeting',
+    name: 'Seasonal and Event Budgeting',
+    shortName: 'Holidays & Seasonal Costs',
+    category: 'Budgeting',
+    description:
+      'Plan ahead for holiday gifts, back-to-school shopping, summer travel, and seasonal utility spikes without credit card hangovers.',
+    intro:
+      'Holidays, back-to-school shopping, and summer travel arrive on the exact same calendar dates every year. Setting per-person limits and starting a seasonal sinking fund months in advance eliminates January credit card debt.',
+    startingGuideSlug: 'holiday-gift-budget-planner-with-per-person-limits',
+    recommendedTools: ['/tools/sinking-fund-calculator', '/tools/savings-goal-calculator'],
+    recommendedPrintables: ['annual-budget-overview', 'sinking-fund-worksheet'],
+    defaultSources: [
+      { title: 'CFPB — Planning Ahead for Seasonal & Irregular Expenses', url: 'https://www.consumerfinance.gov/consumer-tools/educator-tools/your-money-your-goals/' },
+    ],
+    faqs: [
+      {
+        question: 'When should I start saving for holiday spending?',
+        answer:
+          'Starting in January or February spreads a $600 holiday budget into $50 to $55 per month. If you start in September with 3 months left, that same $600 budget requires $200 per month.',
+      },
+    ],
+  },
+  {
+    slug: 'calculator-tutorials-and-worked-examples',
+    name: 'Calculator Tutorials and Worked Examples',
+    shortName: 'Calculator Tutorials',
+    category: 'Budgeting',
+    description:
+      'Step-by-step worked examples showing how to run zero-based, 50/30/20, paycheck, sinking fund, and debt payoff calculations accurately.',
+    intro:
+      'A financial calculator is only as useful as the numbers you put into it. These tutorials walk through realistic household income and expense scenarios with transparent formulas and verifiable math.',
+    startingGuideSlug: 'how-to-use-a-zero-based-budget-calculator',
+    recommendedTools: ['/tools/zero-based-budget-calculator', '/tools/50-30-20-budget-calculator', '/budget-calculator'],
+    recommendedPrintables: ['zero-based-budget-worksheet', 'monthly-budget-planner'],
+    defaultSources: [
+      { title: 'CFPB — Financial Education & Calculation Guides', url: 'https://www.consumerfinance.gov/consumer-tools/' },
+    ],
+    faqs: [
+      {
+        question: 'Why should I test my budget in a calculator before writing it on paper?',
+        answer:
+          'An interactive calculator lets you test three or four category adjustments in seconds until your remaining balance is positive, then transfer the finalized numbers onto your printable worksheet.',
+      },
+    ],
+  },
+  {
+    slug: 'spreadsheets-and-expense-tracking',
+    name: 'Spreadsheets and Expense Tracking',
+    shortName: 'Spreadsheets & Tracking',
+    category: 'Budgeting',
+    description:
+      'Build clean monthly budget spreadsheets in Google Sheets or Excel, categorize bank transactions, and export CSV records without subscription apps.',
+    intro:
+      'A simple, customizable spreadsheet gives you automatic sum formulas and multi-month comparisons without paying $10 to $15 a month for a budgeting app or sharing your bank login credentials.',
+    startingGuideSlug: 'how-to-make-a-monthly-budget-in-google-sheets',
+    recommendedTools: ['/tools/expense-tracker', '/budget-calculator'],
+    recommendedPrintables: ['expense-tracker', 'annual-budget-overview'],
+    defaultSources: [
+      { title: 'FTC — Protecting Your Financial Privacy Online', url: 'https://consumer.ftc.gov/identity-theft-and-online-security' },
+    ],
+    faqs: [
+      {
+        question: 'Is a manual expense spreadsheet safer than linking bank accounts to an app?',
+        answer:
+          'Entering transactions manually or importing a read-only CSV keeps your bank login credentials private and forces you to review every line item intentionally.',
+      },
+    ],
+  },
+]
+
+const SLUG_TO_CLUSTER: Record<string, string> = {
+  'how-to-make-a-monthly-budget': 'budget-systems',
+  'budget-categories-and-percentages': 'budget-systems',
+  '50-30-20-budget-rule-examples': 'budget-systems',
+  'monthly-budget-checklist': 'budget-systems',
+  'how-to-build-a-budget-when-broke': 'budget-systems',
+  'low-income-budget-tips': 'budget-systems',
+  'how-to-build-a-bare-bones-budget-for-essential-expenses': 'budget-systems',
+  'weekly-budget-check-in-a-ten-minute-routine': 'budget-systems',
+  'how-to-create-a-budget-buffer-without-hiding-expenses': 'budget-systems',
+  'how-to-fix-a-month-when-you-overspend-your-budget': 'budget-systems',
+
+  'how-to-budget-with-irregular-income': 'paycheck-and-variable-income',
+  'biweekly-budgeting-for-beginners': 'paycheck-and-variable-income',
+  'how-to-budget-when-bills-are-due-before-payday': 'paycheck-and-variable-income',
+  'how-to-split-monthly-bills-across-two-paychecks': 'paycheck-and-variable-income',
+  'planning-for-a-three-paycheck-month': 'paycheck-and-variable-income',
+
+  'best-budget-planners-for-beginners': 'budget-printables-and-binders',
+  'expense-tracker': 'budget-printables-and-binders',
+  'budget-printables-how-to-use': 'budget-printables-and-binders',
+  'how-to-build-a-budget-binder-from-free-printables': 'budget-printables-and-binders',
+
+  'how-to-save-1000-emergency-fund': 'savings-and-sinking-funds',
+  'how-to-budget-for-bills-that-arrive-every-three-months': 'savings-and-sinking-funds',
+  'one-month-versus-three-months-of-emergency-savings': 'savings-and-sinking-funds',
+  'how-to-start-a-car-repair-sinking-fund': 'savings-and-sinking-funds',
+
+  'budget-meal-plan-for-one': 'groceries-and-meal-planning',
+  'frugal-grocery-shopping-tips': 'groceries-and-meal-planning',
+  'grocery-budget-worksheet-for-two-adults': 'groceries-and-meal-planning',
+
+  'how-to-pay-off-debt-fast': 'debt-tracking-and-payoff-planning',
+  'how-to-list-all-debts-before-picking-a-payoff-method': 'debt-tracking-and-payoff-planning',
+
+  'save-money-on-utilities': 'bills-and-utilities',
+  'how-to-audit-every-monthly-subscription': 'bills-and-utilities',
+
+  'how-to-split-shared-bills-fairly-with-a-partner': 'household-and-family-budgets',
+  'cheap-date-ideas': 'household-and-family-budgets',
+  'modern-home-office-setup-on-a-budget': 'household-and-family-budgets',
+
+  'first-paycheck-budget-for-a-new-employee': 'students-and-first-jobs',
+
+  '30-day-money-saving-challenge': 'no-spend-challenges-and-habits',
+  'no-spend-weekend-ideas': 'no-spend-challenges-and-habits',
+  'no-spend-month-guide': 'no-spend-challenges-and-habits',
+  'how-to-stop-impulse-buying': 'no-spend-challenges-and-habits',
+  'free-fun-things-to-do': 'no-spend-challenges-and-habits',
+  'seven-day-no-buy-challenge-with-a-free-checklist': 'no-spend-challenges-and-habits',
+
+  'holiday-gift-budget-planner-with-per-person-limits': 'seasonal-and-event-budgeting',
+  'how-to-use-a-zero-based-budget-calculator': 'calculator-tutorials-and-worked-examples',
+  'how-to-make-a-monthly-budget-in-google-sheets': 'spreadsheets-and-expense-tracking',
+}
+
+export function getClusterBySlug(slug: string): TopicClusterMeta | undefined {
+  return TOPIC_CLUSTERS.find((c) => c.slug === slug)
+}
+
+export function getClusterForPost(post: Post): TopicClusterMeta {
+  if (post.topicSlug) {
+    const byTopicSlug = getClusterBySlug(post.topicSlug)
+    if (byTopicSlug) return byTopicSlug
+  }
+  if (post.topicCluster) {
+    const byName = TOPIC_CLUSTERS.find((c) => c.name.toLowerCase() === post.topicCluster!.toLowerCase())
+    if (byName) return byName
+  }
+  const mappedSlug = SLUG_TO_CLUSTER[post.slug]
+  if (mappedSlug) {
+    const found = getClusterBySlug(mappedSlug)
+    if (found) return found
+  }
+  const cat = post.category?.toLowerCase() || ''
+  if (cat === 'food') return getClusterBySlug('groceries-and-meal-planning')!
+  if (cat === 'debt') return getClusterBySlug('debt-tracking-and-payoff-planning')!
+  if (cat === 'savings') return getClusterBySlug('savings-and-sinking-funds')!
+  if (cat === 'lifestyle') return getClusterBySlug('no-spend-challenges-and-habits')!
+  return TOPIC_CLUSTERS[0]
 }
 
 export const posts: Post[] = [
@@ -332,7 +763,7 @@ Net-worth tracking, detailed investment pages, dozens of sinking funds, and year
 Use the free BudgetLoom template for one full month. Notice what you complete, what you ignore, and what information you wish you had. Those observations are a better buying guide than a long feature list.`
   },
   {
-    slug: 'cash-envelope-categories',
+    slug: 'expense-tracker',
     title: 'Cash Envelope Categories and How Much to Put in Each',
     description: 'Choose useful cash-envelope categories, calculate realistic amounts, and adapt the method when you prefer cards or digital banking.',
     date: '2026-07-22', category: 'Budgeting', readTime: '9 min',
@@ -2528,9 +2959,640 @@ Start with one change, use it, and then decide what comes next. A modern office 
     category: "Budgeting",
     readTime: "6 min",
     content: "## A buffer is a category, not missing information\n\nA monthly budget buffer is money deliberately kept available for small cost variations or timing problems. It does not replace emergency savings, and it should not conceal an expense you already know will occur. The purpose is to respond to minor changes without using rent money or going into debt.\n\n## Start by listing your real obligations\n\nCalculate take-home income and record housing, food, required transport, insurance, minimum debt payments, other essentials, and savings for irregular bills. If required costs already exceed dependable income, do not write an imaginary positive buffer into the sheet. Deal with the shortfall honestly first.\n\n## Pick a realistic starting amount\n\nYou might begin with $25, $50, or an amount that can safely remain unspent. For example, if your plan has $150 remaining after bills and commitments, allocating $75 to a buffer and $75 to optional spending is a possible approach. It is an illustration, not a universal recommendation.\n\n## Decide when the buffer may be used\n\nA small grocery overrun, an unavoidable transport cost, or a payment timing difference may qualify. An unplanned luxury purchase ordinarily belongs in an optional spending category. Define the rule ahead of time so the buffer is not silently spent every month.\n\n## Record withdrawals and replenish when practical\n\nIf a $75 buffer covers a $30 shortfall, $45 remains. You can rebuild the missing $30 through later affordable transfers. Do not prioritize restoring the buffer over an essential payment that is due now.\n\nWhen the same expense repeatedly consumes the buffer, adjust its original category. If groceries routinely exceed the planned amount, that may signal the grocery estimate is unrealistic. Hiding the difference in miscellaneous prevents learning from actual costs.\n\n## Do not count the same cash twice\n\nMoney reserved for a quarterly insurance bill is not also available as an emergency fund or monthly buffer. Keep category balances separate, even if all the money sits in one bank account.\n\n## Review your buffer at month-end\n\nAsk what used it, whether the initial size was reasonable, and which expenses should receive their own categories next month. If it remains untouched, decide whether to carry it forward or allocate part of it elsewhere after reviewing upcoming bills.\n\nBudgetLoom's budget calculator lets you create a Monthly Buffer category, track planned and actual use, and save the plan locally on your device."
+  },
+{
+    slug: "how-to-fix-a-month-when-you-overspend-your-budget",
+    title: "How to Fix a Month When You Overspend Your Budget",
+    description: "Recover from a mid-month budget overrun in five steps with a concrete $3,600 worked example, category triage rules, and a reset worksheet.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Budget Systems",
+    topicSlug: "budget-systems",
+    readTime: "8 min",
+    content: `## An overspent category is data, not a reason to quit
+
+Most budgets do not fail because the household lacks discipline; they fail because a real-world cost—a car repair, a utility spike, or a higher grocery trip—exceeded the initial estimate. When one category goes over limit on the 14th of the month, abandoning the budget entirely turns a $120 variance into a $500 shortfall by the 30th.
+
+Instead of waiting until next month to start over, run a mid-month triage. The goal is simple: keep housing, utilities, essential food, work transit, and required debt minimums protected while rebalancing flexible lines to cover the overrun.
+
+## Step 1: Measure the exact dollar overrun
+
+Stop guessing how bad the damage is and calculate the exact variance in dollars. Look at the category that ran over and compare what you have spent so far with what you still must spend before the month ends.
+
+Suppose your monthly take-home income is $3,600. On the 18th of the month, an unexpected $180 car battery replacement hits your transportation category, and groceries are already $60 ahead of pace. Your combined mid-month overrun is $240.
+
+## Step 2: Freeze non-essential discretionary categories for 7 days
+
+Before pulling money out of emergency savings, check how much unspent money remains in flexible wants and monthly buffer categories:
+
+| Budget Category | Original Plan | Spent by 18th | Remaining Before Triage | Rebalanced Plan |
+|---|---|---|---|---|
+| Housing & Fixed Bills | $1,850 | $1,550 | $300 (Committed) | $1,850 (Unchanged) |
+| Groceries & Essentials | $480 | $360 | $120 | $540 (+$60 added) |
+| Transportation & Auto | $220 | $310 | -$90 (Overrun) | $400 (+$180 added) |
+| Dining Out & Entertainment | $260 | $110 | $150 | $140 (-$120 moved) |
+| Personal & Miscellaneous | $190 | $70 | $120 | $130 (-$60 moved) |
+| Monthly Checking Buffer | $100 | $0 | $100 | $40 (-$60 moved) |
+| Emergency & Sinking Savings | $500 | $250 | $250 | $500 (Protected) |
+
+By moving $120 from remaining dining out, $60 from personal spending, and $60 from the monthly checking buffer ($120 + $60 + $60 = $240), the entire $240 overrun is absorbed without touching rent money, minimum debt payments, or the $500 savings goal.
+
+## Step 3: Distinguish a one-time spike from a chronic under-budget
+
+Ask why the category ran over:
+
+1. **Unplanned irregular expense:** A car battery, annual renewal, or medical copay means you need a dedicated sinking fund next month so irregular bills stop ambushing your monthly cash flow.
+2. **Unrealistic baseline estimate:** If you budget $350 for groceries every month but actually spend $510 three months in a row, $350 is a wish rather than a budget. Raise the grocery line to $500 next month and trim a lower-priority category permanently.
+3. **Impulse drift:** Unplanned convenience orders or online shopping respond well to a 48-hour waiting rule and a weekly safe-to-spend cap.
+
+## Step 4: Switch to weekly safe-to-spend limits for the rest of the month
+
+When only 10 to 12 days remain in the month, divide your remaining grocery and fuel money by the number of weeks left. Knowing you have $90 per week for groceries is far easier to act on at the supermarket checkout than staring at a monthly spreadsheet.
+
+## Step 5: Close out the month and update next month's template
+
+At month-end, record both the original planned amounts and the actual final numbers in our [Monthly Budget Calculator](/budget-calculator) or on the [Weekly Budget & 10-Minute Check-In Planner](/printables/weekly-budget-planner). A budget that bends without breaking is a system you can use for years.`
+  },
+  {
+    slug: "how-to-split-monthly-bills-across-two-paychecks",
+    title: "How to Split Monthly Bills Across Two Paychecks",
+    description: "Prevent early-month cash squeezes by splitting monthly bills across two paychecks using either due-date matching or the 50/50 half-bill reserve method.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Paycheck and Variable Income",
+    topicSlug: "paycheck-and-variable-income",
+    readTime: "9 min",
+    content: `## Why paying rent from a single paycheck creates a two-week cash crunch
+
+Many households earn enough across an entire month to pay all their bills, yet feel broke for the first two weeks of every month. The cause is almost always bill clustering: when rent or a mortgage ($1,400), car insurance ($140), and utilities ($160) are all due between the 1st and the 10th, a single $1,900 paycheck cannot cover $1,700 in bills plus two weeks of groceries and gas.
+
+You can solve this mismatch using one of two paycheck-splitting methods: **Due-Date Matching** or the **Half-Bill Reserve Method**.
+
+## Method 1: Due-Date Matching (Best when bills are evenly distributed)
+
+In Due-Date Matching, Paycheck #1 pays every bill due before Paycheck #2 arrives, and Paycheck #2 pays every bill due before next month's Paycheck #1 arrives.
+
+1. Write down your two expected payday dates (for example, the 1st and the 15th).
+2. List every fixed monthly bill with its exact due date and amount.
+3. Assign bills due between the 1st and 14th to Paycheck #1, and bills due between the 15th and 31st to Paycheck #2.
+
+## Method 2: The 50/50 Half-Bill Reserve (Best when rent dominates the 1st of the month)
+
+When housing takes more than 45% of a single paycheck, Due-Date Matching still leaves Paycheck #1 starved for grocery money. Instead, total all fixed monthly bills and reserve **exact halves** from each paycheck in a dedicated bills checking sub-account:
+
+| Expense Category | Monthly Total | Reserved From Paycheck #1 ($1,900) | Reserved From Paycheck #2 ($1,900) |
+|---|---|---|---|
+| Rent (Due on the 1st) | $1,400 | $700 (For next month's 1st) | $700 (Completes next month's rent) |
+| Utilities, Internet & Phone | $280 | $140 | $140 |
+| Auto Insurance & Loan Minimums | $420 | $210 | $210 |
+| **Total Fixed Bill Reserve** | **$2,100** | **$1,050** | **$1,050** |
+| Groceries & Fuel (Two-Week Cap) | $560 | $280 | $280 |
+| Savings & Sinking Funds | $600 | $300 | $300 |
+| Personal Wants & Buffer | $540 | $270 | $270 |
+| **Total Allocated** | **$3,800** | **$1,900** | **$1,900** |
+
+Notice how both paychecks now feel identical: every payday reserves $1,050 for fixed bills, $280 for groceries and gas, $300 for savings, and $270 for personal spending and buffer.
+
+## How to transition into the half-bill rhythm
+
+If rent is due on the 1st and you do not yet have half a month of rent sitting in reserve, transition over three or four pay periods by setting aside an extra $150 to $200 per paycheck—or by using a tax refund or third biweekly paycheck—to seed the initial half-rent cushion.
+
+Test your own paycheck numbers in the [Paycheck Budget Planner](/tools/paycheck-budget-planner) or download the [Paycheck Budget Worksheet PDF](/printables/paycheck-budget-worksheet).`
+  },
+  {
+    slug: "planning-for-a-three-paycheck-month",
+    title: "Planning for a Three-Paycheck Month: How to Use Your Extra Biweekly Paychecks",
+    description: "Employees paid every two weeks receive 26 paychecks a year, creating two three-paycheck months. Learn how to calculate your true surplus and allocate it wisely.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Paycheck and Variable Income",
+    topicSlug: "paycheck-and-variable-income",
+    readTime: "8 min",
+    content: `## Why biweekly earners get two three-paycheck months each year
+
+A standard year has 52 weeks. If you are paid every two weeks (biweekly), you receive **26 paychecks per year**. Because 12 months multiplied by 2 paychecks equals 24 paychecks, there are **2 extra paychecks** every year that land as a third deposit inside a single calendar month.
+
+When you build your standard monthly budget around two biweekly paychecks (24 checks per year), those two three-paycheck months become powerful financial accelerators—provided you plan for them before the deposit hits your checking account.
+
+## Why a third paycheck is not 100% free money
+
+A common mistake is treating the entire third paycheck as a windfall while forgetting that two weeks of life still happen before the next payday:
+
+- **What is already covered:** Monthly bills billed once a month (rent/mortgage, monthly internet, monthly insurance, monthly subscriptions) are already covered by your first two paychecks of the month. Also, if your employer only deducts health/dental premiums from 24 paychecks a year, your third paycheck may actually be slightly larger.
+- **What still continues:** You still need two weeks of groceries, commuter fuel or transit, and normal day-to-day essentials during those 14 days.
+
+## Worked example: Calculating the true net surplus on a $2,100 biweekly check
+
+Suppose your regular biweekly take-home paycheck is $2,100:
+
+| Allocation Line | Standard Check #1 | Standard Check #2 | 3rd Paycheck in Month |
+|---|---|---|---|
+| Half of Monthly Fixed Bills ($2,200/mo) | $1,100 | $1,100 | **$0 (Already Paid)** |
+| Two Weeks of Groceries & Household | $260 | $260 | $260 (Still Needed) |
+| Two Weeks of Fuel & Commute | $90 | $90 | $90 (Still Needed) |
+| Two Weeks of Personal / Dining Allowance | $150 | $150 | $150 (Optional) |
+| Regular Savings & Sinking Transfer | $500 | $500 | $500 (Regular Habit) |
+| **Freed-Up Surplus From Bill Reserve** | **$0** | **$0** | **$1,100 Extra Surplus** |
+
+In this example, even after covering two full weeks of groceries ($260), fuel ($90), personal spending ($150), and the regular $500 savings transfer, **$1,100 of freed-up bill money** ($1,600 total going toward goals) is available from a single three-paycheck month—or **$2,200 to $3,200 per year** across both three-paycheck months.
+
+## Four high-impact jobs for your third paycheck
+
+Decide the allocation at least two weeks before payday:
+
+1. **Seed a one-paycheck timing buffer:** Keep half a month of bill money permanently in your bills account so early-month rent is never stressful again.
+2. **Fully fund annual sinking funds:** Pre-fund six months of auto insurance, vehicle registration, or holiday gifts in one transfer.
+3. **Complete your $1,000 starter emergency fund:** Reach your initial emergency milestone immediately instead of waiting ten months.
+4. **Make a lump-sum principal payment on high-APR debt:** Eliminating $1,100 of 24% APR credit card principal saves ~$264 per year in recurring interest charges.
+
+Run your exact numbers in our [Biweekly Budget Calculator](/tools/biweekly-budget-calculator) and print the [Biweekly 26-Paycheck Budget Planner](/printables/biweekly-budget-planner).`
+  },
+  {
+    slug: "how-to-build-a-budget-binder-from-free-printables",
+    title: "How to Build a Budget Binder From Free Printables",
+    description: "Assemble a practical, clutter-free household budget binder in six sections using free printable PDFs and a 10-minute weekly routine.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Budget Printables and Binders",
+    topicSlug: "budget-printables-and-binders",
+    readTime: "8 min",
+    content: `## Why a 6-section binder beats a 50-page template pack
+
+Many people download huge printable packs, print 45 pages, and abandon the binder two weeks later because there are too many overlapping trackers to fill out. A functional budget binder only needs **six core sections** that match the decisions you actually make each month.
+
+ You do not need expensive accessories to start: a basic 1-inch three-ring binder, six tab dividers, a pen or pencil, and a zipper pouch for receipts or bills are enough.
+
+## The 6 essential sections of a working budget binder
+
+| Section | Printable Worksheet to Include | When You Use It |
+|---|---|---|
+| **1. Annual Calendar & Renewals** | [Annual Budget Overview](/printables/annual-budget-overview) | Beginning of the year & quarterly review |
+| **2. Monthly Master Plan** | [Monthly Budget Planner](/printables/monthly-budget-planner) or [Zero-Based Worksheet](/printables/zero-based-budget-worksheet) | 3 days before the 1st of each month |
+| **3. Paycheck & Bill Checklist** | [Paycheck Budget Worksheet](/printables/paycheck-budget-worksheet) + [Bill Payment Tracker](/printables/bill-payment-tracker) | Every payday & as bills clear |
+| **4. Weekly Expense Log** | [Weekly Budget Planner](/printables/weekly-budget-planner) + [Expense Tracker](/printables/expense-tracker) | Once a week during a 10-minute check-in |
+| **5. Savings & Sinking Funds** | [Emergency Fund Tracker](/printables/emergency-fund-tracker) + [Sinking Fund Worksheet](/printables/sinking-fund-worksheet) | After payday savings transfers |
+| **6. Debt Payoff Roadmap** | [Debt Payoff Planner](/printables/debt-payoff-planner) | Monthly as statements close |
+
+## How to set up your binder in 20 minutes
+
+1. **Print in grayscale at 100% scale:** All BudgetLoom printables are formatted for standard US Letter (8.5" × 11") paper with clean margins for three-hole punching.
+2. **Put the current month's summary on top:** When you open the binder, the very first page should be this month's budget and bill checklist—not an archive from four months ago.
+3. **Keep a single "Action Pocket" in the front cover:** Place unpaid paper bills, medical statements, and store receipts in the front pocket until your weekly check-in.
+
+## Keep the weekly habit under 10 minutes
+
+Pick one consistent time each week—such as Sunday evening or Friday morning on payday. Open your banking app, check off bills that cleared on your Bill Payment Tracker, log flexible spending in Section 4, and verify how much grocery and gas money remains for the coming week.
+
+Start by downloading the complete 12-page [Budget Starter Bundle](/printables/budget-starter-bundle) for free.`
+  },
+  {
+    slug: "one-month-versus-three-months-of-emergency-savings",
+    title: "One Month Versus Three Months of Emergency Savings: How to Choose Your Target",
+    description: "Compare a 1-month core expense buffer against a 3-to-6-month emergency fund with worked dollar calculations and a staged building plan.",
+    date: "2026-10-14",
+    category: "Savings",
+    topicCluster: "Savings and Sinking Funds",
+    topicSlug: "savings-and-sinking-funds",
+    readTime: "8 min",
+    content: `## Why jumping straight to a 6-month emergency fund overwhelms beginners
+
+Standard financial commentary often tells households to save three to six months of living expenses immediately. For a household spending $3,200 a month on essentials, three to six months equals **$9,600 to $19,200**. When you are living paycheck to paycheck or carrying high-interest debt, a $15,000 target feels so distant that it is easy to save nothing at all.
+
+Breaking emergency savings into **three clear stages**—$1,000 Starter Cushion, 1-Month Core Expenses, and 3–6 Months Full Reserve—lets you build real protection immediately while balancing other priorities.
+
+## First: Calculate your bare-bones monthly survival number
+
+Your emergency fund is based on **essential monthly expenses**, not your total gross income or discretionary lifestyle spending. If you lost your income tomorrow, you would pause restaurant meals, vacation saving, and non-essential shopping.
+
+For a typical household earning $4,000/month net, core survival expenses might look like this:
+
+| Core Expense Category | Monthly Survival Cost |
+|---|---|
+| Housing (Rent or Mortgage + Insurance/Tax) | $1,400 |
+| Basic Utilities (Electric, Heat, Water, Basic Internet/Phone) | $260 |
+| Supermarket Groceries & Household Necessities | $480 |
+| Essential Work Transportation & Auto Insurance | $240 |
+| Healthcare, Prescriptions & Required Debt Minimums | $220 |
+| **1-Month Bare-Bones Emergency Baseline** | **$2,600** |
+
+## Comparing Stage 1, Stage 2, and Stage 3 targets
+
+Using the $2,600 monthly core baseline above:
+
+- **Stage 1 — $1,000 Starter Cushion:** Covers an urgent car repair, appliance failure, or medical deductible without using a high-APR credit card.
+- **Stage 2 — 1 Month of Core Expenses ($2,600):** Eliminates paycheck-timing stress and protects housing and utilities during a short job transition or unpaid sick leave.
+- **Stage 3 — 3 to 6 Months of Core Expenses ($7,800 to $15,600):** Protects the household against a multi-month layoff, business slowdown, or family medical leave.
+
+## When 1 month is enough for now—and when to push to 3–6 months
+
+A **1-month emergency reserve** is often a sensible pause point while you pay off credit card debt charging 20%+ APR, because paying 24% interest costs far more than a savings account earns. Once high-interest consumer debt is eliminated, redirect those freed-up debt payments to grow your reserve to **3 months** (if you have stable dual income) or **6 months** (if you are a single earner, self-employed, or have dependents).
+
+Calculate your own baseline in the [Emergency Fund Calculator](/tools/emergency-fund-calculator) and track each milestone on the [Emergency Fund Tracker PDF](/printables/emergency-fund-tracker).`
+  },
+  {
+    slug: "how-to-start-a-car-repair-sinking-fund",
+    title: "How to Start a Car Repair Sinking Fund (With Monthly Cost Examples)",
+    description: "Stop letting tires, brakes, oil changes, and registration fees wreck your monthly budget. Calculate a realistic monthly car maintenance sinking fund.",
+    date: "2026-10-14",
+    category: "Savings",
+    topicCluster: "Savings and Sinking Funds",
+    topicSlug: "savings-and-sinking-funds",
+    readTime: "7 min",
+    content: `## Car maintenance is not an unexpected emergency
+
+Tires wear out every 40,000 to 60,000 miles. Car batteries last three to five years. Brake pads, oil changes, wiper blades, and annual state registration arrive on a predictable schedule. Even when a vehicle is completely paid off, treating maintenance as a surprise emergency guarantees that a $650 tire or brake bill will end up on a credit card.
+
+A **car repair sinking fund** converts lumpy annual maintenance and repair costs into a steady monthly transfer.
+
+## Worked example: Annualized maintenance math for a daily driver
+
+Consider the typical recurring upkeep costs for a commuter vehicle driven 12,000 miles per year:
+
+| Maintenance / Renewal Item | Typical Cost | Replacement Cycle | Annualized Cost | Monthly Sinking Fund |
+|---|---|---|---|---|
+| 3 Oil & Filter Changes + Tire Rotations | $210 | Every 12 months | $210/yr | $17.50/mo |
+| Set of 4 Tires + Alignment ($720) | $720 | Every 4 years | $180/yr | $15.00/mo |
+| Brake Pads & Rotors Service ($480) | $480 | Every 3 years | $160/yr | $13.33/mo |
+| 12V Battery, Wipers, Air Filters & Fluids | $240 | Every 3 years | $80/yr | $6.67/mo |
+| Annual Registration, Inspection & Tags | $150 | Every 12 months | $150/yr | $12.50/mo |
+| Unscheduled Repair Cushion (Alternator/Starter/Sensors) | $420 | Annual reserve | $420/yr | $35.00/mo |
+| **Total Vehicle Sinking Fund** | — | — | **$1,200/yr** | **$100.00/mo** |
+
+Setting aside **$100 per month** (~$46.15 per biweekly paycheck) builds $1,200 per year in a dedicated vehicle sub-account. If your car is older than eight years or has over 100,000 miles, increasing the target to $125–$150/month builds an extra buffer for suspension or cooling-system work.
+
+## How to start when money is tight
+
+If $100/month is not realistic today, start with the **next known bill**: if registration ($150) and an oil change ($70) are due in four months, save $220 ÷ 4 = **$55/month** first. Once that bill is paid, keep the $55/month transfer running so the balance builds ahead of your next tire or brake service.
+
+Plan all of your irregular vehicle, insurance, and household funds together in our [Sinking Fund Calculator](/tools/sinking-fund-calculator) and log balances on the [Sinking Fund Worksheet](/printables/sinking-fund-worksheet).`
+  },
+  {
+    slug: "grocery-budget-worksheet-for-two-adults",
+    title: "Grocery Budget Worksheet for Two Adults: Realistic Weekly & Monthly Numbers",
+    description: "Plan a realistic two-adult grocery and household supplies budget with thrifty ($480/mo) and moderate ($640/mo) category splits and a weekly store checklist.",
+    date: "2026-10-14",
+    category: "Food",
+    topicCluster: "Groceries and Meal Planning",
+    topicSlug: "groceries-and-meal-planning",
+    readTime: "8 min",
+    content: `## Why a two-person grocery budget needs a weekly cap, not just a monthly number
+
+A monthly grocery budget of $600 sounds straightforward until you spend $230 in Week 1 stocking up on meat and paper towels, leaving only $123 per week for the rest of the month. Because grocery shopping happens weekly, dividing your monthly food allocation into **four weekly shopping caps** plus a small pantry restock buffer keeps spending steady from the 1st to the 31st.
+
+## Worked example: Thrifty ($480/mo) vs. Moderate ($640/mo) two-adult grocery split
+
+For two adults eating ~85% of their meals at home (~150 individual meals per month), here is how a thrifty plan ($480/month, or ~$110.77/week) compares with a moderate plan ($640/month, or ~$147.69/week):
+
+| Supermarket Category | Share of Budget | Thrifty Two-Adult Plan ($480/mo) | Moderate Two-Adult Plan ($640/mo) |
+|---|---|---|---|
+| Proteins, Meat, Eggs, Tofu & Beans | 25% | $120/mo (~$27.69/wk) | $160/mo (~$36.92/wk) |
+| Fresh & Frozen Produce (Fruits & Veggies) | 20% | $96/mo (~$22.15/wk) | $128/mo (~$29.54/wk) |
+| Pantry Staples, Rice, Pasta, Bread & Oats | 25% | $120/mo (~$27.69/wk) | $160/mo (~$36.92/wk) |
+| Dairy, Cheese, Yogurt & Frozen Foods | 18% | $86/mo (~$19.85/wk) | $115/mo (~$26.54/wk) |
+| Household Paper, Soap & Cleaning Supplies | 12% | $58/mo (~$13.38/wk) | $77/mo (~$17.77/wk) |
+| **Total Monthly / Weekly Target** | **100%** | **$480/mo (~$110.77/wk)** | **$640/mo (~$147.69/wk)** |
+
+At $480/month across 180 total monthly meals (2 adults × 3 meals/day × 30 days), the average cost is **$2.67 per meal per person**. At $640/month, the average cost is **$3.56 per meal per person**—still a fraction of a $35–$50 takeout order for two.
+
+## Five rules that keep a two-person kitchen from wasting food
+
+1. **Separate household consumables from restaurant takeout:** Keep paper towels, laundry detergent, and trash bags inside the 12% household line, and track restaurant meals in your Wants category so takeout never disguises itself as groceries.
+2. **Plan 5 cooked dinners, not 7:** Two adults almost always generate enough leftovers from three batch recipes to cover two additional nights. Planning seven brand-new recipes guarantees spoiled ingredients in the crisper drawer.
+3. **Shop your freezer and pantry before writing the list:** Build each week's dinners around one protein or grain you already own.
+4. **Compare unit prices (cost per ounce or pound):** Store-brand oats, canned tomatoes, dried beans, and frozen vegetables frequently cost 30% to 45% less per ounce than national brands.
+5. **Keep two $5 emergency freezer meals on hand:** A bag of frozen dumplings, ravioli, or stir-fry vegetables prevents a $45 delivery order on an exhausting Tuesday night.
+
+Estimate your household's custom numbers in our [Grocery Budget Calculator](/tools/grocery-budget-calculator) and download the 8-page [Meal Planner Budget Kit PDF](/printables/meal-planner-budget-kit).`
+  },
+  {
+    slug: "how-to-list-all-debts-before-picking-a-payoff-method",
+    title: "How to List All Debts Before Picking a Payoff Method (Snowball vs. Avalanche)",
+    description: "Create a complete debt inventory with balances, APRs, minimum payments, and monthly interest costs before choosing between debt snowball and debt avalanche.",
+    date: "2026-10-14",
+    category: "Debt",
+    topicCluster: "Debt Tracking and Payoff Planning",
+    topicSlug: "debt-tracking-and-payoff-planning",
+    readTime: "8 min",
+    content: `## Why you need a complete debt inventory before sending extra payments
+
+When you have multiple credit cards, a car loan, or medical bills, sending an extra $40 here and $50 there spreads your effort too thin to move any single balance noticeably. Before you choose between the **Debt Snowball** (smallest balance first) and the **Debt Avalanche** (highest interest rate first), gather your latest statements and write down five facts for every obligation:
+
+1. Creditor name
+2. Current balance
+3. Annual Percentage Rate (APR)
+4. Required monthly minimum payment
+5. Statement due date
+
+## Worked example: Side-by-side 4-debt inventory ($11,800 total debt)
+
+Suppose a household lists four debts and finds $200/month in extra principal capacity on top of its $345 required minimums ($545 total monthly debt payment):
+
+| Creditor | Current Balance | APR (%) | Est. Monthly Interest (Balance × APR ÷ 12) | Required Minimum | Snowball Order | Avalanche Order |
+|---|---|---|---|---|---|---|
+| Medical Payment Plan | $650 | 0.0% | $0.00/mo | $50 | #2 | #4 |
+| Retail Store Card | $550 | 26.99% | $12.37/mo | $30 | **#1 (First)** | **#1 (First)** |
+| Bank Visa Card | $3,400 | 21.99% | $62.31/mo | $95 | #3 | #2 |
+| Used Auto Loan | $7,200 | 6.90% | $41.40/mo | $170 | #4 | #3 |
+| **Total** | **$11,800** | — | **$116.08/mo in interest** | **$345/mo** | — | — |
+
+## What this inventory immediately reveals
+
+Looking at the table makes the decision clear:
+
+- **Both methods agree on Debt #1:** The Retail Store Card has both the smallest balance ($550) AND the highest APR (26.99%). Directing all $200 of extra money ($230 total payment) wipes it out in **3 months**, freeing up its $30 minimum payment immediately.
+- **Where Snowball and Avalanche diverge on Debt #2:**
+  - **Snowball** attacks the $650 Medical Plan next (paying it off in ~2.5 months and freeing up another $50/month in cash flow, bringing total extra power to $280/month for the Visa card).
+  - **Avalanche** attacks the $3,400 Bank Visa Card next because it is charging **$62.31 every single month in interest**, while the 0% medical bill charges $0 in interest.
+
+## Verify that your total payment exceeds monthly interest
+
+Notice the fourth column: **Estimated Monthly Interest ('Balance × APR ÷ 12')**. Across all four debts, $116.08 of your $345 minimum payments goes purely to interest in Month 1. Always verify that your total monthly payment is substantially higher than monthly interest so your balances amortize downward every cycle.
+
+Compare both payoff timelines with your exact balances in the [Debt Snowball Calculator](/tools/debt-snowball-calculator) and [Debt Avalanche Calculator](/tools/debt-avalanche-calculator), or print the 10-page [Debt Payoff Planner](/printables/debt-payoff-planner).`
+  },
+  {
+    slug: "how-to-audit-every-monthly-subscription",
+    title: "How to Audit Every Monthly Subscription (And Find Hidden Annual Renewals)",
+    description: "Run a 20-minute quarterly subscription audit across bank statements, app stores, and annual renewals to recover $50 to $150 per month.",
+    date: "2026-10-14",
+    category: "Savings",
+    topicCluster: "Bills and Utilities",
+    topicSlug: "bills-and-utilities",
+    readTime: "7 min",
+    content: `## Why recurring charges hide in plain sight
+
+Individual subscriptions rarely look alarming on a bank statement: $9.99 for cloud storage, $14.99 for streaming, $11.99 for a music app, or $99 billed once a year for software you used twice. Combined, however, six or seven forgotten recurring charges routinely drain **$70 to $140 per month ($840 to $1,680 per year)** of after-tax cash flow.
+
+## Step 1: Check all four places where subscriptions hide
+
+A single month's checking statement misses quarterly and annual renewals. Pull four sources together:
+
+1. **Last 90 days of checking and credit card statements:** Scan for recurring merchant names, 'RECURRING', or digital wallet charges.
+2. **Apple App Store & Google Play Subscriptions:** Open your phone's account settings and check active and expiring app subscriptions directly.
+3. **PayPal & Venmo Automatic Payments:** Review pre-approved merchant billing agreements in your digital wallet security settings.
+4. **Email search for '"renewal"' or '"receipt"':** Search the last 12 months of email for annual memberships (warehouse clubs, Prime, antivirus, domain names, fitness apps).
+
+## Step 2: Convert every charge into its true 12-month cost
+
+People evaluate monthly prices emotionally ($15 feels small) but feel annual totals ($180) concretely. Write every recurring charge on one sheet and multiply monthly costs by 12:
+
+| Recurring Service | Billing Cycle | Normalized Monthly Cost | True 12-Month Cost | Audit Decision |
+|---|---|---|---|---|
+| Primary Video Streaming | $16.99 / month | $16.99/mo | $203.88/yr | **Keep** (Used 4x/week) |
+| Secondary Streaming Service | $18.99 / month | $18.99/mo | $227.88/yr | **Cancel** (Rotate seasonally) |
+| Unused Gym / Fitness App | $34.00 / month | $34.00/mo | $408.00/yr | **Cancel** (Unused 60+ days) |
+| Annual Software / App Renewal | $119.88 / year | $9.99/mo | $119.88/yr | **Cancel** before renewal date |
+| Cloud Storage Tier | $9.99 / month | $9.99/mo | $119.88/yr | **Downgrade** to $2.99/mo tier |
+| **Savings From Cancellations** | — | **$69.98/mo Saved** | **$839.76/yr Saved** | Redirect to Emergency Fund |
+
+## Step 3: Apply the 30-Day Use & Rotation Rule
+
+- **Cancel anything unused in the last 30 days:** You can always re-subscribe in two clicks if you genuinely miss it.
+- **Rotate video streaming one service at a time:** Instead of paying for three streaming platforms simultaneously ($50+/month), keep one active for two months, watch what you want, cancel it, and switch to another.
+- **Redirect the freed-up monthly dollars immediately:** If you cancel $70/month in subscriptions but leave the money sitting unallocated in checking, it will vanish into miscellaneous spending. Set an automatic $70/month transfer to your savings or debt goal on the same day.
+
+Run your own recurring charges through our [Bill & Subscription Tracker Calculator](/tools/bill-and-subscription-tracker) and print the [Subscription Audit & Cancellation Log](/printables/subscription-tracker).`
+  },
+  {
+    slug: "how-to-split-shared-bills-fairly-with-a-partner",
+    title: "How to Split Shared Bills Fairly With a Partner: Proportional vs. 50/50 Examples",
+    description: "Compare 50/50 bill splitting against proportional income splitting for couples and domestic partners, with worked examples for $6,000 combined income.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Household and Family Budgets",
+    topicSlug: "household-and-family-budgets",
+    readTime: "8 min",
+    content: `## Why a strict 50/50 split can strain a household when incomes differ
+
+Splitting rent, utilities, and groceries 50/50 works smoothly when two partners or roommates earn nearly identical take-home pay. However, when one partner earns $3,900/month net and the other earns $2,100/month net ($6,000 combined), a 50/50 split on $3,200 of shared household bills takes **76% of the lower earner's income** while taking only **41% of the higher earner's income**.
+
+A **proportional income split** solves this imbalance by having each partner contribute the exact same percentage of their take-home pay toward shared household obligations.
+
+## Worked example: 50/50 vs. Proportional split on $3,200 of shared bills
+
+Suppose Partner A brings home **$3,900/month (65%)** and Partner B brings home **$2,100/month (35%)**, for a combined household income of **$6,000/month**. Shared bills (rent, utilities, groceries, household supplies, and shared internet) total **$3,200/month**:
+
+| Metric | 50/50 Equal Split | Proportional Income Split (65% / 35%) |
+|---|---|---|
+| **Partner A ($3,900 net)** Shared Bill Contribution | $1,600.00 (41.0% of income) | **$2,080.00 (53.3% of income)** |
+| **Partner B ($2,100 net)** Shared Bill Contribution | $1,600.00 (76.2% of income) | **$1,120.00 (53.3% of income)** |
+| Partner A Money Left for Personal Debt, Savings & Wants | $2,300.00 | $1,820.00 |
+| Partner B Money Left for Personal Debt, Savings & Wants | $500.00 | $980.00 |
+
+Under the proportional split, **both partners contribute 53.3% of their individual take-home pay** to run the household, and both retain 46.7% of their pay for retirement/savings, personal obligations, and guilt-free personal spending.
+
+## How to set up a clean "Yours, Mine, and Ours" account workflow
+
+1. **List only true shared bills in the joint calculation:** Rent/mortgage, utilities, shared groceries, household supplies, childcare, and joint savings goals belong in the shared bucket. Individual student loans, personal hobbies, or solo car payments stay in individual budgets unless agreed otherwise.
+2. **Add a 5% buffer to the shared bills total:** If shared bills average $3,050, fund the joint bills account with $3,200 so seasonal electric or grocery fluctuations never cause an overdraft.
+3. **Recalculate when income changes:** Review the percentages once a year or whenever either partner changes jobs or hours.
+
+Calculate both methods side by side in our [Household Expense Splitting Calculator](/tools/expense-split-calculator) and print the [Family & Household Shared Budget Planner](/printables/family-budget-planner).`
+  },
+  {
+    slug: "first-paycheck-budget-for-a-new-employee",
+    title: "First Paycheck Budget for a New Employee: How to Allocate Your Take-Home Pay",
+    description: "Understand gross vs. net pay deductions, avoid first-job lifestyle creep, and allocate your first full-time paychecks across rent, starter savings, and debt.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Students and First Jobs",
+    topicSlug: "students-and-first-jobs",
+    readTime: "8 min",
+    content: `## Never budget your offer-letter salary before seeing your net pay stub
+
+A $52,000 annual starting salary sounds like $4,333 per month. In reality, after federal, state, and payroll taxes (FICA), health insurance premiums, and retirement contributions, actual take-home pay is often **70% to 78% of gross pay**—roughly **$3,100 to $3,350 per month** (or ~$1,430 to $1,550 per biweekly paycheck).
+
+Signing an apartment lease or car loan based on gross salary before your first net paycheck clears is the most common financial trap for new graduates and first-job earners.
+
+## Step 1: Audit your first pay stub line by line
+
+When your first paycheck arrives, verify four numbers:
+
+1. **Gross pay for the pay period:** Confirm your hourly rate or salary matches your offer letter.
+2. **Pre-tax deductions:** Check health/dental/vision premiums and whether you are capturing any employer retirement match (for example, contributing 4% to capture a 4% employer match).
+3. **Tax withholdings:** Confirm filing status so you neither owe a surprise tax bill nor over-withhold excessively.
+4. **Net direct deposit (Take-Home Pay):** This is the **only number** that enters your monthly budget.
+
+## Step 2: Worked example for a $3,100/month first-job take-home budget
+
+Suppose you earn $1,550 every two weeks ($3,100 in a standard two-paycheck month):
+
+| Budget Bucket | Category Breakdown | Monthly Allocation | % of Take-Home |
+|---|---|---|---|
+| **Needs (55%)** | Rent + Renter's Insurance ($1,050), Utilities/Wi-Fi/Phone ($175), Groceries ($300), Transit/Fuel ($180) | $1,705 | 55.0% |
+| **Savings & Debt (25%)** | Starter $1,000 Emergency Fund ($350), Student Loan / Debt Minimums ($225), Car/Moving Sinking Fund ($100), Checking Buffer ($100) | $775 | 25.0% |
+| **Wants (20%)** | Dining Out & Social ($250), Work Wardrobe & Personal ($190), Streaming & Hobbies ($180) | $620 | 20.0% |
+| **Total** | — | **$3,100** | **100.0%** |
+
+## Step 3: Delay major fixed-cost upgrades for your first 90 days
+
+During your first three months on the job, keep fixed bills low while you build your **$1,000 starter emergency fund** and learn what commuting, work lunches, and utilities actually cost. Once 1 to 3 months of essential expenses are safely in savings and student loan grace periods are accounted for, you can upgrade furniture or housing from a position of strength.
+
+Test your starting salary in our [50/30/20 Budget Calculator](/tools/50-30-20-budget-calculator) and download the [Student & First-Job Budget Worksheet](/printables/student-budget-worksheet).`
+  },
+  {
+    slug: "seven-day-no-buy-challenge-with-a-free-checklist",
+    title: "Seven-Day No-Buy Challenge With a Free Checklist: Reset Impulse Spending in One Week",
+    description: "Run a practical 7-day no-buy spending reset without feeling deprived. Includes clear ground rules, a 48-hour impulse list, and a worked savings example.",
+    date: "2026-10-14",
+    category: "Savings",
+    topicCluster: "No-Spend Challenges and Habits",
+    topicSlug: "no-spend-challenges-and-habits",
+    readTime: "7 min",
+    content: `## Why a 7-day spending reset works when a 30-day freeze feels impossible
+
+If you have never tried a no-spend challenge, committing to an entire month can feel overwhelming—especially if a birthday, family dinner, or school event falls in the middle of the calendar. A **7-day no-buy challenge** is short enough to start this Monday, requires almost no advance stockpiling, and immediately exposes the times of day when boredom or work stress triggers unplanned spending.
+
+## Set your 7-day ground rules before Day 1
+
+A no-buy week never pauses essential bills or health needs. Write two columns before the week begins:
+
+- **Green Light (Allowed):** Scheduled rent/mortgage and utility bills, one planned supermarket grocery trip from a written list, commuter fuel or transit passes, prescription medicine, and required debt payments.
+- **Red Light (Paused for 7 Days):** Restaurant takeout and delivery apps, drive-thru coffee and convenience snacks, online retail browsing, clothing/decor/gadgets, and impulse digital purchases.
+
+## Worked example: What a typical household saves in 7 days
+
+Even a modest one-week reset recovers meaningful cash when you redirect the unspent money on Day 7:
+
+| Paused Habit During 7-Day Reset | Typical Weekly Frequency | Average Cost | 7-Day Savings |
+|---|---|---|---|
+| Takeout / Food Delivery Order | 2 nights/week | $36.00 each | $72.00 |
+| Morning Coffee & Convenience Stop | 4 mornings/week | $6.25 each | $25.00 |
+| Unplanned Online / Target Add-On | 1 impulse order | $38.00 | $38.00 |
+| **Total Recovered in 1 Week** | — | — | **$135.00** |
+
+Transferring that **$135.00** out of checking on Sunday evening puts real cash into your emergency cushion or debt snowball immediately.
+
+## Use the 48-Hour Waiting List instead of fighting willpower
+
+Whenever you feel the urge to buy something non-essential during the week, do not argue with yourself—write the item and its price on your **48-Hour Impulse Waiting List**. Tell yourself: *"If I still need this next Monday and it fits my monthly budget, I can buy it then."* In practice, over 80% of impulse urges disappear once 48 hours pass.
+
+Download the free [No-Spend Challenge Calendar & Trigger Log](/printables/no-spend-challenge-calendar) or generate a custom 30-day target with our [30-Day Savings Challenge Generator](/tools/savings-challenge-generator).`
+  },
+  {
+    slug: "holiday-gift-budget-planner-with-per-person-limits",
+    title: "Holiday Gift Budget Planner With Per-Person Limits (No January Debt)",
+    description: "Build a zero-debt holiday budget covering gifts, travel, food, and wrapping with per-person spending caps and a monthly sinking fund schedule.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Seasonal and Event Budgeting",
+    topicSlug: "seasonal-and-event-budgeting",
+    readTime: "8 min",
+    content: `## Why holiday budgets fail when you only budget for gifts
+
+Most holiday overspending happens in the categories people forget to write down: travel fuel or airfare, hosting groceries and baking ingredients, teacher and service tips, wrapping paper, postage, and holiday outfits. If you set a $500 gift limit without accounting for $250 in holiday food and travel, December still ends with a $250 shortfall.
+
+## Step 1: Set one total holiday spending ceiling first
+
+Before writing a single person's name on a gift list, look at your savings and October–December cash flow and pick **one total dollar ceiling** that you can pay in cash without carrying a credit card balance into January.
+
+## Step 2: Divide the total ceiling across all 4 holiday buckets (Worked $600 Example)
+
+Suppose your total holiday budget is **$600**:
+
+| Holiday Category | Share of Total | Dollar Limit ($600 Total) | What Belongs Here |
+|---|---|---|---|
+| **1. Family & Friends Gifts** | 65% | $390 | Individual per-person gift caps (including tax & shipping) |
+| **2. Holiday Meals & Baking** | 15% | $90 | Special hosting dinners, potluck dishes, baking staples |
+| **3. Travel & Events** | 12% | $72 | Extra highway fuel, transit, parking, or local festive outing |
+| **4. Wrapping, Cards & Tips** | 8% | $48 | Gift bags, tape, postage stamps, teacher/service appreciation |
+| **Total Holiday Plan** | **100%** | **$600** | **100% funded without credit card debt** |
+
+## Step 3: Assign per-person gift caps before shopping
+
+Take the **$390 gift bucket** and assign a specific dollar ceiling beside every name on your list before opening a store or shopping site. If adding a new person pushes the total above $390, lower other lines by $10–$15 or suggest a family Secret Santa / name draw so the $390 total never moves.
+
+## Step 4: Turn next year's holiday budget into a monthly sinking fund
+
+- **12 months out (January start):** $600 ÷ 12 = **$50/month** (~$23.08 per biweekly paycheck)
+- **6 months out (July start):** $600 ÷ 6 = **$100/month**
+- **3 months out (October start):** $600 ÷ 3 = **$200/month**
+
+Calculate your monthly holiday reserve in the [Sinking Fund Calculator](/tools/sinking-fund-calculator) and map all seasonal costs on the [Annual Budget Overview PDF](/printables/annual-budget-overview).`
+  },
+  {
+    slug: "how-to-use-a-zero-based-budget-calculator",
+    title: "How to Use a Zero-Based Budget Calculator (Step-by-Step Worked Example)",
+    description: "Learn how to build a zero-based budget where Income Minus Outgo Equals $0.00 using a worked $3,800 monthly example and category priority rules.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Calculator Tutorials and Worked Examples",
+    topicSlug: "calculator-tutorials-and-worked-examples",
+    readTime: "8 min",
+    content: `## What "Income Minus Outgo Equals $0.00" really means
+
+In a zero-based budget, every single dollar of monthly take-home income is assigned to a specific category—essential bills, groceries, savings, sinking funds, extra debt payments, or a permanent checking buffer—until **Unassigned Dollars = $0.00**.
+
+It does **not** mean spending your bank account down to zero. In fact, assigning $300 to an emergency fund, $150 to car maintenance, and $100 to a checking-account cushion is how a zero-based budget protects your cash from disappearing into unplanned purchases.
+
+## Step-by-step worked example on $3,800 monthly take-home pay
+
+Here is how a household earning $3,800/month after taxes builds a balanced zero-based plan inside our [Zero-Based Budget Calculator](/tools/zero-based-budget-calculator):
+
+| Priority Tier | Category | Planned Allocation | Running Remaining Balance |
+|---|---|---|---|
+| **Starting Income** | Net Monthly Take-Home Pay | **$3,800.00** | **$3,800.00** |
+| **Tier 1: Core Needs** | Rent & Renter's Insurance | $1,350.00 | $2,450.00 |
+| **Tier 1: Core Needs** | Electric, Gas, Water, Internet & Phone | $290.00 | $2,160.00 |
+| **Tier 1: Core Needs** | Supermarket Groceries & Household | $520.00 | $1,640.00 |
+| **Tier 1: Core Needs** | Fuel, Transit & Auto Insurance | $310.00 | $1,330.00 |
+| **Tier 1: Core Needs** | Healthcare & Required Debt Minimums | $230.00 | $1,100.00 |
+| **Tier 2: Savings & Debt** | Emergency Fund Automatic Transfer | $300.00 | $800.00 |
+| **Tier 2: Savings & Debt** | Sinking Funds (Auto Repair & Annual Bills) | $180.00 | $620.00 |
+| **Tier 2: Savings & Debt** | Extra Principal on Credit Card | $150.00 | $470.00 |
+| **Tier 3: Flexible Wants** | Dining Out, Coffee & Entertainment | $220.00 | $250.00 |
+| **Tier 3: Flexible Wants** | Personal Care, Clothing & Hobbies | $150.00 | $100.00 |
+| **Tier 4: Safety Cushion** | Permanent Monthly Checking Buffer | $100.00 | **$0.00 (Balanced)** |
+
+## What to do when your initial total is not $0.00
+
+- **If Remaining Balance is positive (e.g., +$140):** Do not leave that $140 floating unlabelled in checking. Assign it deliberately to your highest priority—such as boosting extra debt payoff from $150 to $290 or adding to your sinking funds.
+- **If Remaining Balance is negative (e.g., -$185):** Trim Tier 3 flexible wants first, audit subscriptions, and adjust flexible grocery/dining plans until the calculator displays exactly **$0.00**.
+
+Try this exact workflow in the interactive [Zero-Based Budget Calculator](/tools/zero-based-budget-calculator) and print a matching copy from the [Zero-Based Budget Worksheet PDF](/printables/zero-based-budget-worksheet).`
+  },
+  {
+    slug: "how-to-make-a-monthly-budget-in-google-sheets",
+    title: "How to Make a Monthly Budget in Google Sheets or Excel (With Free CSV Template)",
+    description: "Set up a clean 5-column monthly budget spreadsheet in Google Sheets or Excel using simple SUM and subtraction formulas, or download our free starter CSV.",
+    date: "2026-10-14",
+    category: "Budgeting",
+    topicCluster: "Spreadsheets and Expense Tracking",
+    topicSlug: "spreadsheets-and-expense-tracking",
+    readTime: "8 min",
+    content: `## Why a simple 5-column spreadsheet outperforms complicated templates
+
+Many spreadsheet budgets fail because they contain 14 tabs, complex pivot charts, and fragile macros that break the first time you insert a row. A durable monthly budget spreadsheet only needs **five columns** on a single sheet:
+
+1. **Column A ('Section'):** 'Income', 'Needs', 'Wants', 'Savings', or 'Debt'
+2. **Column B ('Category'):** The specific bill or spending line (e.g., 'Rent', 'Groceries', 'Emergency Fund')
+3. **Column C ('Planned'):** What you plan to receive or spend before the month begins
+4. **Column D ('Actual'):** What actually cleared your bank account during the month
+5. **Column E ('Difference'):** How far under or over plan the category finished
+
+## The 3 essential spreadsheet formulas
+
+Assuming your expense rows sit in rows '4' through '18', you only need three formulas:
+
+| Formula Purpose | Exact Spreadsheet Formula | How to Interpret It |
+|---|---|---|
+| **Income Difference (Row 2)** | '=D2-C2' | Positive means you earned **more** than planned |
+| **Expense / Goal Variance (Row 4+)** | '=C4-D4' | Positive means you have money **remaining** in that category; negative means you **overspent** |
+| **Total Planned / Actual Sum** | '=SUM(C4:C18)' | Sums all planned allocations to compare against total take-home income |
+
+## Worked example: Checking your monthly spreadsheet balance
+
+If your total planned income in 'C2' is **$4,000** and your total planned expenses/savings in '=SUM(C4:C18)' equals **$3,850**, your unallocated buffer formula ('=C2-SUM(C4:C18)') returns **$150.00**.
+
+## Keep a clean monthly tab workflow
+
+- **Create one Master Template tab:** Keep planned amounts in a clean 'Template' tab with '$0' in the 'Actual' column.
+- **Duplicate the tab on the 28th of each month:** Name the new tab '2026-11', adjust any seasonal bills, and update the 'Actual' column once a week during a 10-minute check-in.
+
+Download our ready-to-open CSV file on the [Free Budget Spreadsheet page](/free-budget-spreadsheet), or build and export your custom categories directly from our [Monthly Budget Calculator](/budget-calculator) and [Expense Tracker & CSV Exporter](/tools/expense-tracker).`
   }
 ]
 
 export function getPostBySlug(slug: string): Post | undefined {
-  return posts.find(p => p.slug === slug)
+  return posts.find((p) => p.slug === slug)
 }

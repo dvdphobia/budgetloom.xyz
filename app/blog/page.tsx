@@ -1,83 +1,53 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import Link from 'next/link'
 import Breadcrumbs from '../components/Breadcrumbs'
-import { CardCover, Icon } from '../components/Icons'
-import { getVisiblePosts } from '@/lib/content'
+import BlogCatalogClient from '../components/BlogCatalogClient'
+import { getVisiblePosts, TOPIC_CLUSTERS } from '@/lib/content'
+import Link from 'next/link'
 
 export const metadata = {
-  title: 'Money Guides',
-  description: 'Free guides on budgeting, saving money, meal planning, debt payoff, and no-spend challenges.',
+  title: 'Practical Money & Budgeting Guides (Worked Examples & Free Tools)',
+  description:
+    'Step-by-step guides on monthly budgeting, biweekly paychecks, sinking funds, emergency savings, frugal grocery shopping, and debt payoff.',
   alternates: { canonical: 'https://budgetloom.xyz/blog' },
 }
-
-const categoryIcons: Record<string, { label: string, cat: string }> = {
-  'Savings': { label: 'Savings', cat: 'savings' },
-  'Budgeting': { label: 'Budgeting', cat: 'budgeting' },
-  'Food': { label: 'Food', cat: 'food' },
-  'Debt': { label: 'Debt', cat: 'debt' },
-  'Lifestyle': { label: 'Lifestyle', cat: 'lifestyle' },
-}
-
-const categoryOrder = ['Savings', 'Budgeting', 'Food', 'Debt', 'Lifestyle']
 
 export const dynamic = 'force-dynamic'
 
 export default async function BlogPage() {
   const posts = await getVisiblePosts()
-  const categories = [...new Set(posts.map(p => p.category))].sort(
-    (a, b) => (categoryOrder.indexOf(a) < 0 ? 999 : categoryOrder.indexOf(a)) - (categoryOrder.indexOf(b) < 0 ? 999 : categoryOrder.indexOf(b))
-  )
 
   return (
     <>
       <Header />
-      <main id="main" className="container section">
-        <Breadcrumbs items={[
-          { label: 'Home', href: '/' },
-          { label: 'Guides' },
-        ]} />
+      <main id="main">
+        <section className="tool-hero compact">
+          <div className="container">
+            <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Guides' }]} />
+            <span className="eyebrow">{posts.length} Verified Money Guides · 13 Topic Clusters</span>
+            <h1>Practical Money Guides</h1>
+            <p>
+              Actionable step-by-step instructions with worked dollar examples, realistic assumptions, and matching free calculators and printables.
+            </p>
+          </div>
+        </section>
 
-        <div className="section-header">
-          <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '-0.025em' }}>Money Guides</h1>
-          <p>Practical tips you can use today — no fluff, no jargon.</p>
-        </div>
+        <section className="section">
+          <div className="container">
+            <BlogCatalogClient posts={posts} clusters={TOPIC_CLUSTERS} />
 
-        <div className="category-pills">
-          {categories.map(cat => (
-            <a key={cat} href={`#${cat.toLowerCase()}`} className="category-pill">
-              {categoryIcons[cat]?.label ?? cat}
-            </a>
-          ))}
-        </div>
-
-        {categories.map(cat => {
-          const catPosts = posts.filter(p => p.category === cat)
-          if (catPosts.length === 0) return null
-          return (
-            <section key={cat} id={cat.toLowerCase()} style={{ marginBottom: '3rem', scrollMarginTop: '80px' }}>
-              <h2 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--dark)' }}>{cat}</h2>
-              <div className="grid">
-                {catPosts.map(post => (
-                  <Link href={`/blog/${post.slug}`} className="card" key={post.slug}>
-                    <div className="card-cover">
-                      <CardCover category={categoryIcons[post.category]?.cat || 'printable'} />
-                    </div>
-                    <div className="card-body">
-                      <span className="card-badge">{post.category}</span>
-                      <h3>{post.title}</h3>
-                      <p>{post.description}</p>
-                      <div className="card-meta">
-                        <Icon.clock className="" style={{ width: '13px', height: '13px' }} />
-                        <span>{post.readTime} read</span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )
-        })}
+            <div className="callout" style={{ marginTop: '3.5rem' }}>
+              <span className="eyebrow">Browse by Learning Path</span>
+              <h2>Looking for a complete topic roadmap?</h2>
+              <p>
+                Visit our 13 Topic Hubs to see the recommended starting guide, interactive calculators, and printable PDF workbooks for each goal.
+              </p>
+              <Link href="/topics" className="btn btn-primary">
+                Explore all 13 Topic Hubs
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

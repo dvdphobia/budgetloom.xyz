@@ -1,14 +1,17 @@
 {
   "name": "budgetloom",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint app lib",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
     "indexnow": "node scripts/submit-indexnow.mjs",
     "generate:printables": "node scripts/generate-printables.mjs",
+    "verify:printables": "node scripts/generate-printables.mjs && python3 scripts/render_and_verify_printables.py",
     "prebuild": "node scripts/generate-printables.mjs",
     "predev": "node scripts/generate-printables.mjs"
   },

@@ -1,26 +1,26 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import EmailForm from '../../components/EmailForm'
-import AmazonLink, { AffiliateDisclaimer, AmazonProductCard } from '../../components/AmazonLink'
+import { AffiliateDisclaimer, AmazonProductCard } from '../../components/AmazonLink'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import ShareButtons from '../../components/ShareButtons'
 import AuthorBox from '../../components/AuthorBox'
 import AdSlot from '../../components/AdSlot'
 import { Icon } from '../../components/Icons'
 import { posts as staticPosts } from '@/lib/posts'
-import { getVisiblePosts, getVisiblePost } from '@/lib/content'
-import { affiliateProducts, monetization } from '@/lib/config'
-import { notFound } from 'next/navigation'
+import { getVisiblePosts, getVisiblePost, resolveSlugRedirect, getClusterForPost } from '@/lib/content'
+import { getPrintableBySlug } from '@/lib/printables'
+import { affiliateProducts, monetization, site } from '@/lib/config'
+import { notFound, permanentRedirect } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { site } from '@/lib/config'
 
 type Params = { slug: string }
 
 export const dynamic = 'force-dynamic'
 
 export async function generateStaticParams() {
-  return staticPosts.map(p => ({ slug: p.slug }))
+  return staticPosts.map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -28,88 +28,187 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const post = await getVisiblePost(slug)
   if (!post) return { title: 'Not Found' }
   return {
-    title: post.title,
+    title: post.seoTitle || post.title,
     description: post.description,
     openGraph: {
-      title: post.title,
+      title: post.seoTitle || post.title,
       description: post.description,
       type: 'article',
       url: `${site.url}/blog/${post.slug}`,
       publishedTime: post.date,
       modifiedTime: post.updatedAt ?? post.date,
-      authors: [site.publisher],
+      authors: [post.author || site.publisher],
       section: post.category,
       images: [{ url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.title }],
     },
-    twitter: { card: 'summary_large_image', title: post.title, description: post.description, images: [`/blog/${post.slug}/opengraph-image`] },
-    alternates: { canonical: `${site.url}/blog/${post.slug}` },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.seoTitle || post.title,
+      description: post.description,
+      images: [`/blog/${post.slug}/opengraph-image`],
+    },
+    alternates: { canonical: post.canonicalUrl || `${site.url}/blog/${post.slug}` },
   }
 }
 
 function slugify(text: string) {
-  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+function renderInlineFormatting(text: string, keyPrefix: string): React.ReactNode {
+  // Parse inline links [label](url), bold **text**, and inline code `code`
+  const tokenRegex = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|`[^`]+`)/g
+  const parts = text.split(tokenRegex)
+  return parts.map((part, idx) => {
+    if (!part) return null
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+    if (linkMatch) {
+      const [, label, href] = linkMatch
+      if (href.startsWith('/')) {
+        return (
+          <Link key={`${keyPrefix}-l-${idx}`} href={href}>
+            {label}
+          </Link>
+        )
+      }
+      return (
+        <a key={`${keyPrefix}-a-${idx}`} href={href} target="_blank" rel="noopener noreferrer">
+          {label}
+        </a>
+      )
+    }
+    const boldMatch = part.match(/^\*\*([^*]+)\*\*$/)
+    if (boldMatch) {
+      return <strong key={`${keyPrefix}-b-${idx}`}>{boldMatch[1]}</strong>
+    }
+    const codeMatch = part.match(/^`([^`]+)`$/)
+    if (codeMatch) {
+      return (
+        <code
+          key={`${keyPrefix}-c-${idx}`}
+          style={{ background: '#f3f4f6', padding: '0.12rem 0.35rem', borderRadius: 4, fontSize: '0.9em' }}
+        >
+          {codeMatch[1]}
+        </code>
+      )
+    }
+    return part
+  })
 }
 
 function parseContent(content: string) {
   const lines = content.split('\n')
   const elements: React.ReactNode[] = []
   let listItems: string[] = []
-  let listKey = 0
   let orderedItems: string[] = []
+  let tableRows: string[][] = []
+  let blockKey = 0
 
-  const flushList = (key: string) => {
+  const flushListsAndTables = () => {
     if (listItems.length > 0) {
-      elements.push(<ul key={`ul-${listKey++}`}>{listItems.map((item, i) => <li key={i}>{item}</li>)}</ul>)
+      elements.push(
+        <ul key={`ul-${blockKey++}`}>
+          {listItems.map((item, i) => (
+            <li key={i}>{renderInlineFormatting(item, `ul-${blockKey}-${i}`)}</li>
+          ))}
+        </ul>
+      )
       listItems = []
     }
     if (orderedItems.length > 0) {
-      elements.push(<ol key={`ol-${listKey++}`}>{orderedItems.map((item, i) => <li key={i}>{item}</li>)}</ol>)
+      elements.push(
+        <ol key={`ol-${blockKey++}`}>
+          {orderedItems.map((item, i) => (
+            <li key={i}>{renderInlineFormatting(item, `ol-${blockKey}-${i}`)}</li>
+          ))}
+        </ol>
+      )
       orderedItems = []
+    }
+    if (tableRows.length > 0) {
+      const headerRow = tableRows[0]
+      const bodyRows = tableRows.slice(1).filter((r) => !r.every((cell) => /^[-:\s]+$/.test(cell)))
+      elements.push(
+        <div className="budget-table-wrap" key={`tbl-${blockKey++}`}>
+          <table className="budget-table">
+            <thead>
+              <tr>
+                {headerRow.map((h, i) => (
+                  <th key={i} scope="col">
+                    {renderInlineFormatting(h, `th-${blockKey}-${i}`)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {bodyRows.map((r, ri) => (
+                <tr key={ri}>
+                  {r.map((c, ci) => (
+                    <td key={ci}>{renderInlineFormatting(c, `td-${blockKey}-${ri}-${ci}`)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+      tableRows = []
     }
   }
 
   lines.forEach((line, i) => {
-    const h2 = line.match(/^## (.+)/)
-    const h3 = line.match(/^### (.+)/)
-    const bullet = line.match(/^- (.+)/)
-    const numbered = line.match(/^(\d+)\.\s+(.+)/)
+    const trimmed = line.trim()
+    const h2 = trimmed.match(/^## (.+)/)
+    const h3 = trimmed.match(/^### (.+)/)
+    const bullet = trimmed.match(/^- (.+)/)
+    const numbered = trimmed.match(/^(\d+)\.\s+(.+)/)
+    const isTableRow = trimmed.startsWith('|') && trimmed.endsWith('|') && trimmed.split('|').length > 2
 
-    if (h2) {
-      flushList(`f-${i}`)
-      elements.push(<h2 key={i} id={slugify(h2[1])}>{h2[1]}</h2>)
+    if (isTableRow) {
+      if (listItems.length || orderedItems.length) flushListsAndTables()
+      const cells = trimmed
+        .slice(1, -1)
+        .split('|')
+        .map((c) => c.trim())
+      tableRows.push(cells)
+    } else if (h2) {
+      flushListsAndTables()
+      elements.push(
+        <h2 key={`h2-${i}`} id={slugify(h2[1])}>
+          {h2[1]}
+        </h2>
+      )
     } else if (h3) {
-      flushList(`f-${i}`)
-      elements.push(<h3 key={i} id={slugify(h3[1])}>{h3[1]}</h3>)
+      flushListsAndTables()
+      elements.push(
+        <h3 key={`h3-${i}`} id={slugify(h3[1])}>
+          {h3[1]}
+        </h3>
+      )
     } else if (bullet) {
+      if (tableRows.length || orderedItems.length) flushListsAndTables()
       listItems.push(bullet[1])
     } else if (numbered) {
+      if (tableRows.length || listItems.length) flushListsAndTables()
       orderedItems.push(numbered[2])
-    } else if (!line.trim()) {
-      flushList(`f-${i}`)
+    } else if (!trimmed) {
+      flushListsAndTables()
     } else {
-      flushList(`f-${i}`)
-      // Inject affiliate links inline
-      if (line.includes('planner notebook')) {
-        elements.push(<p key={i}>{line} — <AmazonLink asin={affiliateProducts.budgetPlannerNotebook.asin}>check price on Amazon</AmazonLink>.</p>)
-      } else if (line.includes('envelope')) {
-        elements.push(<p key={i}>{line} — <AmazonLink asin={affiliateProducts.cashEnvelopes.asin}>see envelope systems on Amazon</AmazonLink>.</p>)
-      } else if (line.includes('meal prep')) {
-        elements.push(<p key={i}>{line} — <AmazonLink asin={affiliateProducts.mealPrepContainers.asin}>browse meal prep containers</AmazonLink>.</p>)
-      } else if (line === 'Browse budget-friendly standing desks on Amazon only after you know your required width and height range.') {
-        elements.push(<p key={i}>Once you know your required width and height range, <AmazonLink href={`https://www.amazon.com/s?k=budget+standing+desk&tag=${monetization.amazonTrackingId}`}>compare budget-friendly standing desks on Amazon</AmazonLink>.</p>)
-      } else {
-        elements.push(<p key={i}>{line}</p>)
-      }
+      flushListsAndTables()
+      elements.push(<p key={`p-${i}`}>{renderInlineFormatting(trimmed, `p-${i}`)}</p>)
     }
   })
-  flushList('final')
+  flushListsAndTables()
   return elements
 }
 
 function generateTOC(content: string) {
-  const headings: { text: string, id: string }[] = []
+  const headings: { text: string; id: string }[] = []
   for (const line of content.split('\n')) {
-    const h2 = line.match(/^## (.+)/)
+    const h2 = line.trim().match(/^## (.+)/)
     if (h2) headings.push({ text: h2[1], id: slugify(h2[1]) })
   }
   return headings
@@ -118,12 +217,26 @@ function generateTOC(content: string) {
 export default async function PostPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params
   const post = await getVisiblePost(slug)
-  if (!post) return notFound()
+  if (!post) {
+    const redirected = await resolveSlugRedirect(slug)
+    if (redirected) {
+      permanentRedirect(`/blog/${redirected}`)
+    }
+    return notFound()
+  }
 
-  const relatedPosts = (await getVisiblePosts()).filter(p => p.slug !== slug && p.category === post.category).slice(0, 3)
+  const cluster = getClusterForPost(post)
+  const allPosts = await getVisiblePosts()
+  const relatedPosts = allPosts
+    .filter((p) => p.slug !== slug && (p.topicSlug === post.topicSlug || p.category === post.category))
+    .slice(0, 3)
+  const matchedPrintables = (post.relatedPrintables || cluster.recommendedPrintables)
+    .map((s) => getPrintableBySlug(s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
   const tocItems = generateTOC(post.content)
   const postUrl = `${site.url}/blog/${post.slug}`
   const isHomeOffice = post.slug === 'modern-home-office-setup-on-a-budget'
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -133,41 +246,61 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
     dateModified: post.updatedAt ?? post.date,
     mainEntityOfPage: postUrl,
     image: `${postUrl}/opengraph-image`,
-    articleSection: post.category,
-    author: { '@type': 'Organization', name: site.publisher, url: `${site.url}/about` },
-    publisher: { '@type': 'Organization', name: site.name, url: site.url, logo: { '@type': 'ImageObject', url: `${site.url}/logo.png` } },
+    articleSection: post.topicCluster || post.category,
+    author: { '@type': 'Organization', name: post.author || site.publisher, url: `${site.url}/about` },
+    publisher: {
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+      logo: { '@type': 'ImageObject', url: `${site.url}/logo.png` },
+    },
   }
 
   const affiliateProduct = isHomeOffice
     ? {
         name: 'Budget-Friendly Standing Desks',
         href: `https://www.amazon.com/s?k=budget+standing+desk&tag=${monetization.amazonTrackingId}`,
-        desc: 'Compare desk sizes, height ranges, weight capacities, and current customer feedback before choosing a model for your space.',
+        desc: 'Compare desk sizes, height ranges, weight capacities, and customer feedback before choosing a model for your space.',
       }
     : post.category === 'Food'
-    ? { ...affiliateProducts.mealPrepContainers, desc: 'Good containers keep food fresh longer and make batch cooking actually work.' }
+    ? { ...affiliateProducts.mealPrepContainers, desc: affiliateProducts.mealPrepContainers.description }
     : post.category === 'Savings'
-    ? { ...affiliateProducts.cashEnvelopes, desc: 'Cash envelopes make savings visible. When the envelope is empty, you stop spending.' }
-    : { ...affiliateProducts.budgetPlannerNotebook, desc: 'Writing your budget by hand makes it real. A planner notebook builds consistency.' }
+    ? { ...affiliateProducts.cashEnvelopes, desc: affiliateProducts.cashEnvelopes.description }
+    : { ...affiliateProducts.budgetPlannerNotebook, desc: affiliateProducts.budgetPlannerNotebook.description }
+
+  const activeFaqs = post.faqs?.length ? post.faqs : cluster.faqs
 
   return (
     <>
       <Header />
       <main id="main" className="container section">
-        <article style={{ maxWidth: '720px', margin: '0 auto' }}>
+        <article style={{ maxWidth: '740px', margin: '0 auto' }}>
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-          <Breadcrumbs items={[
-            { label: 'Home', href: '/' },
-            { label: 'Guides', href: '/blog' },
-            { label: post.title },
-          ]} />
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Guides', href: '/blog' },
+              { label: cluster.shortName, href: `/topics/${cluster.slug}` },
+              { label: post.title },
+            ]}
+          />
 
           <div className="article-meta">
-            <span className="cat">{post.category}</span>
+            <Link href={`/topics/${cluster.slug}`} className="cat">
+              {post.topicCluster || post.category}
+            </Link>
             <span className="dot">·</span>
             <span className="time">{post.readTime} read</span>
             <span className="dot">·</span>
-            <time dateTime={post.date}>Published {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${post.date}T00:00:00Z`))}</time>
+            <time dateTime={post.date}>
+              Published{' '}
+              {new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                timeZone: 'UTC',
+              }).format(new Date(`${post.date}T00:00:00Z`))}
+            </time>
           </div>
           <h1 className="article-title">{post.title}</h1>
           <p className="article-sub">{post.description}</p>
@@ -175,14 +308,14 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           <ShareButtons title={post.title} url={postUrl} />
           <AffiliateDisclaimer />
 
-          
-
           {tocItems.length > 2 && (
             <nav className="toc" aria-label="Table of contents">
-              <div className="toc-label">In this article</div>
+              <div className="toc-label">In this guide</div>
               <ol>
                 {tocItems.map((item, i) => (
-                  <li key={i}><a href={`#${item.id}`}>{item.text}</a></li>
+                  <li key={i}>
+                    <a href={`#${item.id}`}>{item.text}</a>
+                  </li>
                 ))}
               </ol>
             </nav>
@@ -194,92 +327,131 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
               const firstBreak = Math.max(3, Math.floor(blocks.length * 0.28))
               const secondBreak = Math.max(firstBreak + 3, Math.floor(blocks.length * 0.66))
               if (blocks.length < 10) return blocks
-              return <>
-                {blocks.slice(0, firstBreak)}
-                <AdSlot placement="blog_post_top" />
-                {blocks.slice(firstBreak, secondBreak)}
-                <AdSlot placement="blog_post_middle" />
-                {blocks.slice(secondBreak)}
-              </>
+              return (
+                <>
+                  {blocks.slice(0, firstBreak)}
+                  <AdSlot placement="blog_post_top" />
+                  {blocks.slice(firstBreak, secondBreak)}
+                  <AdSlot placement="blog_post_middle" />
+                  {blocks.slice(secondBreak)}
+                </>
+              )
             })()}
           </div>
 
-          {post.category === 'Budgeting' && (
-            <aside className="resource-box" aria-label="Free budgeting resources">
-              <h2>Put this guide into practice</h2>
-              <p>Use the free tools that match the next step in your budget.</p>
-              <div>
-                <Link href="/free-budget-template">Free budget template</Link>
-                <Link href="/monthly-budget-worksheet">Monthly worksheet and example</Link>
-                <Link href="/budget-calculator">Monthly budget calculator</Link>
-                <Link href="/free-budget-spreadsheet">Free budget spreadsheet</Link>
-                <Link href="/tools/savings-goal-calculator">Savings goal calculator</Link>
-                <Link href="/tools/savings-challenge-generator">Savings challenge generator</Link>
-              </div>
-            </aside>
+          {/* Contextual Interactive Tools & Printables Box */}
+          <aside className="resource-box" aria-label="Free calculators and printable worksheets">
+            <span className="eyebrow">Put This Guide Into Practice</span>
+            <h2>Free calculators & printable worksheets for {cluster.shortName.toLowerCase()}</h2>
+            <p>Run your own numbers or print a clean worksheet—no email signup required.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem 1.25rem' }}>
+              {(post.relatedTools || cluster.recommendedTools).map((toolHref) => (
+                <Link key={toolHref} href={toolHref}>
+                  Interactive Tool: {toolHref.replace('/tools/', '').replace('/', '').replace(/-/g, ' ')} →
+                </Link>
+              ))}
+              {matchedPrintables.map((pr) => (
+                <Link key={pr.slug} href={`/printables/${pr.slug}`}>
+                  Free PDF: {pr.title} ({pr.pages} pages) →
+                </Link>
+              ))}
+              <Link href={`/topics/${cluster.slug}`}>Explore {cluster.name} Hub →</Link>
+            </div>
+          </aside>
+
+          {/* References & Editorial Sources */}
+          {post.sources && post.sources.length > 0 && (
+            <section
+              aria-label="References and educational sources"
+              style={{
+                margin: '2rem 0',
+                padding: '1.25rem',
+                borderRadius: 'var(--brand-radius)',
+                border: '1px solid var(--border-light)',
+                background: 'var(--white)',
+              }}
+            >
+              <h2 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.5rem' }}>
+                References & Methodology Notes
+              </h2>
+              <p style={{ fontSize: '0.84rem', color: 'var(--gray)', marginBottom: '0.6rem' }}>
+                Worked dollar examples in this article are illustrative planning scenarios. Verify interest rates, tax rules, and account terms with your provider.
+              </p>
+              <ul style={{ margin: 0, paddingLeft: '1.1rem', fontSize: '0.84rem' }}>
+                {post.sources.map((src) => (
+                  <li key={src.url} style={{ marginBottom: '0.25rem' }}>
+                    <a href={src.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--green-dark)' }}>
+                      {src.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
 
-          {post.category === 'Savings' && (
-            <aside className="resource-box" aria-label="Free savings calculators">
-              <h2>Make your savings goal manageable</h2>
-              <p>Create your contribution plan or generate a free 30-day schedule.</p>
-              <div>
-                <Link href="/tools/savings-goal-calculator">Savings goal calculator</Link>
-                <Link href="/tools/savings-challenge-generator">Savings challenge generator</Link>
-                <Link href="/printables/30-day-savings-challenge">Free printable savings pack</Link>
-              </div>
-            </aside>
-          )}
-
-          {/* Single affiliate product — contextually relevant */}
+          {/* Single clearly disclosed affiliate product card */}
           <div style={{ marginTop: '2rem' }}>
-            <h3 style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--gray)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem' }}>Recommended</h3>
-            <AmazonProductCard asin={'asin' in affiliateProduct ? affiliateProduct.asin : undefined} href={'href' in affiliateProduct ? affiliateProduct.href : undefined} name={affiliateProduct.name} description={affiliateProduct.desc} />
+            <h3
+              style={{
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                color: 'var(--gray)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.04em',
+                marginBottom: '0.5rem',
+              }}
+            >
+              Optional Paper Tool (Affiliate Link)
+            </h3>
+            <AmazonProductCard
+              asin={'asin' in affiliateProduct ? affiliateProduct.asin : undefined}
+              href={'href' in affiliateProduct ? affiliateProduct.href : undefined}
+              name={affiliateProduct.name}
+              description={affiliateProduct.desc}
+            />
           </div>
 
-          {/* FAQ */}
-          <div className="faq">
-            <h2>Common Questions</h2>
-            {isHomeOffice ? (
-              <>
-                <div className="faq-item"><h3>Do I need a standing desk?</h3><p>No. A stable desk at the right working height is more important. A standing desk is useful if you want to alternate positions during the day.</p></div>
-                <div className="faq-item"><h3>What should I upgrade first?</h3><p>Start with the item causing daily discomfort or friction. That is usually the chair, monitor height, lighting, or cable placement—not decoration.</p></div>
-                <div className="faq-item"><h3>Can a small room fit two monitors?</h3><p>Often, yes. A monitor arm can recover desk depth, but check the desk thickness, clamp clearance, and arm weight rating before buying.</p></div>
-              </>
-            ) : (
-              <>
-                <div className="faq-item"><h3>Is this guide free?</h3><p>Yes, all guides on BudgetLoom are free to read. Printable downloads are also free.</p></div>
-                <div className="faq-item"><h3>Do I need special software?</h3><p>No. All printables are PDF files — download and print at home.</p></div>
-                <div className="faq-item"><h3>Will this work on a low income?</h3><p>Yes. These tips are designed for real people, including those on tight budgets.</p></div>
-              </>
-            )}
-          </div>
+          {activeFaqs.length > 0 && (
+            <div className="faq">
+              <h2>Common questions</h2>
+              {activeFaqs.map((faq) => (
+                <div className="faq-item" key={faq.question}>
+                  <h3>{faq.question}</h3>
+                  <p>{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          )}
 
           <AuthorBox />
 
-
-
-          {/* Email CTA */}
           <div className="lead-box">
-            <h2>{isHomeOffice ? 'Plan the cost before you upgrade' : 'Get the matching printable'}</h2>
-            <p>{isHomeOffice ? 'Use our free budget tools to set a workspace limit and avoid impulse upgrades.' : 'Join the library and download the free printable that goes with this guide.'}</p>
-            <EmailForm cta={isHomeOffice ? 'Get free budget tools' : 'Download free printable'} tag={isHomeOffice ? 'home office budget' : 'matching printable'} />
+            <h2>Get our free printable budget library</h2>
+            <p>Receive new printable worksheets and practical money guides as they are published.</p>
+            <EmailForm cta="Join free library" tag={post.topicCluster || post.category} />
             <div className="lead-perks">
-              <span className="lead-perk"><Icon.check className="" /> Instant download</span>
-              <span className="lead-perk"><Icon.check className="" /> No spam</span>
-              <span className="lead-perk"><Icon.check className="" /> Unsubscribe anytime</span>
+              <span className="lead-perk">
+                <Icon.check className="" /> 20 free PDF workbooks
+              </span>
+              <span className="lead-perk">
+                <Icon.check className="" /> Practical examples
+              </span>
+              <span className="lead-perk">
+                <Icon.check className="" /> Unsubscribe anytime
+              </span>
             </div>
           </div>
 
-          {/* Related */}
           {relatedPosts.length > 0 && (
             <div style={{ marginTop: '3rem' }}>
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '1rem' }}>Keep reading</h2>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem' }}>
+                More guides in {cluster.name}
+              </h2>
               <div className="grid">
-                {relatedPosts.map(rp => (
+                {relatedPosts.map((rp) => (
                   <Link href={`/blog/${rp.slug}`} className="card" key={rp.slug}>
                     <div className="card-body">
-                      <span className="card-badge">{rp.category}</span>
+                      <span className="card-badge">{rp.topicCluster || rp.category}</span>
                       <h3>{rp.title}</h3>
                       <p>{rp.description}</p>
                       <div className="card-meta">

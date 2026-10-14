@@ -1,46 +1,41 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import Link from 'next/link'
 import Breadcrumbs from '../components/Breadcrumbs'
-import { CardCover } from '../components/Icons'
+import PrintablesCatalogClient from '../components/PrintablesCatalogClient'
 import { printables } from '@/lib/printables'
 
 export const metadata = {
-  title: 'Budget Printables',
-  description: 'Printable budget planners, savings challenges, meal planners, and debt payoff trackers. Instant download.',
+  title: 'Free Budget Printables Library (20 Printable PDF Workbooks & Trackers)',
+  description:
+    'Download 20 free printable budget planners, paycheck worksheets, 30-day and 52-week savings challenges, meal planners, and debt payoff trackers.',
   alternates: { canonical: 'https://budgetloom.xyz/printables' },
 }
 
 export default function PrintablesPage() {
+  const totalPages = printables.reduce((sum, p) => sum + p.pages, 0)
+
   return (
     <>
       <Header />
-      <main id="main" className="container section">
-        <Breadcrumbs items={[
-          { label: 'Home', href: '/' },
-          { label: 'Printables' },
-        ]} />
+      <main id="main">
+        <section className="tool-hero compact">
+          <div className="container">
+            <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Printables' }]} />
+            <span className="eyebrow">
+              {printables.length} Free Printable Workbooks · {totalPages} Total Pages · Instant PDF Download
+            </span>
+            <h1>Free Budget Printables Library</h1>
+            <p>
+              Every worksheet and multi-page bundle is 100% free to download and formatted for standard US Letter or A4 home printing in color or grayscale—no email wall required.
+            </p>
+          </div>
+        </section>
 
-        <div className="section-header">
-          <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '-0.025rem' }}>Budget Printables</h1>
-          <p>Download planners to help you save money and stay organized.</p>
-        </div>
-
-        <div className="grid">
-          {printables.map(p => (
-            <Link href={`/printables/${p.slug}`} className="card" key={p.slug}>
-              <div className="card-cover">
-                <CardCover variant="printable" />
-                <span className={`card-cover-tag ${p.price === 'Free' ? 'free' : ''}`}>{p.price}</span>
-              </div>
-              <div className="card-body">
-                <span className="card-badge">{p.pages} pages</span>
-                <h3>{p.title}</h3>
-                <p>{p.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <section className="section">
+          <div className="container">
+            <PrintablesCatalogClient items={printables} />
+          </div>
+        </section>
       </main>
       <Footer />
     </>

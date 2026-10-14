@@ -29,10 +29,11 @@
     "slug": "how-to-fix-a-month-when-you-overspend-your-budget",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-004",
@@ -40,7 +41,7 @@
     "slug": "how-to-choose-a-realistic-miscellaneous-budget-category",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
     "reviewRequired": true
@@ -75,7 +76,7 @@
     "slug": "how-to-start-budgeting-again-after-falling-behind",
     "cluster": "Budget Systems",
     "priority": "P1",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Monthly budget worksheet; basic budget calculator.",
     "reviewRequired": true
@@ -120,10 +121,11 @@
     "slug": "how-to-split-monthly-bills-across-two-paychecks",
     "cluster": "Paycheck and Variable Income",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Paycheck allocation calculator; bill calendar.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-012",
@@ -131,7 +133,7 @@
     "slug": "paycheck-to-paycheck-bill-calendar-with-example",
     "cluster": "Paycheck and Variable Income",
     "priority": "P1",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Paycheck allocation calculator; bill calendar.",
     "reviewRequired": true
@@ -153,10 +155,11 @@
     "slug": "how-to-budget-with-two-paydays-per-month",
     "cluster": "Paycheck and Variable Income",
     "priority": "P1",
-    "status": "idea",
+    "status": "merged_duplicate",
     "searchIntent": "informational",
     "asset": "Paycheck allocation calculator; bill calendar.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "mergedInto": "how-to-split-monthly-bills-across-two-paychecks"
   },
   {
     "id": "BL-015",
@@ -164,10 +167,11 @@
     "slug": "planning-for-a-three-paycheck-month",
     "cluster": "Paycheck and Variable Income",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Paycheck allocation calculator; bill calendar.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-016",
@@ -230,7 +234,7 @@
     "slug": "how-to-use-a-weekly-budget-printable-with-a-worked-example",
     "cluster": "Budget Printables and Binders",
     "priority": "P1",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Downloadable PDF; real preview; instructions.",
     "reviewRequired": true
@@ -241,10 +245,11 @@
     "slug": "how-to-build-a-budget-binder-from-free-printables",
     "cluster": "Budget Printables and Binders",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Downloadable PDF; real preview; instructions.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-023",
@@ -340,10 +345,11 @@
     "slug": "one-month-versus-three-months-of-emergency-savings",
     "cluster": "Savings and Sinking Funds",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Savings goal calculator; sinking fund tracker.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-032",
@@ -351,10 +357,11 @@
     "slug": "how-to-start-a-car-repair-sinking-fund",
     "cluster": "Savings and Sinking Funds",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Savings goal calculator; sinking fund tracker.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-033",
@@ -362,7 +369,7 @@
     "slug": "how-to-budget-for-annual-insurance-premiums",
     "cluster": "Savings and Sinking Funds",
     "priority": "P1",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Savings goal calculator; sinking fund tracker.",
     "reviewRequired": true
@@ -450,10 +457,11 @@
     "slug": "grocery-budget-worksheet-for-two-adults",
     "cluster": "Groceries and Meal Planning",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Meal planner; cost-per-serving calculator.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-042",
@@ -461,7 +469,7 @@
     "slug": "family-of-four-grocery-budget-example-and-blank-template",
     "cluster": "Groceries and Meal Planning",
     "priority": "P1",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Meal planner; cost-per-serving calculator.",
     "reviewRequired": true
@@ -571,10 +579,11 @@
     "slug": "how-to-list-all-debts-before-picking-a-payoff-method",
     "cluster": "Debt Tracking and Payoff Planning",
     "priority": "P2",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Payoff planner; transparent formula example.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-053",
@@ -582,7 +591,7 @@
     "slug": "how-credit-card-interest-changes-a-payoff-timeline",
     "cluster": "Debt Tracking and Payoff Planning",
     "priority": "P2",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Payoff planner; transparent formula example.",
     "reviewRequired": true
@@ -670,10 +679,11 @@
     "slug": "how-to-audit-every-monthly-subscription",
     "cluster": "Bills and Utilities",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Bill tracker; recurring costs calculator.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-062",
@@ -681,7 +691,7 @@
     "slug": "bill-calendar-template-for-irregular-due-dates",
     "cluster": "Bills and Utilities",
     "priority": "P1",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Bill tracker; recurring costs calculator.",
     "reviewRequired": true
@@ -780,10 +790,11 @@
     "slug": "how-to-split-shared-bills-fairly-with-a-partner",
     "cluster": "Household and Family Budgets",
     "priority": "P2",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Shared expense template.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-072",
@@ -791,7 +802,7 @@
     "slug": "joint-versus-separate-budget-worksheets-for-couples",
     "cluster": "Household and Family Budgets",
     "priority": "P2",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Shared expense template.",
     "reviewRequired": true
@@ -890,10 +901,11 @@
     "slug": "first-paycheck-budget-for-a-new-employee",
     "cluster": "Students and First Jobs",
     "priority": "P2",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "First-job budget template.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-082",
@@ -901,7 +913,7 @@
     "slug": "college-student-monthly-budget-template",
     "cluster": "Students and First Jobs",
     "priority": "P2",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "First-job budget template.",
     "reviewRequired": true
@@ -1000,10 +1012,11 @@
     "slug": "seven-day-no-buy-challenge-with-a-free-checklist",
     "cluster": "No-Spend Challenges and Habits",
     "priority": "P2",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Challenge tracker printable.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-092",
@@ -1011,7 +1024,7 @@
     "slug": "fourteen-day-spending-reset-with-a-printable-tracker",
     "cluster": "No-Spend Challenges and Habits",
     "priority": "P2",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Challenge tracker printable.",
     "reviewRequired": true
@@ -1110,10 +1123,11 @@
     "slug": "holiday-gift-budget-planner-with-per-person-limits",
     "cluster": "Seasonal and Event Budgeting",
     "priority": "P2",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Event checklist or seasonal savings schedule.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-102",
@@ -1121,7 +1135,7 @@
     "slug": "back-to-school-shopping-budget-worksheet",
     "cluster": "Seasonal and Event Budgeting",
     "priority": "P2",
-    "status": "idea",
+    "status": "in_review",
     "searchIntent": "informational",
     "asset": "Event checklist or seasonal savings schedule.",
     "reviewRequired": true
@@ -1220,10 +1234,11 @@
     "slug": "how-to-use-a-zero-based-budget-calculator",
     "cluster": "Calculator Tutorials and Worked Examples",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Interactive working calculator.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-112",
@@ -1242,10 +1257,11 @@
     "slug": "how-to-use-a-paycheck-allocation-planner",
     "cluster": "Calculator Tutorials and Worked Examples",
     "priority": "P1",
-    "status": "idea",
+    "status": "merged_duplicate",
     "searchIntent": "informational",
     "asset": "Interactive working calculator.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "mergedInto": "how-to-split-monthly-bills-across-two-paychecks"
   },
   {
     "id": "BL-114",
@@ -1330,10 +1346,11 @@
     "slug": "budget-spreadsheet-with-editable-spending-categories",
     "cluster": "Spreadsheets and Expense Tracking",
     "priority": "P1",
-    "status": "idea",
+    "status": "merged_duplicate",
     "searchIntent": "informational",
     "asset": "Editable CSV or Google Sheets example.",
-    "reviewRequired": true
+    "reviewRequired": true,
+    "mergedInto": "how-to-make-a-monthly-budget-in-google-sheets"
   },
   {
     "id": "BL-122",
@@ -1341,10 +1358,11 @@
     "slug": "how-to-make-a-monthly-budget-in-google-sheets",
     "cluster": "Spreadsheets and Expense Tracking",
     "priority": "P1",
-    "status": "idea",
+    "status": "published",
     "searchIntent": "informational",
     "asset": "Editable CSV or Google Sheets example.",
-    "reviewRequired": true
+    "reviewRequired": false,
+    "publishedDate": "2026-10-14"
   },
   {
     "id": "BL-123",
