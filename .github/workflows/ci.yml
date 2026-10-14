@@ -1,0 +1,40 @@
+name: BudgetLoom CI & Verification
+
+on:
+  push:
+    branches: [master, 'feat/**']
+  pull_request:
+    branches: [master]
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      JWT_SECRET: ci-verification-jwt-secret-at-least-32-characters-long
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate and verify printable PDFs
+        run: npm run generate:printables
+
+      - name: Run automated unit, math, security & SEO test suite
+        run: npm test
+
+      - name: Run TypeScript type check
+        run: npx tsc --noEmit
+
+      - name: Build production Next.js bundle
+        env:
+          NODE_ENV: production
+        run: npm run build

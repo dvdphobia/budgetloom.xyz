@@ -702,3 +702,196 @@ body:has(.admin-shell) a:hover {
     @apply font-sans;
   }
 }
+
+/* === REDESIGNED HERO SPLIT, CATALOG CONTROLS & PRINTABLE MARKETPLACE === */
+.nav a.active {
+  background: var(--green-mint);
+  color: var(--green-dark);
+  font-weight: 600;
+}
+
+.hero-split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+}
+.hero-copy h1 {
+  font-size: 3.1rem;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  margin: 0.45rem 0 1.1rem;
+  color: var(--dark);
+}
+.hero-copy p {
+  font-size: 1.12rem;
+  color: var(--slate);
+  max-width: 580px;
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+.hero-showcase-card {
+  background: var(--white);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--brand-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+.hero-showcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 0.85rem;
+}
+.badge-pill {
+  display: inline-block;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  background: var(--green-mint);
+  color: var(--green-dark);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+.showcase-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.52rem 0;
+  font-size: 0.9rem;
+  border-bottom: 1px dashed var(--border-light);
+}
+.showcase-row.total {
+  border-bottom: 0;
+  padding-top: 0.75rem;
+  font-weight: 700;
+  font-size: 0.96rem;
+}
+.hero-showcase-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.catalog-controls {
+  margin-bottom: 1.25rem;
+}
+.catalog-search-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.catalog-search-input {
+  flex: 2 1 280px;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: var(--white);
+  color: var(--dark);
+}
+.catalog-search-input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+}
+.catalog-select {
+  flex: 1 1 220px;
+  min-height: 44px;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  background: var(--white);
+  color: var(--dark);
+}
+.category-pill {
+  cursor: pointer;
+}
+.category-pill.active {
+  background: var(--green);
+  color: var(--white);
+  border-color: var(--green);
+}
+
+.printable-marketplace-card .printable-card-media {
+  position: relative;
+  background: var(--cream);
+  padding: 1rem 1.5rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-light);
+  overflow: hidden;
+  max-height: 250px;
+}
+.printable-thumb-img {
+  width: auto;
+  max-height: 225px;
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--brand-border);
+}
+.printable-mini-includes {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  color: var(--slate);
+}
+.printable-mini-includes li {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0;
+}
+.printable-mini-includes svg {
+  width: 13px;
+  height: 13px;
+  color: var(--green);
+  flex-shrink: 0;
+}
+.printable-preview-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  background: var(--cream);
+  padding: 1.25rem;
+  border-radius: var(--brand-radius-lg);
+  border: 1px solid var(--brand-border);
+}
+
+.footer-grid {
+  grid-template-columns: 1.6fr 1fr 1fr 0.9fr;
+}
+
+@media (max-width: 900px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero-copy h1 {
+    font-size: 2.35rem;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .printable-preview-gallery {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
